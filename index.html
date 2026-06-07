@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AIマスター山本の道場 — 2026おもしろAI特集 & Dynamic Workflow 体感ラボ</title>
+<meta name="description" content="AIマスター山本(創作ペルソナ)が語る、2026年のおもしろAI特集と、人生モテモテになるイケてるAIインストラクター講座。Claude Opus 4.8 Dynamic Workflow のすごさをフォトヒーロー型の最新HPで体感。" />
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex, notranslate" />
+<meta name="googlebot" content="noindex, nofollow" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700;800;900&family=Montserrat:wght@700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#fdfbff;--bg-soft:#f6f1ff;--bg-pink:#fff4fa;
+    --ink:#2c2342;--ink-soft:#4a3f63;--muted:#8479a0;
+    --card:#ffffff;--line:rgba(120,95,180,.14);--line-2:rgba(120,95,180,.22);
+    --shadow:0 14px 40px rgba(130,95,200,.10);--shadow-lg:0 26px 60px rgba(130,95,200,.16);
+    --pink:#ff4f9e;--violet:#7b5bff;--cyan:#14b8b8;--green:#21b573;--gold:#f1a306;
+    --grad:linear-gradient(120deg,#ff4f9e 0%,#7b5bff 50%,#14b8b8 100%);
+    --radius:24px;
+    --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+    --disp:"Montserrat","M PLUS Rounded 1c",system-ui,sans-serif;
+    --body:"M PLUS Rounded 1c",system-ui,-apple-system,"Hiragino Kaku Gothic ProN",sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--body);background:var(--bg);color:var(--ink);line-height:1.78;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+  body::before{content:"";position:fixed;inset:0;z-index:-2;background:
+    radial-gradient(900px 620px at 8% -6%,rgba(255,79,158,.14),transparent 60%),
+    radial-gradient(820px 600px at 102% 4%,rgba(123,91,255,.13),transparent 58%),
+    radial-gradient(900px 740px at 50% 116%,rgba(20,184,184,.11),transparent 58%),
+    linear-gradient(180deg,#ffffff,#fdfbff 50%,#fbf7ff)}
+  /* grain overlay */
+  .grain{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.5;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+  a{color:inherit}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 22px}
+  .grad-text{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .eyebrow{display:inline-flex;align-items:center;gap:.5em;font-weight:800;font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:var(--violet);border:1px solid var(--line-2);background:#fff;padding:.5em 1em;border-radius:999px;box-shadow:var(--shadow)}
+  section{padding:92px 0;position:relative}
+  .band-soft{background:linear-gradient(180deg,transparent,var(--bg-soft),transparent)}
+  .band-pink{background:linear-gradient(180deg,transparent,var(--bg-pink),transparent)}
+  h2.section-title{font-family:var(--disp);font-size:clamp(1.9rem,4.6vw,3rem);font-weight:900;line-height:1.16;margin:.4em 0 .25em}
+  .tagline{color:var(--ink-soft);font-size:1.02rem;max-width:62ch}
+
+  /* ---------- PROGRESS + NAV ---------- */
+  #progress{position:fixed;top:0;left:0;height:3px;width:0;background:var(--grad);z-index:1000;transition:width .1s}
+  nav{position:fixed;top:0;left:0;right:0;z-index:900;display:flex;align-items:center;justify-content:space-between;
+    padding:14px 22px;transition:background .3s,box-shadow .3s,padding .3s;color:#fff}
+  nav.scrolled{background:rgba(255,255,255,.82);backdrop-filter:blur(14px);box-shadow:0 6px 24px rgba(130,95,200,.12);color:var(--ink);padding:10px 22px}
+  nav .brand{font-weight:900;font-family:var(--disp);font-size:1.05rem;display:flex;align-items:center;gap:.45em;text-shadow:0 2px 12px rgba(0,0,0,.4)}
+  nav.scrolled .brand{text-shadow:none}
+  nav .links{display:flex;gap:6px;align-items:center}
+  nav .links a{font-weight:800;font-size:.86rem;padding:.5em .9em;border-radius:999px;text-decoration:none;opacity:.92;transition:background .2s,opacity .2s}
+  nav .links a:hover{opacity:1;background:rgba(255,255,255,.16)}
+  nav.scrolled .links a:hover{background:var(--bg-soft)}
+  nav .navcta{background:var(--grad);color:#fff !important;box-shadow:0 8px 20px rgba(123,91,255,.4)}
+  @media(max-width:720px){nav .links a:not(.navcta){display:none}}
+
+  /* ---------- LOADING ---------- */
+  #loader{position:fixed;inset:0;z-index:9999;background:linear-gradient(160deg,#ffffff,#fbf6ff 60%,#fff4fa);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;transition:opacity .6s,visibility .6s;padding:24px;text-align:center}
+  #loader.done{opacity:0;visibility:hidden;pointer-events:none}
+  .loader-orb{width:96px;height:96px;border-radius:50%;background:conic-gradient(from 0deg,#ff4f9e,#7b5bff,#14b8b8,#21b573,#ff4f9e);animation:spin 1.1s linear infinite;position:relative;box-shadow:0 12px 40px rgba(123,91,255,.3)}
+  .loader-orb::after{content:"🧙‍♂️";position:absolute;inset:4px;background:#fff;border-radius:50%;display:grid;place-items:center;font-size:40px}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  #loadMsg{font-family:var(--mono);color:var(--violet);font-size:.96rem;min-height:1.5em;max-width:34ch;font-weight:700}
+  .loader-bar{width:min(320px,80vw);height:8px;border-radius:99px;background:rgba(123,91,255,.12);overflow:hidden}
+  .loader-bar > i{display:block;height:100%;width:0;background:var(--grad);transition:width .25s}
+  .loader-sub{color:var(--muted);font-size:.8rem}
+
+  /* ---------- HERO (photo) ---------- */
+  .hero{position:relative;min-height:96vh;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden;color:#fff}
+  .hero-bg{position:absolute;inset:0;background:#1a1230 center/cover no-repeat;z-index:0;transform:scale(1.06);animation:kenburns 22s ease-in-out infinite alternate}
+  @keyframes kenburns{from{transform:scale(1.06) translateY(0)}to{transform:scale(1.16) translateY(-12px)}}
+  .hero-overlay{position:absolute;inset:0;z-index:1;background:
+    radial-gradient(120% 90% at 50% 0%,rgba(20,8,40,.30),transparent 45%),
+    linear-gradient(180deg,rgba(28,12,52,.46),rgba(24,10,44,.34) 40%,rgba(255,251,255,.05) 78%,var(--bg) 100%),
+    linear-gradient(115deg,rgba(255,79,158,.22),transparent 40%,rgba(20,184,184,.20))}
+  .hero-glow{position:absolute;width:520px;height:520px;border-radius:50%;z-index:1;pointer-events:none;background:radial-gradient(circle,rgba(255,196,90,.22),transparent 65%);filter:blur(20px);transform:translate(-50%,-50%);left:50%;top:40%;transition:left .25s,top .25s}
+  .hero .emojis{position:absolute;inset:0;pointer-events:none;z-index:2}
+  .hero .emojis span{position:absolute;opacity:.5;animation:float linear infinite}
+  @keyframes float{0%{transform:translateY(18px) rotate(0)}50%{transform:translateY(-22px) rotate(12deg)}100%{transform:translateY(18px) rotate(0)}}
+  .hero-inner{position:relative;z-index:3;padding:120px 22px 70px;max-width:980px}
+  .hero .eyebrow{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.3);color:#fff;backdrop-filter:blur(6px)}
+  .master-badge{display:inline-flex;align-items:center;gap:.6em;margin:18px auto 4px;padding:.5em 1.1em;border-radius:999px;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.12);backdrop-filter:blur(6px);font-weight:800;color:#ffe7a8}
+  .master-badge .face{font-size:1.5em}
+  h1{font-family:var(--disp);font-weight:900;font-size:clamp(2.4rem,7.6vw,5.4rem);line-height:1.04;letter-spacing:-.01em;margin:.14em 0;text-shadow:0 6px 36px rgba(0,0,0,.45)}
+  h1 .grad-text{filter:drop-shadow(0 2px 18px rgba(255,79,158,.35))}
+  .hero-sub{color:rgba(255,255,255,.94);font-size:clamp(1.05rem,2.4vw,1.45rem);max-width:32ch;margin:18px auto 0;font-weight:700;text-shadow:0 2px 18px rgba(0,0,0,.5)}
+  .hero-chips{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:20px}
+  .hchip{display:inline-flex;align-items:center;gap:.4em;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);backdrop-filter:blur(6px);border-radius:999px;padding:.45em 1em;font-weight:800;font-size:.9rem;color:#fff}
+  .hchip.mote{color:#ffd0e6}
+  .cta-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:30px}
+  .btn{font-family:var(--body);font-weight:800;font-size:1rem;cursor:pointer;border:none;padding:.95em 1.7em;border-radius:999px;color:#fff;background:var(--grad);box-shadow:0 14px 32px rgba(123,91,255,.4);transition:transform .15s,box-shadow .15s;text-decoration:none;display:inline-flex;align-items:center;gap:.5em}
+  .btn:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 20px 46px rgba(255,79,158,.5)}
+  .btn.ghost{background:rgba(255,255,255,.14);color:#fff;border:1px solid rgba(255,255,255,.4);box-shadow:none;backdrop-filter:blur(6px)}
+  .btn.ghost:hover{background:rgba(255,255,255,.24)}
+  .fiction-note{margin:24px auto 0;font-size:.76rem;color:rgba(255,255,255,.86);max-width:60ch;border:1px solid rgba(255,255,255,.24);border-radius:14px;padding:.7em 1em;background:rgba(20,10,40,.32);backdrop-filter:blur(6px)}
+  .scrolldown{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);z-index:3;color:rgba(255,255,255,.8);font-size:1.4rem;animation:bobd 1.8s infinite}
+  @keyframes bobd{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,8px)}}
+
+  /* ---------- STATS BENTO ---------- */
+  .bento{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:150px;gap:16px;margin-top:-60px;position:relative;z-index:5}
+  @media(max-width:860px){.bento{grid-template-columns:repeat(2,1fr)}}
+  .bcell{border-radius:20px;padding:20px;box-shadow:var(--shadow-lg);position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:center;border:1px solid var(--line);background:#fff}
+  .bcell.stat .num{font-family:var(--disp);font-weight:900;font-size:2.2rem;line-height:1}
+  .bcell.stat .lab{color:var(--muted);font-weight:800;font-size:.84rem;margin-top:4px}
+  .bcell.img{padding:0;color:#fff;justify-content:flex-end}
+  .bcell.img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+  .bcell.img .cap{position:relative;z-index:2;padding:14px 16px;font-weight:800;font-size:.86rem;text-shadow:0 2px 10px rgba(0,0,0,.6)}
+  .bcell.img::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(0deg,rgba(20,8,40,.7),transparent 60%)}
+  .bcell.wide{grid-column:span 2}
+  .bcell.tall{grid-row:span 2}
+  @media(max-width:860px){.bcell.tall{grid-row:span 1}}
+
+  /* ---------- SPEECH ---------- */
+  .speech{display:flex;gap:20px;align-items:flex-start;max-width:880px;margin:0 auto}
+  .speech .avatar{flex:0 0 auto;font-size:3.4rem;filter:drop-shadow(0 8px 16px rgba(123,91,255,.25))}
+  .bubble{position:relative;background:#fff;border:1px solid var(--line);border-radius:22px;padding:24px 26px;font-size:1.12rem;font-weight:700;box-shadow:var(--shadow)}
+  .bubble::before{content:"";position:absolute;left:-11px;top:26px;border:8px solid transparent;border-right-color:#fff;filter:drop-shadow(-2px 0 1px var(--line))}
+
+  /* ---------- DEMO ---------- */
+  .demo-stage{border:1px solid var(--line);border-radius:var(--radius);background:#fff;overflow:hidden;margin-top:30px;box-shadow:var(--shadow-lg)}
+  .demo-head{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:16px 20px;border-bottom:1px solid var(--line);flex-wrap:wrap;background:var(--bg-soft)}
+  .demo-head .title{font-family:var(--mono);font-weight:700;color:var(--violet);font-size:.92rem}
+  .stat-pills{display:flex;gap:10px;flex-wrap:wrap}
+  .pill{font-family:var(--mono);font-size:.78rem;padding:.35em .8em;border-radius:999px;border:1px solid var(--line);background:#fff;color:var(--muted)}
+  .pill b{color:var(--green)}
+  .demo-body{display:grid;grid-template-columns:1.15fr .85fr;gap:0}
+  @media(max-width:820px){.demo-body{grid-template-columns:1fr}}
+  .stage-zone{padding:22px;min-height:330px;position:relative}
+  .stage-label{font-weight:800;color:var(--violet);margin-bottom:16px;font-size:.96rem;min-height:1.4em}
+  .agents{display:flex;flex-wrap:wrap;gap:10px;align-content:flex-start}
+  .agent-chip{--c:var(--violet);opacity:0;transform:translateY(10px) scale(.9);border:1px solid var(--line);border-left:3px solid var(--c);background:#fff;border-radius:13px;padding:10px 13px;min-width:150px;flex:1 1 150px;max-width:230px;box-shadow:var(--shadow);transition:opacity .35s,transform .35s,border-color .3s,background .3s}
+  .agent-chip.in{opacity:1;transform:none}
+  .agent-chip.busy{animation:chipPulse 1s ease-in-out infinite}
+  .agent-chip.done{border-left-color:var(--green);background:rgba(33,181,115,.06)}
+  @keyframes chipPulse{0%,100%{box-shadow:var(--shadow)}50%{box-shadow:0 0 0 4px rgba(123,91,255,.12)}}
+  .agent-chip .name{font-weight:800;font-size:.86rem;display:flex;align-items:center;justify-content:space-between;gap:6px}
+  .agent-chip .name .tick{opacity:0;transition:opacity .3s;color:var(--green)}
+  .agent-chip.done .name .tick{opacity:1}
+  .agent-chip .pbar{height:5px;border-radius:99px;background:rgba(123,91,255,.12);margin-top:9px;overflow:hidden}
+  .agent-chip .pbar > i{display:block;height:100%;width:0;background:var(--grad)}
+  .merge-node{opacity:0;transform:scale(.8);transition:opacity .5s,transform .5s;margin:8px auto 0;max-width:340px;text-align:center;border:1px solid var(--line);border-radius:16px;padding:18px;background:rgba(20,184,184,.07);box-shadow:var(--shadow)}
+  .merge-node.in{opacity:1;transform:none}
+  .merge-node .big{font-size:1.6rem;font-weight:900}
+  .gates{display:flex;flex-direction:column;gap:8px;margin-top:14px;text-align:left}
+  .gate{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:.82rem;color:var(--muted);opacity:.45;transition:opacity .3s,color .3s}
+  .gate.ok{opacity:1;color:var(--green)}
+  .gate .box{width:16px;height:16px;border-radius:5px;border:1px solid var(--line-2);display:grid;place-items:center;font-size:.7rem}
+  .gate.ok .box{background:var(--green);color:#fff;border-color:var(--green)}
+  .compare{opacity:0;transition:opacity .5s;margin-top:18px}
+  .compare.in{opacity:1}
+  .cmp-row{display:flex;align-items:center;gap:12px;margin-top:8px;font-size:.85rem}
+  .cmp-row .label{width:74px;color:var(--muted);font-family:var(--mono)}
+  .cmp-bar{flex:1;height:14px;border-radius:99px;background:rgba(123,91,255,.10);overflow:hidden}
+  .cmp-bar > i{display:block;height:100%;width:0;border-radius:99px;transition:width 1.1s cubic-bezier(.2,.8,.2,1)}
+  .cmp-old > i{background:linear-gradient(90deg,#c7c0da,#a99ec9)}
+  .cmp-new > i{background:var(--grad)}
+  .cmp-row .val{width:64px;text-align:right;font-family:var(--mono);font-weight:700}
+  .terminal{border-left:1px solid var(--line);background:#f7f4fd;padding:18px;min-height:330px}
+  @media(max-width:820px){.terminal{border-left:none;border-top:1px solid var(--line)}}
+  .term-head{font-family:var(--mono);font-size:.74rem;color:var(--muted);margin-bottom:10px;display:flex;gap:6px;align-items:center}
+  .term-head .d{width:10px;height:10px;border-radius:50%}
+  .term-log{font-family:var(--mono);font-size:.78rem;line-height:1.7;height:270px;overflow-y:auto;scrollbar-width:thin}
+  .term-log .line{opacity:0;transform:translateX(-6px);animation:logIn .3s forwards;color:#4a4068;white-space:pre-wrap;word-break:break-word}
+  .term-log .line.sys{color:var(--green)}.term-log .line.warn{color:#c98a00}
+  @keyframes logIn{to{opacity:1;transform:none}}
+
+  /* ---------- POWERS / FEATURES ---------- */
+  .grid{display:grid;gap:18px}
+  .powers-grid{grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+  .pcard{border:1px solid var(--line);background:var(--card);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow);transition:transform .2s,box-shadow .2s;position:relative;overflow:hidden}
+  .pcard::before{content:"";position:absolute;left:0;top:0;right:0;height:4px;background:var(--grad);opacity:0;transition:opacity .25s}
+  .pcard:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg)}.pcard:hover::before{opacity:1}
+  .pcard .ico{font-size:2.2rem}
+  .pcard h3{font-size:1.18rem;font-weight:900;margin:.5em 0 .35em}
+  .pcard .what{font-size:.92rem;color:var(--ink-soft);margin-bottom:.7em}
+  .pcard .why{font-size:.88rem;color:var(--muted);border-top:1px dashed var(--line-2);padding-top:.7em}
+  .pcard .why::before{content:"なにがすごい？ ";color:var(--cyan);font-weight:800}
+  .feat-grid{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+  .fcard{border:1px solid var(--line);background:var(--card);border-radius:var(--radius);padding:24px;display:flex;flex-direction:column;gap:10px;box-shadow:var(--shadow);transition:transform .2s,box-shadow .2s}
+  .fcard:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg)}
+  .fcard .top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+  .fcard .emoji{font-size:2.4rem;line-height:1}
+  .mousou{font-size:.68rem;font-weight:800;font-family:var(--mono);padding:.35em .6em;border-radius:999px;white-space:nowrap;border:1px solid}
+  .m-low{color:var(--green);border-color:rgba(33,181,115,.4);background:rgba(33,181,115,.08)}
+  .m-mid{color:var(--gold);border-color:rgba(241,163,6,.4);background:rgba(241,163,6,.08)}
+  .m-high{color:var(--pink);border-color:rgba(255,79,158,.4);background:rgba(255,79,158,.08)}
+  .fcard h3{font-size:1.16rem;font-weight:900;line-height:1.3}
+  .fcard .ftag{color:var(--cyan);font-weight:700;font-size:.9rem}
+  .fcard .fbody{font-size:.9rem;color:var(--ink-soft)}
+  .fcard .fquote{font-size:.86rem;font-weight:700;border-left:3px solid var(--violet);padding:.4em 0 .4em .8em;margin-top:auto;color:var(--ink)}
+  .fcard .fquote::before{content:"🧙‍♂️ "}
+
+  /* ---------- MOTE ---------- */
+  .mote-head{text-align:center;max-width:780px;margin:0 auto}
+  .parody-banner{display:inline-flex;gap:.5em;align-items:center;font-size:.76rem;font-weight:800;color:var(--pink);border:1px dashed rgba(255,79,158,.5);background:#fff;border-radius:999px;padding:.45em 1em;margin-bottom:8px}
+  .mote-grid{display:grid;grid-template-columns:300px 1fr;gap:26px;align-items:start;margin-top:34px}
+  @media(max-width:780px){.mote-grid{grid-template-columns:1fr}}
+  .gauge-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:26px;text-align:center;box-shadow:var(--shadow);position:relative;overflow:hidden}
+  .gauge{width:180px;height:180px;border-radius:50%;margin:6px auto 14px;display:grid;place-items:center;background:conic-gradient(var(--pink) 0deg,var(--violet) 0deg,rgba(123,91,255,.12) 0deg)}
+  .gauge .inner{width:138px;height:138px;border-radius:50%;background:#fff;display:grid;place-items:center;box-shadow:inset 0 4px 14px rgba(123,91,255,.1)}
+  .gauge .pct{font-family:var(--disp);font-weight:900;font-size:2.4rem;line-height:1}
+  .gauge .heart{font-size:1.2rem}
+  .gauge-card .lbl{font-weight:900;font-size:1.02rem}
+  .gauge-card .cap{color:var(--muted);font-size:.84rem;margin-top:.4em}
+  .fans-wrap{position:relative}
+  .fans{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+  .fanbubble{display:flex;gap:10px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:16px;padding:11px 14px;box-shadow:var(--shadow);opacity:0;transform:translateY(10px)}
+  .fanbubble.in{opacity:1;transform:none;transition:opacity .5s,transform .5s}
+  .fanbubble .ava{font-size:1.7rem;flex:0 0 auto;animation:bob 2.6s ease-in-out infinite}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+  .fanbubble .ln{font-size:.86rem;font-weight:700}
+  .hearts{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+  .hearts span{position:absolute;bottom:-10px;font-size:1.1rem;opacity:0;animation:rise linear infinite}
+  @keyframes rise{0%{opacity:0;transform:translateY(0) scale(.7)}15%{opacity:.9}100%{opacity:0;transform:translateY(-260px) scale(1.2)}}
+  .comic{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;margin-top:34px}
+  .comic-card{background:#fff;border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column}
+  .comic-cells{display:grid;grid-template-columns:1fr 36px 1fr}
+  .cell{padding:18px 14px;text-align:center;display:flex;flex-direction:column;gap:8px}
+  .cell .ce{font-size:2.2rem}.cell .ct{font-size:.82rem;font-weight:700}
+  .cell.before{background:#f4f2f8;color:var(--muted)}
+  .cell.after{background:linear-gradient(160deg,#fff4fa,#f6f1ff);color:var(--ink)}
+  .arrow{display:grid;place-items:center;font-weight:900;color:var(--pink);background:#fff}
+  .comic-tag{font-size:.72rem;font-weight:800;color:var(--violet);text-align:center;padding:8px;border-top:1px dashed var(--line-2)}
+  .gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:26px;margin-top:30px}
+  .frame{background:#fff;border-radius:14px;padding:12px 12px 14px;box-shadow:var(--shadow-lg);transform:rotate(var(--rot,0));transition:transform .25s,box-shadow .25s;position:relative}
+  .frame:hover{transform:rotate(0) scale(1.04);box-shadow:0 34px 74px rgba(130,95,200,.26);z-index:3}
+  .frame .media{position:relative;aspect-ratio:4/3;border-radius:9px;overflow:hidden;background:linear-gradient(150deg,#f6f1ff,#fff4fa)}
+  .frame .ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:var(--muted);text-align:center;padding:10px}
+  .frame .ph .big{font-size:2.4rem}.frame .ph .hint{font-size:.74rem;font-weight:700}
+  .frame .ph .file{font-family:var(--mono);font-size:.64rem;color:var(--violet);background:#fff;border:1px solid var(--line);border-radius:6px;padding:.1em .5em;margin-top:2px}
+  .frame img,.frame video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1}
+  .frame .badge{position:absolute;top:8px;left:8px;z-index:3;font-size:.62rem;font-weight:800;background:rgba(255,255,255,.92);border:1px solid var(--line);border-radius:999px;padding:.2em .6em;color:var(--violet)}
+  .frame .badge.ai{color:#fff;background:rgba(123,91,255,.92);border-color:transparent}
+  .frame figcaption{font-size:.78rem;color:var(--ink-soft);font-weight:700;margin-top:10px;text-align:center;line-height:1.5}
+  .frame::after{content:"♡";position:absolute;top:-8px;right:-6px;font-size:1.2rem;color:var(--pink);opacity:.85;transform:rotate(12deg)}
+  .gallery-note{text-align:center;color:var(--muted);font-size:.82rem;margin-top:22px;max-width:70ch;margin-left:auto;margin-right:auto}
+  .gallery-note code{font-family:var(--mono);background:#fff;border:1px solid var(--line);border-radius:6px;padding:.1em .45em;color:var(--violet)}
+
+  /* ---------- COURSE / QUOTES / FOOTER ---------- */
+  .course-hero{text-align:center;max-width:760px;margin:0 auto 18px}
+  .catch{font-family:var(--disp);font-size:clamp(1.3rem,3vw,2rem);font-weight:900;margin:.3em 0}
+  .pitch{max-width:780px;margin:22px auto;padding:22px 26px;border-radius:var(--radius);border:1px solid var(--line);background:#fff;font-weight:700;font-size:1.05rem;box-shadow:var(--shadow)}
+  .pitch::before{content:"🧙‍♂️ AIマスター山本より";display:block;color:var(--gold);font-size:.82rem;letter-spacing:.06em;margin-bottom:.6em}
+  .modules{display:flex;flex-direction:column;gap:14px;margin-top:24px}
+  .mcard{display:grid;grid-template-columns:120px 1fr;gap:18px;align-items:start;border:1px solid var(--line);background:#fff;border-radius:18px;padding:20px 22px;box-shadow:var(--shadow)}
+  @media(max-width:680px){.mcard{grid-template-columns:1fr;gap:8px}}
+  .mcard .lvl{display:flex;flex-direction:column;gap:6px}
+  .lvl-badge{font-weight:900;font-size:.78rem;padding:.4em .7em;border-radius:10px;text-align:center;background:var(--grad);color:#fff}
+  .lvl .dur{font-family:var(--mono);font-size:.74rem;color:var(--muted);text-align:center}
+  .mcard h4{font-size:1.1rem;font-weight:900;margin-bottom:.4em}
+  .mcard .mdesc{font-size:.9rem;color:var(--ink-soft);margin-bottom:.7em}
+  .mcard .mout{font-size:.88rem;border-top:1px dashed var(--line-2);padding-top:.6em}
+  .mcard .mout::before{content:"😎 受講後のあなた：";color:var(--cyan);font-weight:800}
+  .testi-head{display:flex;align-items:center;gap:12px;margin:46px 0 6px;flex-wrap:wrap}
+  .parody-tag{font-size:.74rem;font-weight:800;color:var(--pink);border:1px dashed rgba(255,79,158,.5);border-radius:999px;padding:.3em .8em;background:#fff}
+  .testi-grid{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+  .tcard{border:1px solid var(--line);background:#fff;border-radius:18px;padding:22px;box-shadow:var(--shadow)}
+  .tcard .who{font-weight:900;color:var(--gold);margin-bottom:.7em;font-size:.95rem}
+  .tcard .ba{font-size:.86rem;margin-bottom:.6em}
+  .tcard .ba b{font-family:var(--mono);font-size:.72rem;padding:.2em .5em;border-radius:6px;margin-right:.5em}
+  .tcard .before b{background:#efecf6;color:var(--muted)}.tcard .after b{background:var(--green);color:#fff}
+  .price-gag{margin:34px auto 0;text-align:center;max-width:760px;border:1px solid var(--gold);border-radius:var(--radius);padding:24px;background:#fffaf0;font-weight:700;box-shadow:var(--shadow)}
+  .price-gag::before{content:"💴";font-size:1.6rem;display:block;margin-bottom:.3em}
+  .quotes{text-align:center}
+  .quote-stage{max-width:820px;margin:30px auto 0;position:relative;min-height:130px}
+  .quote{position:absolute;inset:0;opacity:0;transform:translateY(14px);transition:opacity .6s,transform .6s;font-family:var(--disp);font-weight:800;font-size:clamp(1.2rem,3.2vw,1.9rem);line-height:1.5;display:flex;align-items:center;justify-content:center;padding:0 10px}
+  .quote.active{opacity:1;transform:none}
+  .quote-dots{display:flex;gap:8px;justify-content:center;margin-top:24px}
+  .quote-dots i{width:9px;height:9px;border-radius:50%;background:rgba(123,91,255,.2);cursor:pointer;transition:background .3s,transform .3s}
+  .quote-dots i.on{background:var(--grad);transform:scale(1.3)}
+  footer{padding:70px 0 96px;border-top:1px solid var(--line);margin-top:30px;text-align:center}
+  .foot-meta{max-width:720px;margin:0 auto;color:var(--ink-soft);font-size:.9rem}
+  .foot-meta .big{font-family:var(--disp);font-weight:900;font-size:1.3rem;color:var(--ink);margin-bottom:.4em}
+  .disclaimer{margin-top:26px;font-size:.76rem;color:var(--muted);max-width:680px;margin-left:auto;margin-right:auto;border-top:1px dashed var(--line-2);padding-top:18px}
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.2,.8,.2,1),transform .7s cubic-bezier(.2,.8,.2,1)}
+  .reveal.show{opacity:1;transform:none}
+  .egg{position:fixed;bottom:14px;left:14px;z-index:50;font-size:.72rem;color:var(--muted);max-width:280px}
+  .egg .toggle{cursor:pointer;border:1px solid var(--line-2);border-radius:999px;padding:.35em .8em;background:#fff;box-shadow:var(--shadow);font-weight:700}
+  .egg .panel{display:none;margin-top:8px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px;line-height:1.6;box-shadow:var(--shadow-lg)}
+  .egg.open .panel{display:block;animation:logIn .3s}
+  ::selection{background:rgba(255,79,158,.25)}
+</style>
+</head>
+<body>
+<div class="grain"></div>
+<div id="progress"></div>
+
+<nav id="nav">
+  <span class="brand">🧙‍♂️ AIマスター山本</span>
+  <span class="links">
+    <a href="#demo">ライブデモ</a>
+    <a href="#features">2026AI特集</a>
+    <a href="#mote">モテ演出</a>
+    <a href="#course">講座</a>
+    <a class="navcta" href="#demo">⚡ 体感する</a>
+  </span>
+</nav>
+
+<!-- LOADING -->
+<div id="loader">
+  <div class="loader-orb"></div>
+  <div id="loadMsg">起動準備中…</div>
+  <div class="loader-bar"><i id="loadFill"></i></div>
+  <div class="loader-sub">Claude Opus 4.8 · Dynamic Workflow · 弟子(エージェント)を並列起動中</div>
+</div>
+
+<!-- HERO (photo) -->
+<header class="hero" id="top">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-glow" id="heroGlow"></div>
+  <div class="emojis" id="emojis"></div>
+  <div class="hero-inner">
+    <span class="eyebrow">⚡ Dynamic Workflow 体感ラボ</span>
+    <div class="master-badge"><span class="face">🧙‍♂️</span> AIマスター山本の道場</div>
+    <h1><span class="grad-text" id="heroHeadline">フルパワーで弟子を動かす。</span></h1>
+    <p class="hero-sub" id="heroSub">読み込み中…</p>
+    <div class="hero-chips">
+      <span class="hchip mote">♡ モテ度 <span id="heroMote">87</span>%</span>
+      <span class="hchip">🤖 弟子 16体 並列</span>
+      <span class="hchip">💰 儲かってる感 MAX</span>
+    </div>
+    <div class="cta-row">
+      <a class="btn" href="#demo">⚡ ライブデモを体感する</a>
+      <a class="btn ghost" href="#mote">♡ モテ演出を見る</a>
+    </div>
+    <p class="fiction-note">※「AIマスター山本」は<b>創作ペルソナ</b>、写真は<b>AI生成のフィクション・イメージ</b>です（特定の人物・実際の出来事ではありません）。名言・受講生の声・受講料・AI特集・モテ演出もすべてAI生成のパロディ。実在の人物・企業・商品とは関係ありません。</p>
+  </div>
+  <div class="scrolldown">▾</div>
+</header>
+
+<!-- STATS BENTO -->
+<div class="wrap">
+  <div class="bento reveal">
+    <div class="bcell stat"><div class="num"><span class="count" data-to="16">0</span></div><div class="lab">弟子(エージェント) 並列起動</div></div>
+    <div class="bcell stat"><div class="num"><span class="count" data-to="47">0</span><span style="font-size:1.2rem">分</span></div><div class="lab">分析完了（従来 240分）</div></div>
+    <div class="bcell img tall"><img src="images/money.jpg" alt="AI生成イメージ：札束と金貨"><span class="cap">💰 儲かってる感、過剰供給<br><span style="font-weight:600;opacity:.85">※AI生成・架空イメージ</span></span></div>
+    <div class="bcell stat"><div class="num">♡<span class="count" data-to="87">0</span>%</div><div class="lab">モテ度（当社比・ネタ）</div></div>
+    <div class="bcell stat"><div class="num">¥<span class="count" data-to="298">0</span>,000</div><div class="lab">講座お値段（パロディ）</div></div>
+    <div class="bcell img wide"><img src="images/rocket.jpg" alt="AI生成イメージ：¥ロケットと爆上げグラフ"><span class="cap">🚀 ¥ロケット、点火。爆上げ確定（※AI生成・架空イメージ）</span></div>
+  </div>
+</div>
+
+<!-- MASTER INTRO -->
+<section id="intro" class="band-soft">
+  <div class="wrap reveal"><div class="speech"><div class="avatar">🧙‍♂️</div><div class="bubble" id="masterIntro">…</div></div></div>
+</section>
+
+<!-- LIVE DEMO -->
+<section class="demo" id="demo">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="eyebrow">🎮 Interactive Demo</span>
+      <h2 class="section-title">弟子を<span class="grad-text">16体同時</span>に走らせる、を体感する</h2>
+      <p class="tagline">下の「起動」を押すと、1本のスクリプトから弟子(サブエージェント)がファンアウトし、バリア無しで並列処理し、敵対検証ゲートを抜けてCEOに報告するまでを、その場で再現します。<br>— これは演出ですが、動きは本物の Dynamic Workflow の挙動そのままです。</p>
+    </div>
+    <div class="demo-stage reveal">
+      <div class="demo-head">
+        <span class="title">▮ saiaru-os :: dynamic-workflow.run()</span>
+        <div class="stat-pills">
+          <span class="pill">agents <b id="statAgents">0</b>/16</span>
+          <span class="pill">budget <b id="statBudget">0</b>k</span>
+          <span class="pill">status <b id="statStatus">idle</b></span>
+        </div>
+      </div>
+      <div class="demo-body">
+        <div class="stage-zone">
+          <div class="stage-label" id="stageLabel">▶ ボタンを押すとワークフローが起動します</div>
+          <div class="agents" id="agentArea"></div>
+          <div class="merge-node" id="mergeNode">
+            <div class="big">🎯 統合完了</div>
+            <div style="color:var(--muted);font-size:.85rem">6つの独立分析を merge → 構造化JSON出力</div>
+            <div class="gates" id="gates"></div>
+          </div>
+          <div class="compare" id="compare">
+            <div style="font-weight:800;margin-bottom:6px">⏱ 処理時間：直列 vs Dynamic Workflow</div>
+            <div class="cmp-row cmp-old"><span class="label">従来直列</span><span class="cmp-bar"><i id="barOld"></i></span><span class="val">240分</span></div>
+            <div class="cmp-row cmp-new"><span class="label">Workflow</span><span class="cmp-bar"><i id="barNew"></i></span><span class="val grad-text">47分</span></div>
+          </div>
+        </div>
+        <div class="terminal">
+          <div class="term-head"><span class="d" style="background:#ff5f56"></span><span class="d" style="background:#ffbd2e"></span><span class="d" style="background:#27c93f"></span> live log</div>
+          <div class="term-log" id="termLog"><div class="line sys">$ awaiting launch…</div></div>
+        </div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:26px"><button class="btn" id="runBtn">▶ Dynamic Workflow を起動</button></div>
+  </div>
+</section>
+
+<!-- POWERS -->
+<section id="powers" class="band-soft">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="eyebrow">🛠 5つの必殺技</span>
+      <h2 class="section-title">なんで、こんなに<span class="grad-text">速うて賢い</span>んや？</h2>
+      <p class="tagline">— Dynamic Workflow の5つの力を、マスターが解説。</p>
+    </div>
+    <div class="grid powers-grid" id="powersGrid" style="margin-top:34px"></div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="eyebrow">🔮 2026 おもしろAI特集</span>
+      <h2 class="section-title">マスター厳選・<span class="grad-text">2026年のおもしろAI</span> 9連発</h2>
+      <p class="tagline">— 各カードの「妄想度メーター」で、本気度をチェックしてや。</p>
+    </div>
+    <div class="grid feat-grid" id="featGrid" style="margin-top:34px"></div>
+  </div>
+</section>
+
+<!-- MOTE -->
+<section id="mote" class="band-pink">
+  <div class="wrap">
+    <div class="reveal mote-head">
+      <span class="parody-banner">🎭 パロディ／イメージサンプル — 写真はAI生成・架空です</span>
+      <h2 class="section-title" id="moteTitle">…</h2>
+      <p class="tagline" id="moteTag" style="margin:0 auto">…</p>
+    </div>
+    <div class="mote-grid reveal">
+      <div class="gauge-card">
+        <div class="gauge" id="gauge"><div class="inner"><div><div class="pct"><span id="gaugePct">0</span>%</div><div class="heart">♡♡♡</div></div></div></div>
+        <div class="lbl" id="moteLbl">…</div><div class="cap" id="moteCap">…</div>
+      </div>
+      <div class="fans-wrap"><div class="hearts" id="moteHearts"></div><div class="fans" id="fans"></div></div>
+    </div>
+    <div class="comic reveal" id="comic"></div>
+    <div class="reveal">
+      <h3 style="font-family:var(--disp);font-size:1.4rem;font-weight:900;text-align:center;margin-top:48px">📸 “儲かってる×モテモテ” ギャラリー <span style="font-size:.66em;color:var(--pink)">（AI生成・架空イメージ）</span></h3>
+      <div class="gallery" id="gallery"></div>
+      <p class="gallery-note">紫バッジ=<b>AI生成の架空イメージ</b>（実在の人物・出来事ではありません）。グレーバッジ=<b>差し込み枠</b>：<code>output/dynamic-workflow-showcase/images/</code> に <code>your-photo.jpg</code> / <code>clip1.mp4</code> を置くと、ご自分の実写・動画がその枠に表示されます。</p>
+    </div>
+  </div>
+</section>
+
+<!-- COURSE -->
+<section id="course">
+  <div class="wrap">
+    <div class="reveal course-hero">
+      <span class="eyebrow">🎓 イケてる講座</span>
+      <h2 class="section-title" id="courseTitle">…</h2>
+      <p class="catch grad-text" id="courseCatch">…</p>
+    </div>
+    <div class="pitch reveal" id="coursePitch">…</div>
+    <div class="modules reveal" id="modules"></div>
+    <div class="testi-head reveal">
+      <h3 style="font-family:var(--disp);font-size:1.5rem;font-weight:900">😎 受講生の声</h3>
+      <span class="parody-tag">※すべてパロディ・フィクションです</span>
+    </div>
+    <div class="grid testi-grid reveal" id="testimonials"></div>
+    <div class="price-gag reveal" id="priceGag">…</div>
+  </div>
+</section>
+
+<!-- QUOTES -->
+<section class="quotes band-soft" id="quotes">
+  <div class="wrap reveal">
+    <span class="eyebrow">📜 マスター語録</span>
+    <h2 class="section-title">山本マスター<span class="grad-text">名言(風)</span>集</h2>
+    <div class="quote-stage" id="quoteStage"></div>
+    <div class="quote-dots" id="quoteDots"></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot-meta reveal">
+      <div class="big">🧙‍♂️ ええか、これが Dynamic Workflow や。</div>
+      <p id="footClosing">…</p>
+    </div>
+    <div class="disclaimer reveal">
+      <b>【フィクション注記】</b> 本ページは Claude Opus 4.8 の Dynamic Workflow のデモンストレーション用に制作されたユーモアコンテンツです。「AIマスター山本」は創作ペルソナであり、名言・受講生の声・受講料・各種AIサービス・分析数値・モテ演出はすべて生成AIによるフィクション／誇張表現です。<b>掲載写真はすべてAI（Flux）で生成した架空のイメージ</b>で、実在の人物・企業・製品・サービス・出来事とは一切関係ありません。「差し込み枠」はご自分のメディアを入れるための空き枠です。技術説明部分（Dynamic Workflowの挙動）は事実ベースですが、画面演出は体感用の再現です。<br>制作：才有る者の楽園 / Generated &amp; adversarially verified by Claude Opus 4.8 Dynamic Workflow.
+    </div>
+  </div>
+</footer>
+
+<div class="egg" id="egg"><span class="toggle" id="eggToggle">🥚 隠しネタ</span><div class="panel" id="eggPanel"></div></div>
+
+<!-- DATA -->
+<script id="data" type="application/json">
+{
+  "heroHeadline":"フルパワーで弟子を動かす。",
+  "heroSub":"1本のスクリプトから同時に何十人のエージェントを働かせる。それが Dynamic Workflow。",
+  "masterIntro":"ええか、わしや。AIマスター山本。京都で才有る者の楽園を率いる導師や。今日はな、わしの弟子たちが毎日何十人も同時に働く秘密兵器、Dynamic Workflow のなんぼすごいんかを、お前さんらに教えたる。思うてみい、営業から戦略分析から敵対チェックまで、全部を同時並行で、それでいてスマートに回す。それが、これや。",
+  "closing":"ええか、これやな。わしが何百本のプロジェクト同時並行で回されるんは、このやつのおかげ。Claude Opus 4.8 Dynamic Workflow。弟子を動かす最高の道具。お前さんとこにも、この力が要るなら。わし、教えたるで。",
+  "powers":[
+    {"icon":"👥","name":"ファンアウト制御","what":"1本のスクリプトから複数のサブエージェントを動的に起動。パラメータを渡すだけで、営業・分析・敵対検証エージェントが同時に飛ぶ。","why":"従来は『1ステップ→1エージェント→待つ→次』の直列やった。それが『1ステップで何十人が並走』。時間が劇的に短くなって、リアルタイム経営判断ができるようになった。"},
+    {"icon":"⚡","name":"パイプライン横断処理","what":"pipeline()で複数のアイテムを、ステージ間にバリア無く次々と処理。あるアイテムがステージ1にいる間に、別のアイテムはもう stage3 で動いとる。","why":"従来は『ステージ1完全終了→全員集合→ステージ2へ』やった。素早さが命の営業組織にはこれ、毒や。Dynamic Workflow はそれを壊した。"},
+    {"icon":"🔄","name":"並列実行（最大16体）","what":"最大16体のサブエージェントが同時に動く。クライアント調査・競合分析・提案書作成・キャッシュフロー診断が『今この瞬間に』全部進む。","why":"16人同時に働かせるわけや。しかも人間と違うて疲れへん。フル稼働で膨大な頭脳労働量。そら競争力やろ。"},
+    {"icon":"🛡️","name":"敵対的検証","what":"ある結論が出たら『その逆を必死で証明しろ』とエージェントに言いつける。もっともらしいが実は誤った結論を、構造的に潰す。","why":"人間はな『同じ結論』に引っぱられる動物や。でも Workflow は『お前の結論、本当か。反論してみい』と冷徹に問い詰める。これが命やねん。"},
+    {"icon":"📊","name":"トークン予算スケーリング","what":"使える認知予算（トークン）に応じて、探索の深さを動的に調整。余裕あれば deep-dive、タイトなら focus。loop-until-budget で自動判定。","why":"『調べるべき深さ』は実務では固定やない。月初は時間あるけど月末は忙しい。Dynamic Workflow はそれを自動で察して、予算内で最大価値を絞り出す。"}
+  ],
+  "features":[
+    {"emoji":"🤐","title":"心の声チェッカーAI 〜本当は言いたいこと〜","tag":"Zoomの顔認識で、参加者が『内心何を思ってるか』リアルタイム判定。会議の闇を可視化。","body":"視線の動き、顎の微妙な緊張、瞬きの頻度から『この人、本当は反対してる/退屈/激怒している』を推定。上司のスライド中に部長が目線をそらした瞬間、AIが『退屈度レベル3到達』と検出。全員の心の声が見える会議なんて、もう誰も本当のことを言えません。","quote":"会議いうんはな…本当の勝負は『何を言わないか』や。このAIはついにそれを可視化した。","mousou":"high"},
+    {"emoji":"📧","title":"メール納期逆算AI 〜上司メール翻訳機〜","tag":"『ご確認のほど』『いつでもいい』という上司のメールから、本当の期限を逆算するAI。","body":"日本語の曖昧さを逆算エンジンで破壊。『ご確認のほど、よろしくお願いいたします』→実は『明日の朝9時』。『時間がある時にでも』→『金曜夜までに』。敬語の温度を検知して、本当の緊急度をスコア化。もう『いつまで？』と聞き直さなくていい時代が来た。","quote":"日本企業の会話いうんはな…表面と裏面で全く違う。このAIは『敬語の奥にある本音の納期』を嗅ぎ分けた。","mousou":"high"},
+    {"emoji":"👔","title":"採用面接AI 〜嘘検知官〜","tag":"履歴書と実際の話に矛盾がないか、会話の途中で『盛った』瞬間を察知。","body":"応募者が『前職では営業成績全社1位でした』と言った瞬間、公開データと照合。ズレがあったら即『黄色信号』。声のテンポ、言葉の選択から『この部分、本当に経験してる感じじゃないなあ』と判定。複数検知したら面接画面に『盛りリスク度70%』と点灯。","quote":"採用いうんはな…見立てが全てや。これからは『人間の勘』と『AIの嘘検知』の二段構えや。","mousou":"mid"},
+    {"emoji":"🎯","title":"無駄会議検知AI 〜時間泥棒通報機〜","tag":"この会議、本当に必要ですか？AIが『この1時間は無駄です』と判定して退席を促す。","body":"冒頭から参加者の発言量、議論の深さ、意思決定の進度をスキャン。30分たって『結局、何も決まってない。話がループしてる』と判定したら、優しく『そろそろ終了しても大丈夫では？』と提案。最終的に『あと1時間やっても結論変わらんな』と判断したら『終了を推奨します』と赤字で通知。","quote":"会議いうんはな…判断機械の前では、すぐにボロが出る。無駄な会議は、金を捨ててるのと一緒や。","mousou":"high"},
+    {"emoji":"🎬","title":"プレゼン失敗予測AI 〜本番前に教える〜","tag":"リハ動画を見せたら『このスライド、聴衆の90%は理解できません』と教えてくれる。","body":"資料の複雑度、フォントの大きさ、グラフの見づらさ、間の取り方から『このプレゼンはどこで観客を失うか』を予測。『スライド7で全員の集中力が切れます』『この専門用語、3割が知りません』と個別指摘。本番で大失敗する前に、リハで全部修正できる。","quote":"プレゼンいうんはな…聴き手の脳がどこで逃げるかが全てや。このAIは『退屈の瞬間』を捕捉した。","mousou":"mid"},
+    {"emoji":"💰","title":"経費削減AI 〜あなたの浪費、露呈中〜","tag":"毎月の出費パターンから『この支出、実は不要では？』を指摘。無意識の出血点を自動検出。","body":"経費精算システムから支出を吸収し『サブスク30個のうち7個は使ってません』『タクシー利用が前月比30%増、でも移動距離は同じ』と細かい浪費を指摘。CFOの目が届かない部分を、AIが指名する。","quote":"組織いうんはな…細かい出血の集積で死ぬんや。AIが『塵も積もれば…』を数字で見せてくれる。","mousou":"low"},
+    {"emoji":"🗣️","title":"部下の本音AIスピーカー 〜あいつ、何考えてる？〜","tag":"発言ログから『部下が今、何にイライラしてるか』『退職予備軍は誰か』を予測。","body":"テキスト分析で感情温度を監視。返信速度が落ちた、メール文が短くなった、会議での発言が減った…こうした微細な変化から『このメンバー、限界が近い』と検知。マネージャーは勘だけに頼らず、AIが『早期離職リスク68%』と警告。","quote":"部下のホンネいうんはな…本人が自覚する前にAIが察知する時代や。『勘違い配置』から人材を救う。","mousou":"high"},
+    {"emoji":"📱","title":"スマホ依存度自動制限AI 〜君、今日もう1時間見た〜","tag":"集中力が必要な時間帯を学習して、勝手に通知をブロック。人間の弱さをAIが管理。","body":"集中力が落ちる時間帯を学習し『あなたは午後2〜3時が最も集中力が高い』と判定したら、その時間は通知を全ブロック。ロック画面に『あと35分、頑張ってください』とエール。意志だけでは制御できない習慣を、AIが強制リセット。","quote":"スマホ依存いうんはな…人間の最大の敵や。AIが『お前の誘惑』を自動シャットアウトする時代や。","mousou":"mid"},
+    {"emoji":"🎓","title":"オンライン講座の真実AI 〜実は時間の無駄では？〜","tag":"ネット講座を分析して『これは実際に業務に役立つか』を数値化。","body":"『3時間で完全習得コース』の受講者が、実際に業務で使えているか、定着度を調査。『この修了者、80%は実務で使えてません』と判定。一方で『この講座、参加者の60%が3ヶ月以内に成果に』と本物を推奨。時間泥棒から本物だけをフィルタリング。","quote":"自己啓発いうんはな…玉石混交や。AIが『本当に力になる学び』と『時間泥棒』を分別してくれる。","mousou":"high"}
+  ],
+  "motemote":{
+    "title":"AIマスター、モテ度解放委員会",
+    "tagline":"プロンプト一本で、人生のバグ取り完了。AIを使いこなしたら、なぜか人生がモテ始めた——という(あくまでパロディの)お話。",
+    "meter":{"percent":87,"label":"AIマスター認定・完全体モテ度","caption":"プロンプトが長いほど、モテ度も深まる法則（諸説あり）"},
+    "fans":[
+      {"face":"👩","line":"あ、その提案資料…いままでと全然違う🥺"},
+      {"face":"👩‍🦰","line":"マスター、どうしてそんなに返信早いの…？"},
+      {"face":"👩‍🎨","line":"その分析視点、昨日まで見たことない✨"},
+      {"face":"👱‍♀️","line":"あのプロンプト、教えてくれませんか…？（真剣な目）"},
+      {"face":"👩‍💼","line":"それ本当にAIが書いたんですか。味がある〜"},
+      {"face":"👩‍🔬","line":"その会議、30分で終わった…時間余った…？"},
+      {"face":"💃","line":"マスター、次の難案件、あなたに相談したい💕"},
+      {"face":"👩‍🎓","line":"その骨組み、参考にさせてもらえますか"},
+      {"face":"🧑‍🦱","line":"昨日のメール返、むちゃ丁寧だったんですけど"},
+      {"face":"👯‍♀️","line":"やっぱマスターはClaude使ってんだ。納得。"}
+    ],
+    "comic":[
+      {"before_emoji":"😭","before":"夜中2時、Excel眺めて「あ〜もう無理」","after_emoji":"🧠✨","after":"朝7時、プロンプト投げて朝食中に分析が届く"},
+      {"before_emoji":"🗣️💨","before":"会議で「ちょっと待ってください…」と沈黙2分","after_emoji":"🎯💬","after":"会議中にAIが論点整理。「さすが」と言われる"},
+      {"before_emoji":"📧😤","before":"営業メール、3度目の修正「まだ何か違う…」","after_emoji":"📧💌","after":"初版でOK。相手から「返信早い＆品質良い」と信頼UP"}
+    ],
+    "frames":[
+      {"type":"photo","file":"gag1.jpg","ai":true,"cap":"AI生成イメージ①｜“儲かってる感”は気のせいではない","rot":"-4deg"},
+      {"type":"photo","file":"gag2.jpg","ai":true,"cap":"AI生成イメージ②｜札束は紙吹雪として投げるもの（※ネタ）","rot":"3deg"},
+      {"type":"photo","file":"gag3.jpg","ai":true,"cap":"AI生成イメージ③｜気づいたら船上だった（※架空）","rot":"-2deg"},
+      {"type":"photo","file":"gag4.jpg","ai":true,"cap":"AI生成イメージ④｜車も紙吹雪まみれ（※フィクション）","rot":"2deg"},
+      {"type":"photo","file":"your-photo.jpg","ai":false,"cap":"📸 ここにご自分の実写をどうぞ","rot":"-3deg"},
+      {"type":"video","file":"clip1.mp4","ai":false,"cap":"🎬 ご自分の動画もどうぞ（無音ループ）","rot":"3deg"}
+    ]
+  },
+  "course":{
+    "title":"人生モテモテになるイケてるAIインストラクター講座",
+    "catch":"ええか、AIをきっちり使いこなす者が、職場でも家庭でも一目置かれるんや。",
+    "pitch":"わい、何十年も組織を見てきたけどな、AIを使いこなす奴とそうでない奴の差は、もう隠せんほどデカい。この講座では、単なるツール使いやのうて、AIを『考える相棒』として働かせる思考法を伝授する。半年後には、おまえさんの提案が会議で通りまくり、プライベートでも『あの人、なんか違う』て言われるようになる。ほんでから、人間関係が一変するんや。",
+    "modules":[
+      {"level":"初級","name":"プロンプトは『指示書』やない、『対話』や","dur":"90分","desc":"何を聞くか、どう聞くかで答えの質が180度変わる。『Observed→Inferred→Unknown』の3段で思考を整理し、曖昧さを消したプロンプトを書く訓練。","out":"『AIの回答が微妙』と思ってた奴が、実は『自分の質問が微妙だった』ことに気づいて、人生で初めて自分の思考を疑う喜びを味わう。"},
+      {"level":"中級","name":"AIを『敵対検証官』として配置する技","dur":"120分","desc":"自分の企画を『最高にケチなCEO視点』でAIにぶっ叩かせる。反論シナリオを10個生成させ、それぞれへの回答を作る。会議での『でも…』が9割消える。","out":"営業トークが『自信満々で論破不可能』になる。実はAIと『負け筋』を全消ししてるだけ。本人が言うと胡散臭いので、秘密にしておく方がモテ度が上がる（笑）。"},
+      {"level":"中級","name":"『何のため』と『誰のため』を鮮明にする","dur":"100分","desc":"目的と顧客を無視した企画書は死ぬ。『目的樹→ペルソナ→現在地→到達地』の4段フレームで、AIに本質的な価値を言語化させる。","out":"ぼんやりしてた企画が透明感を手に入れる。聞き手には『洞察力が深い人』に見える。実はAIの思考整理を自分の言葉で言ってるだけ。"},
+      {"level":"奥義","name":"複雑な判断を『3モデル並列討論』に託す","dur":"150分","desc":"戦略判断は『1つのAIに聞く』では絶対ダメ。Claude・GPT・Geminiに同じ問いをぶつけ、答えの差を自分の脳で処理する。視野が立体になる。","out":"決定後の『もし違う判断してたら…』という後悔が消える。『あの人の判断は覚悟が違う』と言われ、信頼が堆積する。"},
+      {"level":"奥義","name":"『Fact Integrity』〜AIの創作を見抜く〜","dur":"120分","desc":"AIは平気で『それっぽい嘘』をつく。Observed/Inferred/Unknown/Fictional の4分類を習慣化し『どこまで根拠ありか』を常に問う。","out":"創作癖を見抜く力がつくと、世の中の『嘘くさい／本当』の嗅ぎ分けが鋭くなる。詐欺に強くなり『情報リテラシーが高い人』に見える。"}
+    ],
+    "testimonials":[
+      {"who":"40代・自称DX推進担当","before":"毎週月曜の会議で『でも…』と返されるのが儀式。提案資料は手作りで完成度40点。AIは『なんか信用できん』と触ってもなかった。","after":"今は提案をAIに5回ぶん殴らせてから出す。反論を10個潰してから臨むから『でも…』が消えた。3ヶ月で予算承認5件。部下からも『部長、最近急に鋭くなりました』と。"},
+      {"who":"30代・営業マン","before":"営業トークは機能をダラダラ説明するだけ。契約率は業界平均の半分。AIは『営業の敵』だと思ってた。","after":"『顧客の立場で提案を再構成する』のをAIと一緒にやった。反論シナリオを先に潰す習慣がつき、今月の契約率が大幅アップ。『この人、ほんまに自分の事を考えてくれてる』と言われるように。"},
+      {"who":"50代・管理職","before":"若手がAIを使いこなすのを横目に『時代に取り残されてる』と焦ってた。提案作成に丸1日、新技術に慣れるのは無理と諦めかけてた。","after":"『AIは道具でなく考える相棒』という考え方をもらった。3モデル並列討論で気づかない視点を教わるのが毎日の学びに。役員から『君はまだまだ現役だな』と。"}
+    ],
+    "price":"受講料は『一生モノのスキル代』として¥298,000。…ただし『最初の1ヶ月で提案が1件通ったら回収できる』と、わい自身が提案資料で証明したので、実は負担やない（笑）。『高い』と思う奴は、そもそもAIを使いこなす思考力がまだ足りてない。そういう奴こそ、この講座が必要や。"
+  },
+  "quotes":[
+    "売上いうんはな…虚像や。利益も意見。結局キャッシュだけが事実や。",
+    "50点で速う出して赤ペンもらう方が、100点を1ヶ月待つより10倍強い。",
+    "営業がゼロいうんは、努力不足やない。構造の問題や。",
+    "単発で終わる仕事はするな。ひとつの案件に産業構造の変化を巻き込め。",
+    "頼まれたことをやりきる。これができん奴は、何ぼ優秀でも信頼されん。",
+    "つまらん仕事いうんはな、その仕事の『何のため』を見失ってるだけや。",
+    "感覚で『社運級』と言う奴は、最後必ず泣く。基準で判定せえ。",
+    "顧客の成功が己の成功や。相反するなら、設計から根本で作り直し。"
+  ],
+  "loading":[
+    "弟子を叩き起こしています…(コーヒーをぶっ掛けています)",
+    "16個のエージェント脳を並列起動中…(雷の音)",
+    "Dynamic Workflow を始動させています…",
+    "分析30秒、判定10秒、報告60秒…弟子たちが目覚めます",
+    "山本式AI経営OSの神経回路を接続しています…まもなく覚醒",
+    "儲かってる感を充填中…紙吹雪はゴールド指定で発注済み",
+    "原則13本を脳に焼き付けさせています…",
+    "京大MBA8科目の思考フレームを統合中…",
+    "敵対監査エージェントが目を覚ましました…『その結論、本当か？』",
+    "才有る式エコシステムをスピンアップ…お待たせしません"
+  ],
+  "eggs":[
+    "『ええか、カレーのルーは3種類混ぜるんやで…ビジネスもそや』",
+    "『営業¥0が2週…あ、これ血流やな』",
+    "山本マスターの好物：神丹穂(唐辛子)。辛さで脳をリセットする儀式。",
+    "『細胞も企業も、分裂・分化・死滅を繰り返す。違いは意識と時間軸だけ』",
+    "AI新人3原則：やりきる / 50点で速く / 何のためを問う。これだけで勝ちや。",
+    "『紙吹雪は経費で落ちひん。せやけど夢は経費以上のリターンや』"
+  ],
+  "demo":[
+    {"stage":"📋 Stage 1：入力 → ファンアウト","agents":["営業エージェント","ファンアウト制御","スケジューラー"],"logs":[
+      ["",  "[営業] 『この案件、調べたってや。社運級候補や。』"],
+      ["sys","[制御] 了解。今から並列チームを起動するで。"],
+      ["",  "[スケジューラー] 調査班・競合班・提案班・診断班・敵対班…並列開始"],
+      ["sys","✓ 16 agents spawned | budget: 500k tokens | pipeline: ready"]
+    ]},
+    {"stage":"⚙️ Stage 2：並列処理（バリア無し）","agents":["クライアント調査","競合分析官","提案書生成","CF診断","敵対検証A","敵対検証B"],"logs":[
+      ["",  "[調査班] 沿線・取引構造を分析中…"],
+      ["",  "[競合班] AI研修市場 3社比較 → 差別化軸を発見…"],
+      ["",  "[提案班] 『人間や組織が進化するAI』哲学でフレーム組立…"],
+      ["",  "[診断班] 導入効果 × キャッシュフロー 3年試算…"],
+      ["warn","[敵対A] 『この結論、本当か。逆を証明できるぞ』 → 反証テスト…"],
+      ["warn","[敵対B] 『これ、創作入ってないか』 → Fact Integrity チェック…"]
+    ]},
+    {"stage":"🎯 Stage 3：統合 → CEO判断","agents":["結果統合","品質ゲート","CEO通知"],"logs":[
+      ["",  "[統合] 6つの独立分析を merge → 構造化JSON出力…"],
+      ["sys","[ゲート] 敵対検証『OK』 → Fact完全性『OK』 → スキーマ準拠『OK』"],
+      ["sys","[通知] 『山本さん、分析完了。全検証OK。最終資料は /output に。』"],
+      ["sys","✓ integrated | adversarial: PASS | 所要 47分（従来 240分）"]
+    ]}
+  ]
+}
+</script>
+
+<script>
+(function(){
+  "use strict";
+  var DATA=JSON.parse(document.getElementById('data').textContent);
+  var $=function(id){return document.getElementById(id);};
+  var sleep=function(ms){return new Promise(function(r){setTimeout(r,ms);});};
+
+  $('heroHeadline').textContent=DATA.heroHeadline;
+  $('heroSub').textContent=DATA.heroSub;
+  $('masterIntro').textContent=DATA.masterIntro;
+  $('footClosing').textContent=DATA.closing;
+  $('heroMote').textContent=DATA.motemote.meter.percent;
+  $('heroBg').style.backgroundImage="url('images/hero.jpg')";
+
+  /* floating emojis (hero) */
+  (function(){
+    var pool=['💰','🤖','🥂','💖','🎯','✨','💵','🍾','💕','🛡️','🤑','🧙‍♂️','💗'];
+    var box=$('emojis');
+    for(var i=0;i<16;i++){var s=document.createElement('span');s.textContent=pool[i%pool.length];
+      s.style.left=(Math.random()*100)+'%';s.style.top=(Math.random()*100)+'%';
+      s.style.fontSize=(1.3+Math.random()*2.2)+'rem';
+      s.style.animationDuration=(6+Math.random()*8)+'s';s.style.animationDelay=(-Math.random()*8)+'s';
+      box.appendChild(s);}
+  })();
+
+  /* nav scroll state + progress + hero glow */
+  (function(){
+    var nav=$('nav'),prog=$('progress'),glow=$('heroGlow');
+    function onScroll(){
+      var y=window.scrollY||document.documentElement.scrollTop;
+      nav.classList.toggle('scrolled',y>60);
+      var h=document.documentElement.scrollHeight-window.innerHeight;
+      prog.style.width=(h>0?(y/h*100):0)+'%';
+    }
+    window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+    var hero=$('top');
+    hero.addEventListener('mousemove',function(e){
+      var r=hero.getBoundingClientRect();
+      glow.style.left=(e.clientX-r.left)+'px';glow.style.top=(e.clientY-r.top)+'px';
+    });
+  })();
+
+  /* powers */
+  (function(){var g=$('powersGrid');DATA.powers.forEach(function(p){
+    var d=document.createElement('div');d.className='pcard reveal';
+    d.innerHTML='<div class="ico">'+p.icon+'</div><h3>'+p.name+'</h3><div class="what">'+p.what+'</div><div class="why">'+p.why+'</div>';
+    g.appendChild(d);});})();
+
+  /* features */
+  (function(){var g=$('featGrid');
+    var map={low:['m-low','だいたい実在 · 妄想度20%'],mid:['m-mid','ちょい盛り · 妄想度60%'],high:['m-high','ほぼ妄想 · 妄想度90%']};
+    DATA.features.forEach(function(f){var m=map[f.mousou]||map.mid;
+      var d=document.createElement('div');d.className='fcard reveal';
+      d.innerHTML='<div class="top"><div class="emoji">'+f.emoji+'</div><span class="mousou '+m[0]+'">'+m[1]+'</span></div>'+
+        '<h3>'+f.title+'</h3><div class="ftag">'+f.tag+'</div><div class="fbody">'+f.body+'</div><div class="fquote">'+f.quote+'</div>';
+      g.appendChild(d);});})();
+
+  /* mote */
+  (function(){
+    var mm=DATA.motemote;
+    $('moteTitle').textContent=mm.title;$('moteTag').textContent=mm.tagline;
+    $('moteLbl').textContent=mm.meter.label;$('moteCap').textContent=mm.meter.caption;
+    var fans=$('fans');
+    mm.fans.forEach(function(f){var d=document.createElement('div');d.className='fanbubble';
+      d.innerHTML='<span class="ava">'+f.face+'</span><span class="ln">'+f.line+'</span>';fans.appendChild(d);});
+    var hbox=$('moteHearts'),hset=['💕','💖','💗','♡','✨'];
+    for(var i=0;i<10;i++){var s=document.createElement('span');s.textContent=hset[i%hset.length];
+      s.style.left=(5+Math.random()*90)+'%';s.style.animationDuration=(3.5+Math.random()*3)+'s';
+      s.style.animationDelay=(-Math.random()*5)+'s';hbox.appendChild(s);}
+    var comic=$('comic');
+    mm.comic.forEach(function(c){var d=document.createElement('div');d.className='comic-card';
+      d.innerHTML='<div class="comic-cells"><div class="cell before"><div class="ce">'+c.before_emoji+'</div><div class="ct">'+c.before+'</div></div>'+
+        '<div class="arrow">➜</div><div class="cell after"><div class="ce">'+c.after_emoji+'</div><div class="ct">'+c.after+'</div></div></div>'+
+        '<div class="comic-tag">Before ➜ After ｜ AIマスター式</div>';comic.appendChild(d);});
+    var gal=$('gallery');
+    mm.frames.forEach(function(fr){
+      var fig=document.createElement('figure');fig.className='frame';fig.style.setProperty('--rot',fr.rot);
+      var isVid=fr.type==='video';
+      var media=isVid?'<video src="images/'+fr.file+'" muted autoplay loop playsinline onerror="this.remove()"></video>'
+                     :'<img src="images/'+fr.file+'" alt="" onerror="this.remove()">';
+      var badge=fr.ai?'<span class="badge ai">🤖 AI生成・架空</span>':'<span class="badge">📥 差し込み枠</span>';
+      fig.innerHTML='<div class="media">'+badge+
+        '<div class="ph"><span class="big">'+(isVid?'🎬':'📸')+'</span><span class="hint">'+(isVid?'動画をここに':'写真をここに')+'</span><span class="file">images/'+fr.file+'</span></div>'+
+        media+'</div><figcaption>'+fr.cap+'</figcaption>';
+      gal.appendChild(fig);});
+    var gauge=$('gauge'),pctEl=$('gaugePct'),target=mm.meter.percent,started=false;
+    var gio=new IntersectionObserver(function(es){es.forEach(function(e){
+      if(e.isIntersecting&&!started){started=true;var steps=Math.max(1,target),i=0;
+        var iv=setInterval(function(){i++;var v=Math.round(target*i/steps);pctEl.textContent=v;
+          var deg=v/100*360;gauge.style.background='conic-gradient(var(--pink) 0deg, var(--violet) '+deg+'deg, rgba(123,91,255,.12) '+deg+'deg)';
+          if(i>=steps)clearInterval(iv);},18);gio.unobserve(e.target);}});},{threshold:.4});
+    gio.observe(gauge);
+    var fio=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){
+      fans.querySelectorAll('.fanbubble').forEach(function(b,k){setTimeout(function(){b.classList.add('in');},k*90);});
+      fio.unobserve(e.target);}});},{threshold:.2});
+    fio.observe(fans);
+  })();
+
+  /* count-up stats (bento) */
+  (function(){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){
+      if(e.isIntersecting){var el=e.target,to=parseInt(el.getAttribute('data-to'),10),steps=46,i=0;
+        var iv=setInterval(function(){i++;el.textContent=Math.round(to*i/steps);if(i>=steps){el.textContent=to;clearInterval(iv);}},22);
+        io.unobserve(el);}});},{threshold:.6});
+    document.querySelectorAll('.count').forEach(function(el){io.observe(el);});
+  })();
+
+  /* course */
+  (function(){var c=DATA.course;
+    $('courseTitle').textContent=c.title;$('courseCatch').textContent=c.catch;$('coursePitch').textContent=c.pitch;
+    var m=$('modules');c.modules.forEach(function(x){var d=document.createElement('div');d.className='mcard';
+      d.innerHTML='<div class="lvl"><span class="lvl-badge">'+x.level+'</span><span class="dur">'+x.dur+'</span></div>'+
+        '<div><h4>'+x.name+'</h4><div class="mdesc">'+x.desc+'</div><div class="mout">'+x.out+'</div></div>';m.appendChild(d);});
+    var t=$('testimonials');c.testimonials.forEach(function(x){var d=document.createElement('div');d.className='tcard';
+      d.innerHTML='<div class="who">'+x.who+'</div><div class="ba before"><b>BEFORE</b>'+x.before+'</div><div class="ba after"><b>AFTER</b>'+x.after+'</div>';t.appendChild(d);});
+    $('priceGag').textContent=c.price;})();
+
+  /* quotes */
+  (function(){var stage=$('quoteStage'),dots=$('quoteDots'),idx=0,els=[],dotEls=[];
+    DATA.quotes.forEach(function(q,i){var e=document.createElement('div');e.className='quote'+(i===0?' active':'');
+      e.innerHTML='<span class="grad-text">“ '+q+' ”</span>';stage.appendChild(e);els.push(e);
+      var dd=document.createElement('i');if(i===0)dd.className='on';
+      (function(j){dd.addEventListener('click',function(){go(j);});})(i);dots.appendChild(dd);dotEls.push(dd);});
+    function go(n){els[idx].classList.remove('active');dotEls[idx].classList.remove('on');idx=n;els[idx].classList.add('active');dotEls[idx].classList.add('on');}
+    setInterval(function(){go((idx+1)%els.length);},4200);})();
+
+  /* egg */
+  (function(){var egg=$('egg');$('eggPanel').innerHTML=DATA.eggs.map(function(e){return '🔸 '+e;}).join('<br><br>');
+    $('eggToggle').addEventListener('click',function(){egg.classList.toggle('open');});})();
+
+  /* reveal */
+  (function(){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('show');io.unobserve(e.target);}});},{threshold:.12});
+    document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});})();
+
+  /* loader */
+  (function(){var loader=$('loader'),msg=$('loadMsg'),fill=$('loadFill'),msgs=DATA.loading,i=0,pct=0;
+    msg.textContent=msgs[0];
+    var t=setInterval(function(){i=(i+1)%msgs.length;msg.textContent=msgs[i];},420);
+    var p=setInterval(function(){pct=Math.min(100,pct+Math.random()*16+6);fill.style.width=pct+'%';if(pct>=100)clearInterval(p);},180);
+    function done(){clearInterval(t);clearInterval(p);fill.style.width='100%';loader.classList.add('done');}
+    setTimeout(done,3000);window.addEventListener('load',function(){setTimeout(done,2600);});})();
+
+  /* live demo */
+  (function(){
+    var running=false;
+    var runBtn=$('runBtn'),label=$('stageLabel'),area=$('agentArea'),termLog=$('termLog'),
+        merge=$('mergeNode'),gates=$('gates'),compare=$('compare'),barOld=$('barOld'),barNew=$('barNew'),
+        sA=$('statAgents'),sB=$('statBudget'),sStat=$('statStatus');
+    function logLine(cls,text){var d=document.createElement('div');d.className='line'+(cls?(' '+cls):'');d.textContent=text;termLog.appendChild(d);termLog.scrollTop=termLog.scrollHeight;}
+    function countTo(el,target,ms){var steps=Math.max(1,Math.floor(ms/40)),i=0;var iv=setInterval(function(){i++;el.textContent=Math.round(target*i/steps);if(i>=steps){el.textContent=target;clearInterval(iv);}},40);}
+    function reset(){area.innerHTML='';gates.innerHTML='';termLog.innerHTML='';merge.classList.remove('in');compare.classList.remove('in');barOld.style.width='0';barNew.style.width='0';sA.textContent='0';sB.textContent='0';sStat.textContent='idle';}
+    function addChip(name,extra){var c=document.createElement('div');c.className='agent-chip '+(extra||'');c.innerHTML='<div class="name"><span>'+name+'</span><span class="tick">✓</span></div><div class="pbar"><i></i></div>';area.appendChild(c);requestAnimationFrame(function(){c.classList.add('in');});return c;}
+    async function run(){
+      if(running)return;running=true;runBtn.disabled=true;runBtn.style.opacity=.5;runBtn.textContent='⚙️ 実行中…';
+      reset();logLine('sys','$ dynamic-workflow.run() — launching agents…');sStat.textContent='spawning';
+      var s1=DATA.demo[0];label.textContent=s1.stage;
+      for(var i=0;i<s1.agents.length;i++){addChip(s1.agents[i],'busy');await sleep(260);}
+      countTo(sA,16,900);countTo(sB,500,900);
+      for(var L=0;L<s1.logs.length;L++){logLine(s1.logs[L][0],s1.logs[L][1]);await sleep(480);}
+      await sleep(500);
+      var s2=DATA.demo[1];label.textContent=s2.stage;sStat.textContent='running';area.innerHTML='';
+      var chips=[];for(var a=0;a<s2.agents.length;a++){chips.push(addChip(s2.agents[a],'busy'));await sleep(120);}
+      var durations=[1600,2400,1900,2900,2200,3300];
+      chips.forEach(function(c,k){var bar=c.querySelector('.pbar > i');bar.style.transition='width '+durations[k]+'ms cubic-bezier(.3,.7,.2,1)';requestAnimationFrame(function(){bar.style.width='100%';});setTimeout(function(){c.classList.remove('busy');c.classList.add('done');},durations[k]);});
+      for(var M=0;M<s2.logs.length;M++){logLine(s2.logs[M][0],s2.logs[M][1]);await sleep(430);}
+      await sleep(1500);
+      var s3=DATA.demo[2];label.textContent=s3.stage;sStat.textContent='merging';
+      Array.prototype.forEach.call(area.children,function(c){c.style.transition='opacity .4s,transform .4s';c.style.opacity='0';c.style.transform='scale(.6)';});
+      await sleep(420);area.innerHTML='';merge.classList.add('in');
+      ['敵対検証 (Adversarial)','Fact Integrity','スキーマ準拠 (Schema)'].forEach(function(g){var d=document.createElement('div');d.className='gate';d.innerHTML='<span class="box">✓</span><span>'+g+'</span>';gates.appendChild(d);});
+      for(var L3=0;L3<s3.logs.length;L3++){logLine(s3.logs[L3][0],s3.logs[L3][1]);await sleep(520);}
+      var gEls=gates.querySelectorAll('.gate');for(var gi=0;gi<gEls.length;gi++){gEls[gi].classList.add('ok');await sleep(420);}
+      sStat.textContent='done ✓';compare.classList.add('in');await sleep(120);
+      barOld.style.width='100%';barNew.style.width='19.6%';
+      logLine('sys','$ workflow complete — all checks PASS 🎉');
+      runBtn.disabled=false;runBtn.style.opacity=1;runBtn.textContent='▶ もう一回 体感する';running=false;
+    }
+    runBtn.addEventListener('click',run);
+  })();
+})();
+</script>
+</body>
+</html>

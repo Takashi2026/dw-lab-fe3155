@@ -10,6 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700;800;900&family=Montserrat:wght@700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@500;600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
     --bg:#fdfbff;--bg-soft:#f6f1ff;--bg-pink:#fff4fa;
@@ -319,11 +320,82 @@
   .ga-arrow{text-align:center;font-weight:900;color:var(--pink);font-size:1.9rem;line-height:1}
   .ga-arrow span{display:block;font-size:.58rem;color:var(--muted);letter-spacing:.04em;margin-top:2px}
   .ga-cap{grid-column:1 / -1;text-align:center;font-weight:800;font-size:.96rem;margin-top:2px}
+
+  /* ============================================================
+     PREMIUM EDITORIAL OVERRIDE — 「制作費¥5,000,000」風の高級仕上げ
+     （構造・中身は変えず、見栄えだけを上書き）
+     ============================================================ */
+  :root{
+    --body:"Zen Kaku Gothic New",system-ui,-apple-system,"Hiragino Kaku Gothic ProN",sans-serif;
+    --disp:"Shippori Mincho B1","Hiragino Mincho ProN",serif;
+    --cormorant:"Cormorant Garamond",serif;
+    --ink:#181320;--ink-soft:#3e3550;--muted:#8a8197;
+    --bg:#fbfaf7;--bg-soft:#f4f1ec;--bg-pink:#f7f2ee;
+    --line:rgba(24,19,32,.10);--line-2:rgba(24,19,32,.16);
+    --shadow:0 18px 50px rgba(24,19,32,.06);--shadow-lg:0 34px 80px rgba(24,19,32,.10);
+    --gold:#a97c2f;--gold-2:#e6c477;
+    --foil:linear-gradient(100deg,#7a5520,#c79a45 26%,#f4e2a8 48%,#c79a45 70%,#7a5520);
+  }
+  body{font-family:var(--body);background:var(--bg);letter-spacing:.012em;font-weight:400}
+  body::before{background:radial-gradient(1100px 680px at 50% -12%,rgba(169,124,47,.07),transparent 60%),linear-gradient(180deg,#fdfcf9,#fbfaf7 55%,#f7f4ee)}
+  body::after{opacity:.16}
+  .band-soft{background:linear-gradient(180deg,transparent,#f4f1ec,transparent)}
+  .band-pink{background:linear-gradient(180deg,transparent,#f7f2ee,transparent)}
+  section{padding:118px 0}
+
+  /* 金箔シマー見出し */
+  @keyframes foil{to{background-position:200% center}}
+  .grad-text,.gold-text{background:var(--foil);background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:foil 7s linear infinite}
+
+  /* タイポグラフィ：明朝の大見出し */
+  h1{font-family:var(--disp);font-weight:800;letter-spacing:.01em;line-height:1.06}
+  h2.section-title{font-family:var(--disp);font-weight:800;font-size:clamp(2.3rem,5.2vw,3.9rem);line-height:1.22;letter-spacing:.015em}
+  .catch,.quote,.mb-big,.pitch::before,.foot-meta .big,.gauge .pct,.bcell.stat .num,nav .brand,.lvl-badge,.gauge-card .lbl{font-family:var(--disp)}
+  .hero-sub,.tagline{font-weight:500}
+
+  /* eyebrow：箔押し風の極細トラッキング・ラベル（枠を外す） */
+  .eyebrow{background:none!important;border:none!important;box-shadow:none!important;padding:0!important;font-family:var(--mono);font-weight:700;letter-spacing:.34em;font-size:.7rem;color:var(--gold);text-transform:uppercase}
+  .hero .eyebrow{color:rgba(255,255,255,.82)}
+  .parody-banner,.parody-tag{border-radius:2px;font-family:var(--mono);letter-spacing:.12em;font-weight:700}
+
+  /* カード：角丸を締めて枠線を薄く、影を大きく柔らかく（テンプレ臭を消す） */
+  .pcard,.fcard,.tcard,.mcard,.gauge-card,.bubble,.pitch,.price-gag,.demo-stage,.comic-card,.glowup,.bcell{
+    border-radius:8px!important;border:1px solid var(--line)!important;box-shadow:var(--shadow)!important}
+  .pcard::before,.fcard::before{display:none}
+  .pcard:hover,.fcard:hover,.tcard:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)!important}
+  .agent-chip{border-radius:6px!important}
+  .mq img{border:none!important;border-radius:6px}
+
+  /* ボタン：角を締めてトラッキング、上品に */
+  .btn{border-radius:4px;font-weight:700;letter-spacing:.06em;padding:1.05em 2em;box-shadow:0 16px 34px rgba(24,19,32,.16)}
+  .btn.ghost{box-shadow:none}
+  nav.scrolled{background:rgba(251,250,247,.86)}
+
+  /* スクロール演出をなめらかに（高級イージング） */
+  .reveal{transform:translateY(38px);transition:opacity 1s cubic-bezier(.16,1,.3,1),transform 1s cubic-bezier(.16,1,.3,1)}
+
+  /* カスタムカーソル（クリエイティブ系の定番演出） */
+  .cursor{position:fixed;top:0;left:0;width:32px;height:32px;border:1.4px solid rgba(169,124,47,.6);border-radius:50%;pointer-events:none;z-index:2000;transition:width .2s,height .2s,background .2s,border-color .2s;will-change:transform}
+  .cursor.hot{width:56px;height:56px;background:rgba(169,124,47,.10);border-color:rgba(169,124,47,.8)}
+  @media(pointer:coarse){.cursor{display:none}}
+
+  /* 制作費バンド（黒×金箔） */
+  .prodval{position:relative;background:radial-gradient(900px 520px at 50% -10%,#251c34,#130d1e 70%);color:#fff;text-align:center;padding:130px 0;overflow:hidden}
+  .prodval::before{content:"";position:absolute;inset:0;background:radial-gradient(600px 300px at 50% 120%,rgba(169,124,47,.22),transparent 60%)}
+  .prodval .wrap{position:relative;z-index:1}
+  .pv-label{font-family:var(--mono);letter-spacing:.42em;font-size:.72rem;color:var(--gold-2);text-transform:uppercase}
+  .pv-amt{font-family:var(--cormorant);font-weight:700;font-size:clamp(4rem,17vw,12rem);line-height:.88;margin:.08em 0;background:var(--foil);background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:foil 6s linear infinite}
+  .pv-desc{font-size:1.02rem;color:rgba(255,255,255,.82);max-width:46ch;margin:.7em auto 0;font-weight:500}
+  .pv-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:26px}
+  .pv-pill{font-family:var(--mono);font-size:.74rem;letter-spacing:.06em;color:rgba(255,255,255,.85);border:1px solid rgba(230,196,119,.35);border-radius:2px;padding:.55em 1em}
+  .pv-pill b{color:var(--gold-2)}
+  .pv-fine{font-family:var(--mono);font-size:.72rem;color:rgba(255,255,255,.5);margin-top:26px;letter-spacing:.04em}
 </style>
 </head>
 <body>
 <div class="grain"></div>
 <div id="progress"></div>
+<div class="cursor" id="cursor"></div>
 
 <nav id="nav">
   <span class="brand">🧙‍♂️ AIマスター山本</span>
@@ -602,6 +674,21 @@
 </section>
 
 <!-- FOOTER -->
+<!-- PRODUCTION VALUE 演出 -->
+<section class="prodval">
+  <div class="wrap">
+    <div class="pv-label">Estimated Production Value</div>
+    <div class="pv-amt">¥5,000,000〜</div>
+    <div class="pv-desc">一般的な制作会社にこのクオリティを発注した場合の概算です（当社調べ・諸説あり）。</div>
+    <div class="pv-row">
+      <span class="pv-pill">実制作費：<b>AIトークン代（コーヒー1杯ぶん）</b></span>
+      <span class="pv-pill">所要：<b>数十分</b></span>
+      <span class="pv-pill">制作：<b>Claude Opus 4.8 · Dynamic Workflow</b></span>
+    </div>
+    <div class="pv-fine">※ もちろんネタです。見積書は発行されません。</div>
+  </div>
+</section>
+
 <footer>
   <div class="wrap">
     <div class="foot-meta reveal">
@@ -942,6 +1029,17 @@
     }
     runBtn.addEventListener('click',run);
   })();
+})();
+</script>
+<script>
+(function(){
+  var c=document.getElementById('cursor');
+  if(!c||window.matchMedia('(pointer:coarse)').matches){return;}
+  var x=window.innerWidth/2,y=window.innerHeight/2,cx=x,cy=y;
+  window.addEventListener('mousemove',function(e){x=e.clientX;y=e.clientY;});
+  (function loop(){cx+=(x-cx)*.2;cy+=(y-cy)*.2;c.style.transform='translate('+cx+'px,'+cy+'px) translate(-50%,-50%)';requestAnimationFrame(loop);})();
+  document.addEventListener('mouseover',function(e){if(e.target.closest('a,button,.btn,.frame,.ga,.quote-dots i,.fanbubble')){c.classList.add('hot');}});
+  document.addEventListener('mouseout',function(e){if(e.target.closest('a,button,.btn,.frame,.ga,.quote-dots i,.fanbubble')){c.classList.remove('hot');}});
 })();
 </script>
 </body>

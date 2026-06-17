@@ -283,6 +283,27 @@
   .egg .panel{display:none;margin-top:8px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px;line-height:1.6;box-shadow:var(--shadow-lg)}
   .egg.open .panel{display:block;animation:logIn .3s}
   ::selection{background:rgba(255,79,158,.25)}
+
+  /* ===== NETA MODE: ギラギラ add-ons ===== */
+  .gold-text{background:linear-gradient(120deg,#b8860b,#ffd700 40%,#fff6c0 50%,#ffd700 60%,#f59e0b);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .neta-stamp{position:fixed;top:66px;right:14px;z-index:800;width:106px;height:106px;border-radius:50%;display:grid;place-items:center;text-align:center;font-weight:900;font-family:var(--disp);font-size:.74rem;line-height:1.12;color:#5b3a00;background:radial-gradient(circle at 30% 25%,#fff3b0,#ffd700 45%,#f59e0b);border:3px dashed #b45309;box-shadow:0 10px 26px rgba(245,158,11,.5);transform:rotate(-12deg);animation:stampPulse 1.6s ease-in-out infinite;pointer-events:none}
+  @keyframes stampPulse{0%,100%{transform:rotate(-12deg) scale(1)}50%{transform:rotate(-12deg) scale(1.09)}}
+  @media(max-width:720px){.neta-stamp{width:82px;height:82px;font-size:.62rem;top:56px}}
+  .megaband{position:relative;width:100%;min-height:64vh;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden;color:#fff}
+  .megaband .mb-bg{position:absolute;inset:0;background:#1a1230 center/cover no-repeat;z-index:0;transform:scale(1.05);animation:kenburns 20s ease-in-out infinite alternate}
+  .megaband .mb-ov{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(20,8,40,.52),rgba(20,8,40,.28) 50%,rgba(20,8,40,.58)),linear-gradient(110deg,rgba(255,79,158,.25),transparent,rgba(255,215,0,.24))}
+  .megaband .mb-in{position:relative;z-index:2;padding:60px 22px}
+  .megaband .mb-big{font-family:var(--disp);font-weight:900;font-size:clamp(2.6rem,9.5vw,7.2rem);line-height:1;letter-spacing:-.02em;text-shadow:0 8px 40px rgba(0,0,0,.6)}
+  .megaband .mb-sub{font-weight:800;font-size:clamp(1rem,2.4vw,1.5rem);margin-top:14px;text-shadow:0 2px 16px rgba(0,0,0,.6)}
+  .megaband .mb-tag{display:inline-block;margin-top:18px;font-size:.74rem;font-weight:800;letter-spacing:.08em;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.35);backdrop-filter:blur(6px);border-radius:999px;padding:.45em 1.1em}
+  .photowall{width:100%;overflow:hidden;padding:30px 0;background:linear-gradient(180deg,#fff7df,#fff 70%);position:relative}
+  .pw-ribbon{text-align:center;font-family:var(--disp);font-weight:900;font-size:clamp(1.3rem,4vw,2.4rem);margin-bottom:16px;padding:0 16px}
+  .mq{display:flex;gap:18px;width:max-content;animation:mqscroll var(--dur,55s) linear infinite}
+  .mq.rev{animation-direction:reverse;margin-top:18px}
+  .mq:hover{animation-play-state:paused}
+  .mq img{height:30vh;min-height:200px;max-height:300px;width:auto;border-radius:16px;object-fit:cover;box-shadow:0 14px 30px rgba(130,95,200,.22);border:4px solid #fff}
+  @keyframes mqscroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  .pw-note{text-align:center;color:var(--muted);font-size:.8rem;margin-top:16px;padding:0 16px}
 </style>
 </head>
 <body>
@@ -299,6 +320,7 @@
     <a class="navcta" href="#demo">⚡ 体感する</a>
   </span>
 </nav>
+<div class="neta-stamp">💯<br>ぜんぶ<br>ネタ<br><span style="font-size:.8em">(AI生成)</span></div>
 
 <!-- LOADING -->
 <div id="loader">
@@ -342,6 +364,25 @@
     <div class="bcell stat"><div class="num">♡<span class="count" data-to="87">0</span>%</div><div class="lab">モテ度（当社比・ネタ）</div></div>
     <div class="bcell stat"><div class="num">¥<span class="count" data-to="298">0</span>,000</div><div class="lab">講座お値段（パロディ）</div></div>
     <div class="bcell img wide"><img src="images/rocket.jpg" alt="AI生成イメージ：¥ロケットと爆上げグラフ"><span class="cap">🚀 ¥ロケット、点火。爆上げ確定（※AI生成・架空イメージ）</span></div>
+  </div>
+</div>
+
+<!-- PHOTO WALL (ネタ写真の壁) -->
+<div class="photowall">
+  <div class="pw-ribbon"><span class="gold-text">💰 儲かってる感、過剰供給中。全部ネタ。 💰</span></div>
+  <div class="mq" id="mqTop" style="--dur:55s"></div>
+  <div class="mq rev" id="mqBot" style="--dur:72s"></div>
+  <div class="pw-note">↑ 1枚残らず AI（Flux）生成の架空イメージです。実話・実写は1mmも含まれていません（笑）</div>
+</div>
+
+<!-- MEGA BAND 0 -->
+<div class="megaband">
+  <div class="mb-bg" style="background-image:url('images/gag7.jpg')"></div>
+  <div class="mb-ov"></div>
+  <div class="mb-in">
+    <div class="mb-big"><span class="gold-text">🤑 ぜんぶ、ネタです。</span></div>
+    <div class="mb-sub">この豪遊、1mmも実在しません。AIが30秒で盛りました。</div>
+    <span class="mb-tag">🛩 PRIVATE JET ｜ AI生成・架空イメージ</span>
   </div>
 </div>
 
@@ -404,6 +445,17 @@
   </div>
 </section>
 
+<!-- MEGA BAND 1 -->
+<div class="megaband">
+  <div class="mb-bg" style="background-image:url('images/gag9.jpg')"></div>
+  <div class="mb-ov"></div>
+  <div class="mb-in">
+    <div class="mb-big">💸 札束は、紙吹雪。</div>
+    <div class="mb-sub">※ 映っている人物も場所も<b>すべて架空</b>。実写ではありません。</div>
+    <span class="mb-tag">🎉 MAKE IT RAIN ｜ AI生成・架空イメージ</span>
+  </div>
+</div>
+
 <!-- FEATURES -->
 <section id="features">
   <div class="wrap">
@@ -415,6 +467,17 @@
     <div class="grid feat-grid" id="featGrid" style="margin-top:34px"></div>
   </div>
 </section>
+
+<!-- MEGA BAND 2 -->
+<div class="megaband">
+  <div class="mb-bg" style="background-image:url('images/gag5.jpg')"></div>
+  <div class="mb-ov"></div>
+  <div class="mb-in">
+    <div class="mb-big"><span class="gold-text">🚗 車、札束で見えへん。</span></div>
+    <div class="mb-sub">情報量とギラつきだけは過剰供給。中身は全部ジョークです。</div>
+    <span class="mb-tag">💰 TOO MUCH MONEY ｜ AI生成・架空イメージ</span>
+  </div>
+</div>
 
 <!-- MOTE -->
 <section id="mote" class="band-pink">
@@ -458,6 +521,17 @@
     <div class="price-gag reveal" id="priceGag">…</div>
   </div>
 </section>
+
+<!-- MEGA BAND 3 -->
+<div class="megaband">
+  <div class="mb-bg" style="background-image:url('images/goldbg.jpg')"></div>
+  <div class="mb-ov"></div>
+  <div class="mb-in">
+    <div class="mb-big"><span class="gold-text">✨ 全部 AI が、数十秒で。</span></div>
+    <div class="mb-sub">この写真もコピーも、Dynamic Workflow が生成→敵対監査まで自動。<br>（ギラギラはネタ、技術は本物）</div>
+    <span class="mb-tag">⚡ POWERED BY CLAUDE OPUS 4.8</span>
+  </div>
+</div>
 
 <!-- QUOTES -->
 <section class="quotes band-soft" id="quotes">
@@ -531,10 +605,16 @@
       {"before_emoji":"📧😤","before":"営業メール、3度目の修正「まだ何か違う…」","after_emoji":"📧💌","after":"初版でOK。相手から「返信早い＆品質良い」と信頼UP"}
     ],
     "frames":[
-      {"type":"photo","file":"gag1.jpg","ai":true,"cap":"AI生成イメージ①｜“儲かってる感”は気のせいではない","rot":"-4deg"},
-      {"type":"photo","file":"gag2.jpg","ai":true,"cap":"AI生成イメージ②｜札束は紙吹雪として投げるもの（※ネタ）","rot":"3deg"},
-      {"type":"photo","file":"gag3.jpg","ai":true,"cap":"AI生成イメージ③｜気づいたら船上だった（※架空）","rot":"-2deg"},
-      {"type":"photo","file":"gag4.jpg","ai":true,"cap":"AI生成イメージ④｜車も紙吹雪まみれ（※フィクション）","rot":"2deg"},
+      {"type":"photo","file":"gag1.jpg","ai":true,"cap":"AI生成①｜“儲かってる感”は気のせいではない","rot":"-4deg"},
+      {"type":"photo","file":"gag5.jpg","ai":true,"cap":"AI生成②｜車が札束で見えない","rot":"3deg"},
+      {"type":"photo","file":"gag2.jpg","ai":true,"cap":"AI生成③｜札束は紙吹雪として投げるもの","rot":"-2deg"},
+      {"type":"photo","file":"gag7.jpg","ai":true,"cap":"AI生成④｜気づいたらプライベートジェット","rot":"2deg"},
+      {"type":"photo","file":"gag6.jpg","ai":true,"cap":"AI生成⑤｜風呂は金貨で沸かす派","rot":"-3deg"},
+      {"type":"photo","file":"gag9.jpg","ai":true,"cap":"AI生成⑥｜本日も札束が降っています","rot":"2deg"},
+      {"type":"photo","file":"gag8.jpg","ai":true,"cap":"AI生成⑦｜札束の山に小さな玉座","rot":"-2deg"},
+      {"type":"photo","file":"gag10.jpg","ai":true,"cap":"AI生成⑧｜時計と金塊で情報量過多","rot":"3deg"},
+      {"type":"photo","file":"gag3.jpg","ai":true,"cap":"AI生成⑨｜気づいたら船上だった","rot":"-3deg"},
+      {"type":"photo","file":"gag4.jpg","ai":true,"cap":"AI生成⑩｜車も紙吹雪まみれ","rot":"2deg"},
       {"type":"photo","file":"your-photo.jpg","ai":false,"cap":"📸 ここにご自分の実写をどうぞ","rot":"-3deg"},
       {"type":"video","file":"clip1.mp4","ai":false,"cap":"🎬 ご自分の動画もどうぞ（無音ループ）","rot":"3deg"}
     ]
@@ -625,6 +705,14 @@
   $('footClosing').textContent=DATA.closing;
   $('heroMote').textContent=DATA.motemote.meter.percent;
   $('heroBg').style.backgroundImage="url('images/hero.jpg')";
+
+  /* photo marquee wall */
+  (function(){
+    var imgs=['gag1','gag5','gag7','gag2','gag9','gag3','gag8','gag4','gag6','gag10','money','rocket'];
+    function build(el,list){if(!el)return;el.innerHTML=list.concat(list).map(function(n){return '<img src="images/'+n+'.jpg" alt="" loading="lazy">';}).join('');}
+    build($('mqTop'),imgs);
+    build($('mqBot'),imgs.slice().reverse());
+  })();
 
   /* floating emojis (hero) */
   (function(){

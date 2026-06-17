@@ -518,6 +518,17 @@
   </div>
 </section>
 
+<!-- MEGA BAND モテ -->
+<div class="megaband">
+  <div class="mb-bg" style="background-image:url('images/mote5.jpg')"></div>
+  <div class="mb-ov"></div>
+  <div class="mb-in">
+    <div class="mb-big"><span class="gold-text">👑 モテも、過剰供給。</span></div>
+    <div class="mb-sub">気づいたら、美女に囲まれている。（※AI生成・架空。実在しません）</div>
+    <span class="mb-tag">💖 SURROUNDED ｜ AI生成・架空イメージ</span>
+  </div>
+</div>
+
 <!-- GLOW-UP Before/After -->
 <section id="glowup" class="band-pink">
   <div class="wrap">
@@ -652,6 +663,11 @@
       {"before_emoji":"📧😤","before":"営業メール、3度目の修正「まだ何か違う…」","after_emoji":"📧💌","after":"初版でOK。相手から「返信早い＆品質良い」と信頼UP"}
     ],
     "frames":[
+      {"type":"photo","file":"mote1.jpg","ai":true,"cap":"AI生成｜気づいたら美女に囲まれてた","rot":"-3deg"},
+      {"type":"photo","file":"mote2.jpg","ai":true,"cap":"AI生成｜ルーフトップで大人気","rot":"3deg"},
+      {"type":"photo","file":"mote3.jpg","ai":true,"cap":"AI生成｜ガラの主役、撮られまくり","rot":"-2deg"},
+      {"type":"photo","file":"mote4.jpg","ai":true,"cap":"AI生成｜ヨットでモテモテ","rot":"2deg"},
+      {"type":"photo","file":"mote5.jpg","ai":true,"cap":"AI生成｜舞踏会の主役（モテ国王）","rot":"-3deg"},
       {"type":"photo","file":"gag1.jpg","ai":true,"cap":"AI生成①｜“儲かってる感”は気のせいではない","rot":"-4deg"},
       {"type":"photo","file":"gag5.jpg","ai":true,"cap":"AI生成②｜車が札束で見えない","rot":"3deg"},
       {"type":"photo","file":"gag2.jpg","ai":true,"cap":"AI生成③｜札束は紙吹雪として投げるもの","rot":"-2deg"},
@@ -755,7 +771,7 @@
 
   /* photo marquee wall */
   (function(){
-    var imgs=['gag1','ba1a','gag5','gag7','ba2a','gag2','gag9','toona','gag3','gag8','gag4','gag6','gag10','money','rocket'];
+    var imgs=['mote1','gag1','ba1a','mote2','gag5','gag7','mote5','ba2a','gag2','mote3','gag9','toona','gag3','mote4','gag8','gag4','gag6','gag10','money','rocket'];
     function build(el,list){if(!el)return;el.innerHTML=list.concat(list).map(function(n){return '<img src="images/'+n+'.jpg" alt="" loading="lazy">';}).join('');}
     build($('mqTop'),imgs);
     build($('mqBot'),imgs.slice().reverse());

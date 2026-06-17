@@ -304,6 +304,21 @@
   .mq img{height:30vh;min-height:200px;max-height:300px;width:auto;border-radius:16px;object-fit:cover;box-shadow:0 14px 30px rgba(130,95,200,.22);border:4px solid #fff}
   @keyframes mqscroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
   .pw-note{text-align:center;color:var(--muted);font-size:.8rem;margin-top:16px;padding:0 16px}
+  /* Before/After 大変身 */
+  .glowups{display:flex;flex-direction:column;gap:24px;margin-top:34px}
+  .glowup{display:grid;grid-template-columns:1fr 78px 1fr;gap:14px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:22px;padding:18px;box-shadow:var(--shadow-lg)}
+  @media(max-width:680px){.glowup{grid-template-columns:1fr 1fr}.ga-arrow{grid-column:1 / -1;transform:rotate(0)}}
+  .ga{position:relative;margin:0;border-radius:14px;overflow:hidden;aspect-ratio:4/3;box-shadow:var(--shadow)}
+  .ga img{width:100%;height:100%;object-fit:cover;display:block}
+  .ga:not(.aft) img{filter:grayscale(.65) brightness(.92) contrast(.95)}
+  .ga.aft{box-shadow:0 0 0 3px #ffd700,0 18px 40px rgba(241,163,6,.35)}
+  .ga.aft::after{content:"✨";position:absolute;top:6px;right:8px;font-size:1.5rem;animation:stampPulse 1.4s infinite}
+  .ba-tag{position:absolute;top:8px;left:8px;z-index:2;font-weight:900;font-size:.72rem;padding:.25em .7em;border-radius:999px}
+  .ba-tag.b{background:#6b6b8a;color:#fff}
+  .ba-tag.a{background:linear-gradient(120deg,#ffd700,#f59e0b);color:#5b3a00}
+  .ga-arrow{text-align:center;font-weight:900;color:var(--pink);font-size:1.9rem;line-height:1}
+  .ga-arrow span{display:block;font-size:.58rem;color:var(--muted);letter-spacing:.04em;margin-top:2px}
+  .ga-cap{grid-column:1 / -1;text-align:center;font-weight:800;font-size:.96rem;margin-top:2px}
 </style>
 </head>
 <body>
@@ -503,6 +518,38 @@
   </div>
 </section>
 
+<!-- GLOW-UP Before/After -->
+<section id="glowup" class="band-pink">
+  <div class="wrap">
+    <div class="reveal mote-head">
+      <span class="parody-banner">🎭 ぜんぶネタ・AI生成 — 実在しない大変身です</span>
+      <h2 class="section-title">💥 人生<span class="grad-text">大変身</span>ギャラリー</h2>
+      <p class="tagline" style="margin:0 auto">AIをガチで使いこなしたら…貧乏→大富豪、冴えない→イケメンに（※あくまでスーパーネタ。効果には個人差どころか実在しません）。</p>
+    </div>
+    <div class="glowups reveal">
+      <div class="glowup">
+        <figure class="ga"><span class="ba-tag b">😣 BEFORE</span><img src="images/ba1b.jpg" alt="" loading="lazy"></figure>
+        <div class="ga-arrow">💥<span>AI導入</span>➜</div>
+        <figure class="ga aft"><span class="ba-tag a">🤑 AFTER</span><img src="images/ba1a.jpg" alt="" loading="lazy"></figure>
+        <div class="ga-cap">カップ麺すすってた男 → 金スーツで札束ファサァ（所要：プロンプト1本）</div>
+      </div>
+      <div class="glowup">
+        <figure class="ga"><span class="ba-tag b">😑 BEFORE</span><img src="images/ba2b.jpg" alt="" loading="lazy"></figure>
+        <div class="ga-arrow">💥<span>AI導入</span>➜</div>
+        <figure class="ga aft"><span class="ba-tag a">😎 AFTER</span><img src="images/ba2a.jpg" alt="" loading="lazy"></figure>
+        <div class="ga-cap">冴えないメガネ → 後光さすイケメン（※AIは美容整形ではありません）</div>
+      </div>
+      <div class="glowup">
+        <figure class="ga"><span class="ba-tag b">😭 BEFORE</span><img src="images/toonb.jpg" alt="" loading="lazy"></figure>
+        <div class="ga-arrow">💥<span>AI導入</span>➜</div>
+        <figure class="ga aft"><span class="ba-tag a">🤑 AFTER</span><img src="images/toona.jpg" alt="" loading="lazy"></figure>
+        <div class="ga-cap">財布スッカラカン → ゴールドチェーンの帝王（イラスト版）</div>
+      </div>
+    </div>
+    <p class="pw-note" style="margin-top:22px">※ 上記はすべて AI（Flux）生成の架空イメージ。実在の人物・実話ではありません。AIで人格や顔は変わりません（念のため）。</p>
+  </div>
+</section>
+
 <!-- COURSE -->
 <section id="course">
   <div class="wrap">
@@ -661,7 +708,7 @@
   ],
   "eggs":[
     "『ええか、カレーのルーは3種類混ぜるんやで…ビジネスもそや』",
-    "『営業¥0が2週…あ、これ血流やな』",
+    "『売上は虚像、利益は意見。キャッシュだけが事実…あ、これ血流やな』",
     "山本マスターの好物：神丹穂(唐辛子)。辛さで脳をリセットする儀式。",
     "『細胞も企業も、分裂・分化・死滅を繰り返す。違いは意識と時間軸だけ』",
     "AI新人3原則：やりきる / 50点で速く / 何のためを問う。これだけで勝ちや。",
@@ -708,7 +755,7 @@
 
   /* photo marquee wall */
   (function(){
-    var imgs=['gag1','gag5','gag7','gag2','gag9','gag3','gag8','gag4','gag6','gag10','money','rocket'];
+    var imgs=['gag1','ba1a','gag5','gag7','ba2a','gag2','gag9','toona','gag3','gag8','gag4','gag6','gag10','money','rocket'];
     function build(el,list){if(!el)return;el.innerHTML=list.concat(list).map(function(n){return '<img src="images/'+n+'.jpg" alt="" loading="lazy">';}).join('');}
     build($('mqTop'),imgs);
     build($('mqBot'),imgs.slice().reverse());

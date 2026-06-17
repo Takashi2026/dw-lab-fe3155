@@ -238,6 +238,37 @@
   .frame .badge.ai{color:#fff;background:rgba(123,91,255,.92);border-color:transparent}
   .frame figcaption{font-size:.78rem;color:var(--ink-soft);font-weight:700;margin-top:10px;text-align:center;line-height:1.5}
   .frame::after{content:"♡";position:absolute;top:-8px;right:-6px;font-size:1.2rem;color:var(--pink);opacity:.85;transform:rotate(12deg)}
+  /* ===== 体験ギミック：差し込み枠（写真→モテ合成 / モテ動画） ===== */
+  .frame.interactive .media{cursor:pointer}
+  .frame.interactive .ph.drop{gap:9px}
+  .frame.interactive .ph .pick-btn{margin-top:4px;font-family:var(--disp);font-weight:800;font-size:.78rem;color:#fff;background:var(--grad);border:none;border-radius:999px;padding:.62em 1.25em;cursor:pointer;box-shadow:0 8px 20px rgba(123,91,255,.32);transition:transform .2s,box-shadow .2s}
+  .frame.interactive .ph .pick-btn:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(255,79,158,.42)}
+  .frame.interactive .ph .privacy{font-size:.58rem;color:var(--muted);font-weight:700;margin-top:4px;line-height:1.4}
+  .frame .badge.live{color:#fff;background:var(--grad);border-color:transparent;animation:livePulse 1.8s ease-in-out infinite}
+  @keyframes livePulse{0%,100%{box-shadow:0 0 0 0 rgba(255,79,158,.5)}50%{box-shadow:0 0 0 6px rgba(255,79,158,0)}}
+  .frame .composite{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;display:none}
+  .frame.done .composite{display:block}
+  .frame.done .ph,.frame.playing .ph{display:none}
+  .frame .mote-fx{position:absolute;inset:0;z-index:2;pointer-events:none;overflow:hidden}
+  .frame .mote-fx .fx-h{position:absolute;bottom:-12px;font-size:1.15rem;opacity:0;animation:rise linear infinite}
+  .frame .mote-fx .sweep{position:absolute;top:0;left:-45%;width:42%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.6),transparent);transform:skewX(-18deg);opacity:0}
+  .frame.playing .mote-fx .sweep{animation:sweepX 2.6s ease-in-out infinite}
+  @keyframes sweepX{0%{left:-45%;opacity:0}22%{opacity:.95}55%{left:120%;opacity:0}100%{left:120%;opacity:0}}
+  .frame.interactive[data-kind=video].playing img{animation:kenburns 7s ease-in-out infinite alternate}
+  .frame .rec{position:absolute;top:8px;right:8px;z-index:3;display:none;align-items:center;gap:.35em;font-family:var(--mono);font-weight:800;font-size:.6rem;color:#fff;background:rgba(0,0,0,.55);border-radius:999px;padding:.32em .62em}
+  .frame.playing .rec{display:inline-flex}
+  .frame .rec .dot{width:7px;height:7px;border-radius:50%;background:var(--pink);animation:recblink 1s steps(1) infinite}
+  @keyframes recblink{50%{opacity:.15}}
+  .frame .mote-cap{position:absolute;left:0;right:0;bottom:0;z-index:3;text-align:center;font-family:var(--disp);font-weight:900;font-size:.92rem;line-height:1.3;color:#fff;padding:16px 10px 14px;background:linear-gradient(0deg,rgba(20,8,40,.72),transparent);text-shadow:0 2px 8px rgba(0,0,0,.55);opacity:0;transform:translateY(8px);transition:opacity .4s,transform .4s}
+  .frame.playing .mote-cap{opacity:1;transform:none}
+  .frame .timeline{position:absolute;left:10px;right:10px;bottom:7px;z-index:4;height:3px;border-radius:3px;background:rgba(255,255,255,.3);display:none;overflow:hidden}
+  .frame.playing .timeline{display:block}
+  .frame .timeline i{display:block;height:100%;width:0;background:var(--pink);animation:tl 6s linear infinite}
+  @keyframes tl{from{width:0}to{width:100%}}
+  .frame .frame-actions{display:none;gap:8px;justify-content:center;margin-top:9px}
+  .frame.done .frame-actions,.frame.playing .frame-actions{display:flex}
+  .frame .frame-actions button{font-family:var(--disp);font-weight:800;font-size:.7rem;border:1px solid var(--line);background:#fff;color:var(--violet);border-radius:999px;padding:.46em .95em;cursor:pointer;transition:background .2s,color .2s,border-color .2s}
+  .frame .frame-actions button:hover{background:var(--violet);color:#fff;border-color:transparent}
   .gallery-note{text-align:center;color:var(--muted);font-size:.82rem;margin-top:22px;max-width:70ch;margin-left:auto;margin-right:auto}
   .gallery-note code{font-family:var(--mono);background:#fff;border:1px solid var(--line);border-radius:6px;padding:.1em .45em;color:var(--violet)}
 
@@ -585,7 +616,7 @@
     <div class="reveal">
       <h3 style="font-family:var(--disp);font-size:1.4rem;font-weight:900;text-align:center;margin-top:48px">📸 “儲かってる×モテモテ” ギャラリー <span style="font-size:.66em;color:var(--pink)">（AI生成・架空イメージ）</span></h3>
       <div class="gallery" id="gallery"></div>
-      <p class="gallery-note">紫バッジ=<b>AI生成の架空イメージ</b>（実在の人物・出来事ではありません）。グレーバッジ=<b>差し込み枠</b>：<code>output/dynamic-workflow-showcase/images/</code> に <code>your-photo.jpg</code> / <code>clip1.mp4</code> を置くと、ご自分の実写・動画がその枠に表示されます。</p>
+      <p class="gallery-note">紫バッジ=<b>AI生成の架空イメージ</b>（実在の人物・出来事ではありません）。<b>✨ 体験ギミック</b>の枠は、<b>あなたの写真を選ぶ</b>と、その場で「モテシーン」に合成されたり「モテ動画」風に動き出します。<b>🔒 写真はあなたのブラウザ内だけで処理され、どこにも送信・保存されません</b>（すべてネタ・パロディ演出です）。</p>
     </div>
   </div>
 </section>
@@ -765,8 +796,8 @@
       {"type":"photo","file":"gag10.jpg","ai":true,"cap":"AI生成⑧｜時計と金塊で情報量過多","rot":"3deg"},
       {"type":"photo","file":"gag3.jpg","ai":true,"cap":"AI生成⑨｜気づいたら船上だった","rot":"-3deg"},
       {"type":"photo","file":"gag4.jpg","ai":true,"cap":"AI生成⑩｜車も紙吹雪まみれ","rot":"2deg"},
-      {"type":"photo","file":"your-photo.jpg","ai":false,"cap":"📸 ここにご自分の実写をどうぞ","rot":"-3deg"},
-      {"type":"video","file":"clip1.mp4","ai":false,"cap":"🎬 ご自分の動画もどうぞ（無音ループ）","rot":"3deg"}
+      {"type":"photo","file":"your-photo.jpg","ai":false,"cap":"📸 あなたの写真を入れて『モテシーン』に合成（その場で診断）","rot":"-3deg"},
+      {"type":"video","file":"clip1.mp4","ai":false,"cap":"🎬 あなたの写真が『モテ動画』に早変わり（自動ループ）","rot":"3deg"}
     ]
   },
   "course":{
@@ -928,13 +959,34 @@
     mm.frames.forEach(function(fr){
       var fig=document.createElement('figure');fig.className='frame';fig.style.setProperty('--rot',fr.rot);
       var isVid=fr.type==='video';
-      var media=isVid?'<video src="images/'+fr.file+'" muted autoplay loop playsinline onerror="this.remove()"></video>'
-                     :'<img src="images/'+fr.file+'" alt="" onerror="this.remove()">';
-      var badge=fr.ai?'<span class="badge ai">🤖 AI生成・架空</span>':'<span class="badge">📥 差し込み枠</span>';
-      fig.innerHTML='<div class="media">'+badge+
-        '<div class="ph"><span class="big">'+(isVid?'🎬':'📸')+'</span><span class="hint">'+(isVid?'動画をここに':'写真をここに')+'</span><span class="file">images/'+fr.file+'</span></div>'+
+      if(!fr.ai){
+        /* 体験ギミック：写真を入れて『モテ合成 / モテ動画』に */
+        fig.className='frame interactive';fig.setAttribute('data-kind',isVid?'video':'photo');
+        fig.innerHTML='<div class="media">'+
+          '<span class="badge live">✨ 体験ギミック</span>'+
+          '<span class="rec"><span class="dot"></span>MOTE MOVIE</span>'+
+          '<div class="ph drop">'+
+            '<span class="big">'+(isVid?'🎬':'📸')+'</span>'+
+            '<span class="hint">'+(isVid?'写真を入れて『モテ動画』に':'写真を入れて『モテシーン』に合成')+'</span>'+
+            '<button type="button" class="pick-btn">'+(isVid?'🎬 写真を選ぶ':'📸 写真を選ぶ')+'</button>'+
+            '<span class="privacy">🔒 写真はあなたのブラウザ内だけで処理。どこにも送信しません。</span>'+
+          '</div>'+
+          (isVid?'<img alt="" class="user-media">':'<canvas class="composite"></canvas>')+
+          '<div class="mote-fx"></div>'+
+          '<div class="mote-cap"></div>'+
+          '<div class="timeline"><i></i></div>'+
+          '<input type="file" accept="image/*" class="file-in" hidden>'+
+        '</div>'+
+        '<figcaption>'+fr.cap+'</figcaption>'+
+        '<div class="frame-actions">'+(isVid?'':'<button type="button" class="act-save">⬇ 画像を保存</button>')+'<button type="button" class="act-redo">🔄 別の写真</button></div>';
+        gal.appendChild(fig);return;
+      }
+      var media='<img src="images/'+fr.file+'" alt="" onerror="this.remove()">';
+      fig.innerHTML='<div class="media"><span class="badge ai">🤖 AI生成・架空</span>'+
+        '<div class="ph"><span class="big">📸</span><span class="hint">写真をここに</span><span class="file">images/'+fr.file+'</span></div>'+
         media+'</div><figcaption>'+fr.cap+'</figcaption>';
       gal.appendChild(fig);});
+    initInsertGimmick(gal);
     var gauge=$('gauge'),pctEl=$('gaugePct'),target=mm.meter.percent,started=false;
     var gio=new IntersectionObserver(function(es){es.forEach(function(e){
       if(e.isIntersecting&&!started){started=true;var steps=Math.max(1,target),i=0;
@@ -946,6 +998,91 @@
       fans.querySelectorAll('.fanbubble').forEach(function(b,k){setTimeout(function(){b.classList.add('in');},k*90);});
       fio.unobserve(e.target);}});},{threshold:.2});
     fio.observe(fans);
+
+    /* ===== 体験ギミック本体（写真→モテ合成 / モテ動画・全てブラウザ内完結） ===== */
+    function initInsertGimmick(root){
+      var scenes=['mote1.jpg','mote2.jpg','mote3.jpg','mote4.jpg','mote5.jpg'];
+      var hearts=['💕','💖','💗','✨','💫','♡'];
+      var vidCaps=['💕 主役、登場。','✨ 視線、独占。','👑 モテ国王、爆誕。','📈 モテ度、上昇中…','🔥 オーラ、隠せてへん。'];
+      function spawnHearts(fx,n){
+        fx.innerHTML='<div class="sweep"></div>';
+        for(var i=0;i<n;i++){var s=document.createElement('span');s.className='fx-h';
+          s.textContent=hearts[Math.floor(Math.random()*hearts.length)];
+          s.style.left=(4+Math.random()*92)+'%';
+          s.style.animationDuration=(3+Math.random()*3)+'s';
+          s.style.animationDelay=(-Math.random()*5)+'s';fx.appendChild(s);}
+      }
+      function drawCover(ctx,img,x,y,w,h){
+        var ir=img.width/img.height,r=w/h,sw,sh,sx,sy;
+        if(ir>r){sh=img.height;sw=sh*r;sx=(img.width-sw)/2;sy=0;}
+        else{sw=img.width;sh=sw/r;sx=0;sy=(img.height-sh)/2;}
+        ctx.drawImage(img,sx,sy,sw,sh,x,y,w,h);
+      }
+      function txt(ctx,s,x,y,px,fill,weight){
+        ctx.font=(weight||'900')+' '+px+'px "M PLUS Rounded 1c","Hiragino Sans","Yu Gothic",sans-serif';
+        ctx.textAlign='center';ctx.textBaseline='middle';
+        ctx.lineJoin='round';ctx.lineWidth=Math.max(4,px/7);ctx.strokeStyle='rgba(0,0,0,.55)';
+        ctx.strokeText(s,x,y);ctx.fillStyle=fill;ctx.fillText(s,x,y);
+      }
+      function compositePhoto(frame,userImg){
+        var canvas=frame.querySelector('.composite'),W=1080,H=810;
+        canvas.width=W;canvas.height=H;var ctx=canvas.getContext('2d');
+        var score=95+Math.floor(Math.random()*5);
+        var scene=new Image();
+        scene.onload=function(){draw(scene);};scene.onerror=function(){draw(null);};
+        scene.src='images/'+scenes[Math.floor(Math.random()*scenes.length)];
+        function draw(bg){
+          if(bg){drawCover(ctx,bg,0,0,W,H);
+            var g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,'rgba(40,12,70,.42)');g.addColorStop(1,'rgba(18,6,40,.8)');
+            ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+          }else{var g2=ctx.createLinearGradient(0,0,W,H);g2.addColorStop(0,'#7b5bff');g2.addColorStop(1,'#ff4f9e');ctx.fillStyle=g2;ctx.fillRect(0,0,W,H);}
+          var hs=['💕','💖','✨','💫','♡'];
+          for(var i=0;i<14;i++){var sz=26+Math.random()*42;ctx.globalAlpha=.5+Math.random()*.45;
+            ctx.font=sz+'px serif';ctx.textAlign='center';ctx.textBaseline='middle';
+            ctx.fillStyle='#fff';ctx.fillText(hs[i%hs.length],Math.random()*W,Math.random()*H*0.85);}
+          ctx.globalAlpha=1;
+          var cx=W/2,cy=H*0.5,R=Math.min(W,H)*0.27;
+          ctx.save();ctx.shadowColor='rgba(241,163,6,.95)';ctx.shadowBlur=55;
+          ctx.beginPath();ctx.arc(cx,cy,R+12,0,Math.PI*2);ctx.fillStyle='#f1a306';ctx.fill();ctx.restore();
+          ctx.save();ctx.beginPath();ctx.arc(cx,cy,R,0,Math.PI*2);ctx.clip();drawCover(ctx,userImg,cx-R,cy-R,R*2,R*2);ctx.restore();
+          ctx.lineWidth=9;ctx.strokeStyle='#fff';ctx.beginPath();ctx.arc(cx,cy,R,0,Math.PI*2);ctx.stroke();
+          txt(ctx,'✨ AI モテ診断 ✨',W/2,82,52,'#ffe7a6');
+          txt(ctx,'モテ度 '+score+'%',W/2,H-104,72,'#fff');
+          txt(ctx,'才有る AI Lab ｜ AI合成・パロディ（実在の評価ではありません）',W/2,H-44,28,'rgba(255,255,255,.92)','800');
+          frame.classList.remove('playing');frame.classList.add('done');
+          spawnHearts(frame.querySelector('.mote-fx'),10);
+          var fc=frame.querySelector('figcaption');if(fc)fc.innerHTML='AI合成完了 ✨ あなたのモテ度 <b style="color:var(--pink)">'+score+'%</b>（※ネタ診断）';
+        }
+      }
+      function playVideo(frame,dataUrl){
+        var img=frame.querySelector('.user-media');img.src=dataUrl;
+        spawnHearts(frame.querySelector('.mote-fx'),12);
+        frame.classList.remove('done');frame.classList.add('playing');
+        var cap=frame.querySelector('.mote-cap'),ci=0;cap.textContent=vidCaps[0];
+        if(frame._capTimer)clearInterval(frame._capTimer);
+        frame._capTimer=setInterval(function(){ci=(ci+1)%vidCaps.length;cap.style.opacity=0;
+          setTimeout(function(){cap.textContent=vidCaps[ci];cap.style.opacity=1;},250);},1900);
+      }
+      Array.prototype.forEach.call(root.querySelectorAll('.frame.interactive'),function(frame){
+        var kind=frame.getAttribute('data-kind'),input=frame.querySelector('.file-in'),
+            media=frame.querySelector('.media'),redo=frame.querySelector('.act-redo'),save=frame.querySelector('.act-save');
+        media.addEventListener('click',function(){input.click();});
+        if(redo)redo.addEventListener('click',function(e){e.stopPropagation();input.click();});
+        if(save)save.addEventListener('click',function(e){e.stopPropagation();
+          var canvas=frame.querySelector('.composite');if(!canvas||!frame.classList.contains('done'))return;
+          try{var a=document.createElement('a');a.href=canvas.toDataURL('image/png');a.download='saiaru-mote.png';
+            document.body.appendChild(a);a.click();a.remove();}
+          catch(err){alert('この環境では保存できませんでした。公開URL（https）でお試しください。');}});
+        input.addEventListener('change',function(){
+          var f=input.files&&input.files[0];if(!f)return;
+          var rd=new FileReader();
+          rd.onload=function(){var im=new Image();
+            im.onload=function(){kind==='video'?playVideo(frame,rd.result):compositePhoto(frame,im);};
+            im.onerror=function(){alert('画像を読み込めませんでした。別の画像でお試しください。');};
+            im.src=rd.result;};
+          rd.readAsDataURL(f);input.value='';});
+      });
+    }
   })();
 
   /* count-up stats (bento) */

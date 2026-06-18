@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AIマスター山本（架空の導師）｜紹介 — 才有る者の楽園・Dynamic Workflow 道場</title>
+<meta name="description" content="創作ペルソナ「AIマスター山本」の架空・パロディ紹介ページ。弟子十六体を同時に操る(自称)AI経営の導師。来歴・奥義・迷言・戦績はすべてAI生成のフィクションです。" />
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex, notranslate" />
+<meta name="googlebot" content="noindex, nofollow" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700;800;900&family=Montserrat:wght@700;800;900&family=JetBrains+Mono:wght@400;700&family=Shippori+Mincho+B1:wght@500;600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#fbfaf7;--bg-soft:#f4f1ec;--ink:#181320;--ink-soft:#3e3550;--muted:#8a8197;
+    --line:rgba(24,19,32,.10);--line-2:rgba(24,19,32,.16);
+    --shadow:0 18px 50px rgba(24,19,32,.06);--shadow-lg:0 34px 80px rgba(24,19,32,.10);
+    --pink:#ff4f9e;--violet:#7b5bff;--cyan:#14b8b8;--gold:#a97c2f;--gold-2:#e6c477;
+    --grad:linear-gradient(120deg,#ff4f9e 0%,#7b5bff 50%,#14b8b8 100%);
+    --foil:linear-gradient(100deg,#7a5520,#c79a45 26%,#f4e2a8 48%,#c79a45 70%,#7a5520);
+    --radius:8px;
+    --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+    --disp:"Shippori Mincho B1","Hiragino Mincho ProN",serif;
+    --body:"Zen Kaku Gothic New",system-ui,-apple-system,"Hiragino Kaku Gothic ProN",sans-serif;
+    --cormorant:"Cormorant Garamond",serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--body);background:var(--bg);color:var(--ink);line-height:1.8;letter-spacing:.012em;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  body::before{content:"";position:fixed;inset:0;z-index:-2;background:radial-gradient(1100px 680px at 50% -12%,rgba(169,124,47,.08),transparent 60%),linear-gradient(180deg,#fdfcf9,#fbfaf7 55%,#f7f4ee)}
+  .grain{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.16;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E")}
+  a{color:inherit}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+  .grad-text{background:var(--foil);background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:foil 7s linear infinite}
+  @keyframes foil{to{background-position:200% center}}
+
+  /* progress + cursor */
+  #progress{position:fixed;top:0;left:0;height:3px;width:0;background:var(--grad);z-index:1000;transition:width .1s}
+  .cursor{position:fixed;top:0;left:0;width:32px;height:32px;border:1.4px solid rgba(169,124,47,.6);border-radius:50%;pointer-events:none;z-index:2000;transition:width .2s,height .2s,background .2s,border-color .2s;will-change:transform}
+  .cursor.hot{width:54px;height:54px;background:rgba(169,124,47,.10);border-color:rgba(169,124,47,.85)}
+  @media(pointer:coarse){.cursor{display:none}}
+
+  /* nav */
+  nav{position:fixed;top:0;left:0;right:0;z-index:900;display:flex;align-items:center;justify-content:space-between;padding:16px 26px;color:#fff;transition:background .3s,box-shadow .3s,padding .3s,color .3s}
+  nav.scrolled{background:rgba(251,250,247,.86);backdrop-filter:blur(14px);box-shadow:0 6px 24px rgba(130,95,200,.12);color:var(--ink);padding:10px 22px}
+  nav .brand{font-weight:900;font-family:var(--disp);font-size:1.05rem;display:flex;align-items:center;gap:.45em;text-shadow:0 2px 12px rgba(0,0,0,.4)}
+  nav.scrolled .brand{text-shadow:none}
+  nav .navcta{font-weight:800;font-size:.84rem;padding:.6em 1.1em;border-radius:999px;text-decoration:none;background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(123,91,255,.4)}
+
+  /* hero */
+  .hero{position:relative;min-height:92vh;min-height:90svh;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden;color:#fff;padding:120px 20px 80px}
+  .hero-bg{position:absolute;inset:0;z-index:0;background:#160f26 center/cover no-repeat;transform:scale(1.06);animation:kenburns 24s ease-in-out infinite alternate}
+  @keyframes kenburns{from{transform:scale(1.04)}to{transform:scale(1.14)}}
+  .hero-ov{position:absolute;inset:0;z-index:1;background:radial-gradient(900px 560px at 50% 38%,rgba(40,18,70,.30),rgba(14,8,26,.82) 78%)}
+  .hero-in{position:relative;z-index:3;max-width:920px}
+  .eyebrow{font-family:var(--mono);font-weight:700;letter-spacing:.32em;font-size:.7rem;text-transform:uppercase;color:rgba(255,255,255,.82)}
+  .medallion{width:138px;height:138px;margin:20px auto 14px;border-radius:50%;display:grid;place-items:center;font-size:4.6rem;background:radial-gradient(circle at 32% 26%,#fff3b0,#ffd700 46%,#f59e0b);box-shadow:0 0 0 6px rgba(255,255,255,.14),0 22px 60px rgba(245,158,11,.5);animation:bob 4s ease-in-out infinite}
+  @keyframes bob{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-9px) rotate(2deg)}}
+  h1{font-family:var(--disp);font-weight:800;font-size:clamp(2.1rem,8vw,5rem);line-height:1.08;letter-spacing:.01em;margin:.1em 0;text-shadow:0 6px 36px rgba(0,0,0,.45)}
+  .hero-title{font-family:var(--disp);font-weight:700;font-size:clamp(1rem,3.4vw,1.4rem);color:#ffe7a8;margin-top:.4em}
+  .hero-sub{font-weight:500;font-size:clamp(1rem,2.4vw,1.2rem);color:rgba(255,255,255,.9);max-width:36ch;margin:14px auto 0;line-height:1.6;text-shadow:0 2px 14px rgba(0,0,0,.5)}
+  .hero-chips{display:flex;gap:9px;justify-content:center;flex-wrap:wrap;margin-top:20px}
+  .hchip{display:inline-flex;align-items:center;gap:.4em;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);backdrop-filter:blur(6px);border-radius:999px;padding:.42em .95em;font-weight:800;font-size:.82rem}
+  .cta-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:26px}
+  .btn{font-family:var(--body);font-weight:800;font-size:.96rem;cursor:pointer;border:none;padding:1em 1.7em;border-radius:4px;color:#fff;background:var(--grad);box-shadow:0 16px 34px rgba(24,19,32,.2);text-decoration:none;display:inline-flex;align-items:center;gap:.5em;letter-spacing:.04em;transition:transform .25s,box-shadow .15s}
+  .btn.ghost{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.4);box-shadow:none}
+  .fiction-banner{display:inline-flex;gap:.5em;align-items:center;margin-top:26px;font-size:.78rem;font-weight:800;color:#ffd9ec;border:1px dashed rgba(255,150,200,.6);border-radius:999px;padding:.5em 1.1em;background:rgba(20,10,40,.4)}
+
+  /* sections */
+  section{padding:96px 0;position:relative;z-index:2}
+  .band{background:linear-gradient(180deg,transparent,var(--bg-soft),transparent)}
+  .eyebrow-d{font-family:var(--mono);font-weight:700;letter-spacing:.28em;font-size:.7rem;text-transform:uppercase;color:var(--gold);text-align:center;display:block;margin-bottom:.5em}
+  h2{font-family:var(--disp);font-weight:800;font-size:clamp(1.7rem,5.6vw,3.2rem);line-height:1.26;text-align:center;letter-spacing:.012em}
+  .lead{text-align:center;color:var(--ink-soft);max-width:60ch;margin:14px auto 0;font-size:1.02rem}
+
+  /* profile table */
+  .profile{max-width:760px;margin:38px auto 0;border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:var(--shadow);background:#fff}
+  .prow{display:grid;grid-template-columns:160px 1fr;border-top:1px solid var(--line)}
+  .prow:first-child{border-top:none}
+  .prow dt{background:var(--bg-soft);font-weight:800;padding:14px 18px;font-size:.92rem;color:var(--gold);font-family:var(--disp)}
+  .prow dd{padding:14px 18px;font-weight:600}
+  .prow dd b{color:var(--violet)}
+
+  /* timeline */
+  .timeline{max-width:760px;margin:40px auto 0;position:relative;padding-left:30px}
+  .timeline::before{content:"";position:absolute;left:9px;top:6px;bottom:6px;width:2px;background:linear-gradient(180deg,var(--gold-2),var(--violet))}
+  .tnode{position:relative;padding:0 0 30px 18px}
+  .tnode::before{content:"";position:absolute;left:-29px;top:4px;width:16px;height:16px;border-radius:50%;background:var(--foil);background-size:200% auto;box-shadow:0 0 0 4px var(--bg)}
+  .tnode .chap{font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;color:var(--gold);text-transform:uppercase}
+  .tnode h3{font-family:var(--disp);font-size:1.18rem;margin:.2em 0 .3em}
+  .tnode p{color:var(--ink-soft);font-size:.96rem}
+
+  /* technique cards */
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:36px}
+  .tcard{border:1px solid var(--line);background:#fff;border-radius:10px;padding:24px;box-shadow:var(--shadow);position:relative;overflow:hidden;transition:transform .2s,box-shadow .25s}
+  .tcard .ti{font-size:2.1rem}
+  .tcard .kanji{font-family:var(--disp);font-weight:800;font-size:1.2rem;margin:.4em 0 .15em}
+  .tcard .en{font-family:var(--mono);font-size:.68rem;letter-spacing:.12em;color:var(--gold);text-transform:uppercase}
+  .tcard .desc{color:var(--ink-soft);font-size:.92rem;margin-top:.6em}
+  .tcard .rank{position:absolute;top:12px;right:14px;font-family:var(--disp);font-weight:900;font-size:.8rem;color:var(--violet);opacity:.5}
+
+  /* quotes */
+  .quotes-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:36px}
+  .qcard{border-left:3px solid;border-image:var(--foil) 1;background:#fff;border-radius:0 10px 10px 0;padding:20px 22px;box-shadow:var(--shadow);font-family:var(--disp);font-weight:700;font-size:1.05rem;line-height:1.7}
+  .qcard span{color:var(--gold)}
+
+  /* stats */
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px;margin-top:38px}
+  .stat{background:#fff;border:1px solid var(--line);border-radius:10px;padding:24px 18px;text-align:center;box-shadow:var(--shadow)}
+  .stat .num{font-family:var(--disp);font-weight:900;font-size:2.2rem;line-height:1;background:var(--foil);background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:foil 7s linear infinite}
+  .stat .lab{color:var(--muted);font-weight:800;font-size:.8rem;margin-top:8px}
+
+  /* small talk */
+  .kogoto{max-width:760px;margin:34px auto 0;display:grid;gap:12px}
+  .kog{display:flex;gap:12px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px 18px;box-shadow:var(--shadow)}
+  .kog .face{font-size:1.5rem;flex-shrink:0}
+  .kog p{font-weight:600;color:var(--ink-soft)}
+
+  /* prodval-ish closing */
+  .closing{position:relative;background:radial-gradient(900px 520px at 50% -10%,#251c34,#130d1e 70%);color:#fff;text-align:center;padding:110px 0;overflow:hidden}
+  .closing::before{content:"";position:absolute;inset:0;background:radial-gradient(600px 300px at 50% 120%,rgba(169,124,47,.22),transparent 60%)}
+  .closing .wrap{position:relative;z-index:1}
+  .closing .label{font-family:var(--mono);letter-spacing:.4em;font-size:.72rem;color:var(--gold-2);text-transform:uppercase}
+  .closing h2{color:#fff;margin-top:.3em}
+  .closing p{color:rgba(255,255,255,.84);max-width:50ch;margin:1em auto 0;font-weight:500}
+  .closing .cta-row{margin-top:30px}
+
+  footer{background:#0e0a16;color:rgba(255,255,255,.6);padding:46px 0 60px;font-size:.84rem;text-align:center}
+  footer .fnote{max-width:64ch;margin:0 auto;line-height:1.7;border:1px dashed rgba(255,255,255,.18);border-radius:12px;padding:16px 20px;background:rgba(255,255,255,.03)}
+  footer .made{margin-top:16px;font-family:var(--mono);font-size:.72rem;letter-spacing:.04em;color:rgba(255,255,255,.4)}
+  footer a{color:var(--gold-2);font-weight:700}
+
+  /* reveal + char */
+  .reveal{opacity:0;transform:translateY(30px);transition:opacity 1s cubic-bezier(.16,1,.3,1),transform 1s cubic-bezier(.16,1,.3,1)}
+  .reveal.show{opacity:1;transform:none}
+  .ch{display:inline-block;opacity:0;transform:translateY(.45em) rotate(3deg);animation:chIn .6s cubic-bezier(.2,.9,.25,1) forwards}
+  .ch.sp{width:.3em}
+  @keyframes chIn{to{opacity:1;transform:none}}
+  @media (hover:hover) and (pointer:fine){.tcard:hover{transform:translateY(-5px);box-shadow:var(--shadow-lg)}}
+  @media (prefers-reduced-motion: reduce){*{animation-duration:.001ms!important;transition-duration:.01ms!important}.reveal{opacity:1!important;transform:none!important}.ch{opacity:1!important;transform:none!important;animation:none!important}}
+
+  /* back pill */
+  .backpill{position:fixed;bottom:16px;left:16px;z-index:60;font-size:.78rem;font-weight:800;background:#fff;border:1px solid var(--line-2);border-radius:999px;padding:.5em 1em;box-shadow:var(--shadow);text-decoration:none;color:var(--ink)}
+
+  /* mobile */
+  @media (max-width:768px){
+    section{padding:62px 0}
+    .closing{padding:72px 0}
+    .wrap{padding:0 18px}
+    .prow{grid-template-columns:118px 1fr}
+    .prow dt{padding:12px 14px;font-size:.84rem}
+    .prow dd{padding:12px 14px;font-size:.94rem}
+    .hero-sub{max-width:32ch}
+    .hchip{font-size:.78rem}
+    .timeline{padding-left:24px}
+  }
+  @media (max-width:480px){
+    section{padding:48px 0}
+    .cta-row{flex-direction:column}
+    .cta-row .btn{width:100%;justify-content:center}
+    .medallion{width:112px;height:112px;font-size:3.6rem}
+    .prow{grid-template-columns:96px 1fr}
+  }
+</style>
+</head>
+<body>
+<div class="grain"></div>
+<div id="progress"></div>
+<div class="cursor" id="cursor"></div>
+
+<nav id="nav">
+  <a class="brand" href="index.html" style="text-decoration:none">🧙‍♂️ AIマスター山本</a>
+  <a class="navcta" href="index.html#demo">⚡ 道場を体感する</a>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="top">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-ov"></div>
+  <div class="hero-in">
+    <span class="eyebrow">才有る者の楽園 ｜ 架空の導師</span>
+    <div class="medallion">🧙‍♂️</div>
+    <h1><span class="grad-text">AIマスター山本</span></h1>
+    <div class="hero-title">〜 弟子十六体を同時に操る、AI経営の(自称)導師 〜</div>
+    <p class="hero-sub" id="heroSub">深夜2時のExcel地獄から這い上がり、AIを"考える相棒"に変えた男。…という、あくまでパロディのお話。</p>
+    <div class="hero-chips">
+      <span class="hchip">🤖 弟子 16体 並列</span>
+      <span class="hchip">♡ モテ度 87%</span>
+      <span class="hchip">💰 儲かってる感 MAX</span>
+    </div>
+    <div class="cta-row">
+      <a class="btn" href="#waza">⚔ 奥義を見る</a>
+      <a class="btn ghost" href="index.html#mote">♡ モテ演出へ</a>
+    </div>
+    <div class="fiction-banner">🎭 これは創作ペルソナの架空・パロディ紹介。実在の人物・団体とは一切関係ありません</div>
+  </div>
+</header>
+
+<!-- PROFILE -->
+<section id="profile">
+  <div class="wrap reveal">
+    <span class="eyebrow-d">Profile ｜ 架空の門票</span>
+    <h2>導師<span class="grad-text">プロフィール</span>（ぜんぶ架空）</h2>
+    <dl class="profile">
+      <div class="prow"><dt>称号</dt><dd>AIマスター ／ 才有る者の楽園 導師（<b>架空</b>）</dd></div>
+      <div class="prow"><dt>流派</dt><dd>才有る式・<b>Dynamic Workflow 道場</b></dd></div>
+      <div class="prow"><dt>拠点</dt><dd>京都・どこかの道場（架空）</dd></div>
+      <div class="prow"><dt>同時召喚</dt><dd>弟子（エージェント）<b>16体</b>を一斉起動</dd></div>
+      <div class="prow"><dt>得意技</dt><dd>営業・戦略分析・敵対検証を<b>並列</b>で回す</dd></div>
+      <div class="prow"><dt>モテ度</dt><dd><b>87%</b>（当社比・ネタ）</dd></div>
+      <div class="prow"><dt>好物</dt><dd>神丹穂（唐辛子）— 辛さで脳をリセットする儀式</dd></div>
+      <div class="prow"><dt>座右の銘</dt><dd>「キャッシュだけが事実や」</dd></div>
+    </dl>
+  </div>
+</section>
+
+<!-- LORE -->
+<section class="band" id="lore">
+  <div class="wrap reveal">
+    <span class="eyebrow-d">Legend ｜ 架空の来歴</span>
+    <h2>盛りに盛った<span class="grad-text">導師伝</span></h2>
+    <p class="lead">※史実ではありません。AIが30秒で盛った物語です（笑）。</p>
+    <div class="timeline">
+      <div class="tnode"><div class="chap">序章 ｜ 社畜時代</div><h3>深夜2時、Excelを眺めて「あ〜もう無理」</h3><p>手作業で完成度40点の資料を量産。会議では「ちょっと待ってください…」と沈黙2分。AIは「なんか信用できん」と触ってもなかった——という設定。</p></div>
+      <div class="tnode"><div class="chap">開眼 ｜ AIとの邂逅</div><h3>AIを"道具"でなく"考える相棒"にした日</h3><p>プロンプトは指示書やない、対話や。曖昧さを消し、敵対検証で負け筋を全消し。世界が反転した（架空）。</p></div>
+      <div class="tnode"><div class="chap">道場開き ｜ 弟子召喚</div><h3>1本のスクリプトから、弟子を何十体も並列起動</h3><p>Dynamic Workflow を会得し、京都に道場を開く。営業から戦略分析、敵対チェックまで同時並行（あくまでネタ）。</p></div>
+      <div class="tnode"><div class="chap">現在 ｜ 導師</div><h3>何百本のプロジェクトを、同時並行で回す男</h3><p>会議は30分で終わり、時間が余る。気づいたら…なぜか人生がモテ始めた。<b>※全部フィクション・パロディです。</b></p></div>
+    </div>
+  </div>
+</section>
+
+<!-- WAZA -->
+<section id="waza">
+  <div class="wrap reveal">
+    <span class="eyebrow-d">Arts ｜ 奥義帖</span>
+    <h2>AIマスター<span class="grad-text">六つの奥義</span></h2>
+    <p class="lead">必殺技に見せかけて、中身はぜんぶ"ちゃんとしたAIの使い方"です（ネタ）。</p>
+    <div class="grid">
+      <div class="tcard"><span class="rank">壱</span><div class="ti">🌀</div><div class="kanji">弟子十六体・同時召喚</div><div class="en">Dynamic Workflow</div><div class="desc">1本の指示から十六体の弟子(エージェント)が一斉に動く。単発で終わらせず、産業構造の変化ごと巻き込む。</div></div>
+      <div class="tcard"><span class="rank">弐</span><div class="ti">🗡️</div><div class="kanji">敵対検証・全消しの太刀</div><div class="en">Adversarial</div><div class="desc">自分の企画を"最高にケチなCEO視点"でAIにぶっ叩かせ、反論を10個潰してから世に出す。会議の「でも…」が9割消える。</div></div>
+      <div class="tcard"><span class="rank">参</span><div class="ti">⚖️</div><div class="kanji">三神並列討論</div><div class="en">Council</div><div class="desc">Claude・GPT・Gemini に同じ問いを投げ、答えの差を脳で処理する。視野が立体になり、後悔が消える。</div></div>
+      <div class="tcard"><span class="rank">肆</span><div class="ti">👁️</div><div class="kanji">Fact Integrity の眼</div><div class="en">Truth Sight</div><div class="desc">AIの"それっぽい嘘"を見抜く。Observed / Inferred / Unknown / Fictional の四分で、根拠の在処を常に問う。</div></div>
+      <div class="tcard"><span class="rank">伍</span><div class="ti">⚡</div><div class="kanji">五十点・高速錬成</div><div class="en">Fast 50</div><div class="desc">100点を1ヶ月待たず、50点を1日で出して赤ペンをもらう。修正ループ2〜3回が、いちばん強い。</div></div>
+      <div class="tcard"><span class="rank">陸</span><div class="ti">🎯</div><div class="kanji">「何のため」の心眼</div><div class="en">The Why</div><div class="desc">どんな仕事にも事業目標を接続する。つまらん仕事は、その仕事の"何のため"を見失ってるだけや。</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTES -->
+<section class="band" id="meigen">
+  <div class="wrap reveal">
+    <span class="eyebrow-d">Words ｜ 迷言集</span>
+    <h2>山本マスター<span class="grad-text">名言(風)</span></h2>
+    <div class="quotes-grid">
+      <div class="qcard"><span>“</span> 売上いうんはな…虚像や。利益も意見。結局キャッシュだけが事実や。 <span>”</span></div>
+      <div class="qcard"><span>“</span> 50点で速う出して赤ペンもらう方が、100点を1ヶ月待つより10倍強い。 <span>”</span></div>
+      <div class="qcard"><span>“</span> 営業がゼロいうんは、努力不足やない。構造の問題や。 <span>”</span></div>
+      <div class="qcard"><span>“</span> 単発で終わる仕事はするな。ひとつの案件に産業構造の変化を巻き込め。 <span>”</span></div>
+      <div class="qcard"><span>“</span> 頼まれたことをやりきる。これができん奴は、何ぼ優秀でも信頼されん。 <span>”</span></div>
+      <div class="qcard"><span>“</span> 顧客の成功が己の成功や。相反するなら、設計から根本で作り直し。 <span>”</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section id="senseki">
+  <div class="wrap reveal">
+    <span class="eyebrow-d">Records ｜ 架空の戦績</span>
+    <h2>当社比・<span class="grad-text">盛り盛りKPI</span></h2>
+    <p class="lead">※すべてネタ・パロディの数字です。実績ではありません。</p>
+    <div class="stats">
+      <div class="stat"><div class="num"><span class="count" data-to="16">0</span></div><div class="lab">弟子 同時召喚（体）</div></div>
+      <div class="stat"><div class="num"><span class="count" data-to="47">0</span>分</div><div class="lab">分析完了（従来240分）</div></div>
+      <div class="stat"><div class="num">♡<span class="count" data-to="87">0</span>%</div><div class="lab">モテ度（ネタ）</div></div>
+      <div class="stat"><div class="num">¥<span class="count" data-to="5">0</span>M</div><div class="lab">制作費（体感・パロディ）</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- KOGOTO -->
+<section class="band" id="kogoto">
+  <div class="wrap reveal">
+    <span class="eyebrow-d">Mutters ｜ マスターの小言</span>
+    <h2>道場の<span class="grad-text">隠しネタ</span></h2>
+    <div class="kogoto">
+      <div class="kog"><span class="face">🍛</span><p>『ええか、カレーのルーは3種類混ぜるんやで…ビジネスもそや』</p></div>
+      <div class="kog"><span class="face">🩸</span><p>『売上は虚像、利益は意見。キャッシュだけが事実…あ、これ血流やな』</p></div>
+      <div class="kog"><span class="face">🌶️</span><p>山本マスターの好物：神丹穂(唐辛子)。辛さで脳をリセットする儀式。</p></div>
+      <div class="kog"><span class="face">🧬</span><p>『細胞も企業も、分裂・分化・死滅を繰り返す。違いは意識と時間軸だけ』</p></div>
+      <div class="kog"><span class="face">🔥</span><p>AI新人3原則：やりきる ／ 50点で速く ／ 何のためを問う。これだけで勝ちや。</p></div>
+      <div class="kog"><span class="face">🎊</span><p>『紙吹雪は経費で落ちひん。せやけど夢は経費以上のリターンや』</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section class="closing" id="join">
+  <div class="wrap reveal">
+    <div class="label">才有る者の楽園 ｜ Dynamic Workflow 道場</div>
+    <h2>弟子、<span class="grad-text">募集中</span>（※ネタ）</h2>
+    <p>ええか、力が要るなら——わし、教えたるで。まずは道場(本編)で、弟子十六体が同時に動くとこを体感してみい。</p>
+    <div class="cta-row">
+      <a class="btn" href="index.html#demo">⚡ Dynamic Workflow を体感</a>
+      <a class="btn ghost" href="index.html#course">📜 モテ講座をのぞく</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="fnote"><b>【フィクション注記】</b> 本ページは Claude Opus 4.8 / Dynamic Workflow のデモ用に制作されたユーモア・パロディです。「AIマスター山本」は<b>創作ペルソナ</b>であり、来歴・称号・名言・奥義・戦績・モテ度・好物・写真(絵文字)はすべて<b>AI生成のフィクション／誇張</b>です。実在の人物・企業・団体・出来事とは一切関係ありません。技術用語（Dynamic Workflow / Adversarial / Council / Fact Integrity）の説明は事実ベースですが、人物設定は体感用の創作です。</div>
+    <div class="made">制作：才有る者の楽園 ／ Generated &amp; adversarially verified by Claude Opus 4.8 Dynamic Workflow.</div>
+  </div>
+</footer>
+
+<a class="backpill" href="index.html">← 道場(本編)に戻る</a>
+
+<script>
+(function(){
+  "use strict";
+  var $=function(s,c){return (c||document).querySelector(s);};
+  var $$=function(s,c){return Array.prototype.slice.call((c||document).querySelectorAll(s));};
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  $('#heroBg').style.backgroundImage="linear-gradient(0deg,rgba(14,8,26,.5),rgba(14,8,26,.5)),url('images/goldbg.jpg')";
+
+  /* nav + progress */
+  var nav=$('#nav'),prog=$('#progress');
+  function onScroll(){var y=window.scrollY||0;nav.classList.toggle('scrolled',y>60);
+    var h=document.documentElement.scrollHeight-window.innerHeight;prog.style.width=(h>0?(y/h*100):0)+'%';}
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+
+  /* reveal */
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('show');io.unobserve(e.target);}});},{threshold:.12});
+  $$('.reveal').forEach(function(el){io.observe(el);});
+
+  /* count-up */
+  var cio=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){
+    var el=e.target,to=parseInt(el.getAttribute('data-to'),10),steps=42,i=0;
+    var iv=setInterval(function(){i++;el.textContent=Math.round(to*i/steps);if(i>=steps){el.textContent=to;clearInterval(iv);}},22);
+    cio.unobserve(el);}});},{threshold:.6});
+  $$('.count').forEach(function(el){cio.observe(el);});
+
+  /* hero sub char stagger */
+  (function(){var sub=$('#heroSub'); if(!sub||reduce)return;
+    var t=sub.textContent;sub.textContent='';var d=0;
+    t.split('').forEach(function(chr){var s=document.createElement('span');
+      if(chr===' '){s.className='ch sp';s.innerHTML='&nbsp;';}else{s.className='ch';s.textContent=chr;}
+      s.style.animationDelay=d+'ms';sub.appendChild(s);d+=18;});
+  })();
+
+  /* cursor */
+  (function(){var c=$('#cursor'); if(!c||window.matchMedia('(pointer:coarse)').matches)return;
+    var x=window.innerWidth/2,y=window.innerHeight/2,cx=x,cy=y;
+    window.addEventListener('mousemove',function(e){x=e.clientX;y=e.clientY;});
+    (function loop(){cx+=(x-cx)*.2;cy+=(y-cy)*.2;c.style.transform='translate('+cx+'px,'+cy+'px) translate(-50%,-50%)';requestAnimationFrame(loop);})();
+    document.addEventListener('mouseover',function(e){if(e.target.closest('a,button,.btn,.tcard,.qcard,.stat'))c.classList.add('hot');});
+    document.addEventListener('mouseout',function(e){if(e.target.closest('a,button,.btn,.tcard,.qcard,.stat'))c.classList.remove('hot');});
+    /* magnetic buttons (desktop) */
+    if(window.matchMedia('(hover:hover) and (pointer:fine)').matches){
+      $$('.btn').forEach(function(btn){var raf=null;
+        btn.addEventListener('mousemove',function(e){var r=btn.getBoundingClientRect();
+          var mx=e.clientX-(r.left+r.width/2),my=e.clientY-(r.top+r.height/2);
+          if(raf)return;raf=requestAnimationFrame(function(){raf=null;btn.style.transform='translate('+(mx*.25)+'px,'+(my*.4)+'px)';});});
+        btn.addEventListener('mouseleave',function(){btn.style.transform='';});});
+    }
+  })();
+})();
+</script>
+</body>
+</html>

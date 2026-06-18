@@ -130,6 +130,16 @@
   footer .made{margin-top:16px;font-family:var(--mono);font-size:.72rem;letter-spacing:.04em;color:rgba(255,255,255,.4)}
   footer a{color:var(--gold-2);font-weight:700}
 
+  /* 代表メッセージ card */
+  .msgcard{display:grid;grid-template-columns:120px 1fr;gap:26px;align-items:start;max-width:860px;margin:36px auto 0;background:#fff;border:1px solid var(--line);border-radius:14px;padding:32px;box-shadow:var(--shadow-lg)}
+  .msg-ava{width:104px;height:104px;border-radius:50%;display:grid;place-items:center;font-size:3.2rem;background:radial-gradient(circle at 32% 26%,#fff3b0,#ffd700 46%,#f59e0b);box-shadow:0 14px 36px rgba(245,158,11,.4)}
+  .msg-body p{margin-bottom:.9em;color:var(--ink-soft);font-size:1.04rem}
+  .msg-body p b{color:var(--violet)}
+  .msg-body p:first-child{font-family:var(--disp);font-weight:700;font-size:1.16rem;color:var(--ink)}
+  .sign{margin-top:1.1em;font-family:var(--disp);font-weight:800;font-size:1.32rem;text-align:right}
+  .sign-sub{display:block;font-size:.76rem;font-weight:600;color:var(--muted);font-family:var(--body);margin-top:.2em}
+  @media(max-width:768px){.msgcard{grid-template-columns:1fr;gap:16px;padding:24px 20px}.msg-ava{margin:0 auto;width:92px;height:92px;font-size:2.8rem}.sign{text-align:center}}
+
   /* reveal + char */
   .reveal{opacity:0;transform:translateY(30px);transition:opacity 1s cubic-bezier(.16,1,.3,1),transform 1s cubic-bezier(.16,1,.3,1)}
   .reveal.show{opacity:1;transform:none}
@@ -195,6 +205,24 @@
     <div class="fiction-banner">🎭 これは創作ペルソナの架空・パロディ紹介。実在の人物・団体とは一切関係ありません</div>
   </div>
 </header>
+
+<!-- REP MESSAGE -->
+<section class="band" id="message">
+  <div class="wrap reveal">
+    <span class="eyebrow-d">Message ｜ 代表メッセージ</span>
+    <h2>師範<span class="grad-text">ごあいさつ</span></h2>
+    <div class="msgcard">
+      <div class="msg-ava">🧙‍♂️</div>
+      <div class="msg-body">
+        <p>ええか、わしや。<b>AIマスター山本</b>。京都で『才有る者の楽園』を率いる、架空の導師や。よう来たな。</p>
+        <p>今の時代、AIを"指示する道具"で終わらせる奴と、"考える相棒"として働かせる奴の差は、もう隠せんほどデカい。わしが何百本のプロジェクトを同時並行で回せるんは、弟子(エージェント)十六体を一斉に動かす <b>Dynamic Workflow</b> のおかげや。営業も、戦略分析も、敵対検証も、ぜんぶ並列で、それでいてスマートにな。</p>
+        <p>大事なんは三つや。<b>やりきる</b>こと。<b>50点で速う出して</b>赤ペンをもらうこと。そして<b>「何のため」</b>を見失わんこと。これだけで、たいていの勝負は決まる。</p>
+        <p>……ま、わしはぜんぶネタやけどな(笑)。この道場で『AIで仕事がどう変わるか』を、笑いながら体感していってくれ。お前さんにも、この力が要るならいつでも来い。</p>
+        <div class="sign"><span class="grad-text">AIマスター山本</span><span class="sign-sub">才有る者の楽園 導師（創作ペルソナ）</span></div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- PROFILE -->
 <section id="profile">

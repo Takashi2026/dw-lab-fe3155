@@ -57,7 +57,18 @@
   nav .links a:hover{opacity:1;background:rgba(255,255,255,.16)}
   nav.scrolled .links a:hover{background:var(--bg-soft)}
   nav .navcta{background:var(--grad);color:#fff !important;box-shadow:0 8px 20px rgba(123,91,255,.4)}
-  @media(max-width:720px){nav .links a:not(.navcta){display:none}}
+  nav .navmsg{border:1px solid rgba(255,255,255,.34)}
+  nav.scrolled .navmsg{border-color:var(--line-2)}
+  /* モバイル: 一般リンクは畳むが「代表メッセージ」とCTAはメニューに残す */
+  @media(max-width:720px){
+    nav{padding:11px 14px}
+    nav .links a:not(.navcta):not(.navmsg){display:none}
+    nav .brand{font-size:.95rem}
+    nav .links{gap:7px}
+    nav .navmsg{padding:.42em .72em;font-size:.76rem;background:rgba(255,255,255,.14)}
+    nav .navcta{padding:.46em .82em;font-size:.8rem}
+  }
+  @media(max-width:430px){nav .brand .btxt{display:none}}
 
   /* ---------- LOADING ---------- */
   #loader{position:fixed;inset:0;z-index:9999;background:linear-gradient(160deg,#ffffff,#fbf6ff 60%,#fff4fa);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;transition:opacity .6s,visibility .6s;padding:24px;text-align:center}
@@ -560,13 +571,13 @@
 <div class="cursor" id="cursor"></div>
 
 <nav id="nav">
-  <span class="brand">🧙‍♂️ AIマスター山本</span>
+  <span class="brand"><span class="bico">🧙‍♂️</span><span class="btxt">AIマスター山本</span></span>
   <span class="links">
     <a href="#demo">ライブデモ</a>
     <a href="#features">2026AI特集</a>
     <a href="#mote">モテ演出</a>
     <a href="#course">講座</a>
-    <a href="master.html">師範紹介</a>
+    <a class="navmsg" href="master.html">代表メッセージ</a>
     <a class="navcta" href="#demo">⚡ 体感する</a>
   </span>
 </nav>

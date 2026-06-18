@@ -478,6 +478,80 @@
   /* フッタ締めの呼吸 */
   html.js .breathe{display:inline-block;animation:breathe 5.5s ease-in-out infinite}
   @keyframes breathe{0%,100%{letter-spacing:.005em;opacity:.9}50%{letter-spacing:.07em;opacity:1}}
+
+  /* ============================================================
+     MOBILE OPTIMIZATION — スマホ可読性（最終レイヤー・≤768 / ≤480）
+     既存演出は壊さず、サイズ/余白/タップ領域/段組のみ最適化
+     ============================================================ */
+  @media (max-width:768px){
+    /* 横スクロール完全防止（sub-pixel/演出要素の溢れを吸収・固定要素は非影響） */
+    html,body{overflow-x:hidden!important}
+    /* 余白圧縮（PC基準118pxの空白を詰める） */
+    section{padding:60px 0!important}
+    .prodval{padding:66px 0!important}
+    .wrap{padding:0 18px!important}
+    /* ヒーロー：見出しを写真に埋もれさせない・読める下限 */
+    .hero{min-height:90vh;min-height:88svh}
+    h1{font-size:clamp(1.95rem,8vw,5.4rem)!important;line-height:1.14!important;letter-spacing:0!important}
+    .hero-sub{font-size:1.02rem!important;line-height:1.6!important;max-width:34ch;margin-left:auto;margin-right:auto}
+    .master-badge{font-size:.9rem;padding:.45em .9em}
+    .hchip{font-size:.82rem!important;padding:.4em .85em!important}
+    .hero-chips{gap:8px!important;margin-top:16px!important}
+    .fiction-note{font-size:.8rem!important;line-height:1.62!important;max-width:42ch}
+    /* 見出し・ラベル：折返し崩れを防ぐ */
+    h2.section-title{font-size:clamp(1.6rem,6.4vw,3.9rem)!important;line-height:1.32!important;letter-spacing:.006em!important}
+    .eyebrow{letter-spacing:.18em!important}
+    .tagline{font-size:1rem!important;line-height:1.7!important;max-width:46ch}
+    /* デモ：ターミナル高さ・比較バーを収める */
+    .term-log{height:200px!important;font-size:.74rem!important}
+    .terminal{padding:14px!important;min-height:auto!important}
+    .stage-zone{padding:16px!important}
+    .cmp-row{gap:8px!important;font-size:.8rem!important}
+    .cmp-row .label{width:56px!important}
+    .cmp-row .val{width:52px!important}
+    /* bento：画像セルは高さ必須なので行高は維持し縮小のみ */
+    .bento{grid-auto-rows:128px!important;gap:12px!important;margin-top:-22px!important}
+    .bcell{padding:16px!important}
+    .bcell.stat .num{font-size:1.95rem!important}
+    /* 写真ウォール：縦を抑える */
+    .mq img{height:160px!important;min-height:160px!important;max-height:200px!important}
+    .pw-ribbon{font-size:clamp(1.1rem,4.6vw,2.4rem)!important}
+    .photowall{padding:22px 0!important}
+    /* ゲージ */
+    .gauge{width:150px!important;height:150px!important}
+    /* ギャラリー：2列で一覧性UP・写真ギミックは全幅 */
+    .gallery{grid-template-columns:repeat(2,1fr)!important;gap:12px!important;margin-top:22px!important}
+    .frame.interactive{grid-column:1 / -1!important}
+    .frame figcaption{font-size:.8rem!important;line-height:1.45!important}
+    /* 名言：折返しても切れない高さ */
+    .quote-stage{min-height:170px!important}
+    .quote{font-size:clamp(1.15rem,4.6vw,1.9rem)!important;padding:0 6px!important}
+    .quote-dots i{width:13px!important;height:13px!important}
+    /* prodval：巨大数字のはみ出し回避 */
+    .pv-amt{font-size:clamp(2.7rem,15vw,12rem)!important}
+    .pv-row{flex-direction:column!important;gap:10px!important}
+    .pv-pill{width:100%!important;text-align:center!important}
+    /* スピーチ：縦積み */
+    .speech{flex-direction:column!important;gap:12px!important}
+    .bubble{font-size:1.04rem!important;padding:18px 20px!important}
+    /* ネタスタンプを控えめに（pointer-events:noneなので操作は阻害しない） */
+    .neta-stamp{width:68px!important;height:68px!important;font-size:.54rem!important;top:60px!important;right:8px!important;opacity:.9}
+    /* ナビCTAのタップ領域 */
+    nav .navcta{min-height:42px;display:inline-flex;align-items:center}
+  }
+  @media (max-width:480px){
+    section{padding:46px 0!important}
+    .wrap{padding:0 15px!important}
+    /* CTAは縦並び全幅で押しやすく */
+    .cta-row{flex-direction:column!important;gap:10px!important}
+    .cta-row .btn{width:100%!important;justify-content:center!important}
+    .btn{min-height:46px!important;padding:.85em 1.4em!important}
+    .gallery{gap:10px!important}
+    .mcard{padding:16px!important}
+    /* 隠しネタパネルは画面内に収める */
+    .egg{max-width:62vw!important}
+    .egg .panel{max-height:50vh!important;overflow-y:auto!important}
+  }
 </style>
 </head>
 <body>

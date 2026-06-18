@@ -421,6 +421,63 @@
   .pv-pill{font-family:var(--mono);font-size:.74rem;letter-spacing:.06em;color:rgba(255,255,255,.85);border:1px solid rgba(230,196,119,.35);border-radius:2px;padding:.55em 1em}
   .pv-pill b{color:var(--gold-2)}
   .pv-fine{font-family:var(--mono);font-size:.72rem;color:rgba(255,255,255,.5);margin-top:26px;letter-spacing:.04em}
+
+  /* ============================================================
+     KINETIC LUXE — 受賞級スタジオの所作（無駄に美しい化・追加レイヤー）
+     .js ガード / 重い演出は pointer:fine 限定 / reduced-motion 全対応
+     ============================================================ */
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion: reduce){
+    *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+    html.js .section-title,html.js .hero h1,html.js .hero-sub,
+    html.js .hero .hero-chips,html.js .hero .cta-row{clip-path:none!important;opacity:1!important;transform:none!important}
+    .ch{opacity:1!important;transform:none!important;animation:none!important}
+  }
+  /* 見出しワイプ（grad-textを壊さない要素単位リビール） */
+  html.js .section-title{clip-path:inset(0 102% 0 -2%);opacity:0;transform:translateY(10px);
+    transition:clip-path 1.05s cubic-bezier(.16,1,.3,1),opacity .9s ease,transform 1.05s cubic-bezier(.16,1,.3,1)}
+  html.js .section-title.in{clip-path:inset(0 -2% 0 -2%);opacity:1;transform:none}
+  /* ヒーロー入場（ローダー消滅に同期） */
+  html.js .hero h1{clip-path:inset(0 104% 0 -4%);opacity:0;transform:translateY(16px);
+    transition:clip-path 1.25s cubic-bezier(.16,1,.3,1),opacity 1s ease,transform 1.25s cubic-bezier(.16,1,.3,1)}
+  html.js .hero.lit h1{clip-path:inset(0 -4% 0 -4%);opacity:1;transform:none}
+  html.js .hero:not(.lit) .hero-sub{opacity:0}
+  html.js .hero:not(.lit) .hero-chips,html.js .hero:not(.lit) .cta-row{opacity:0;transform:translateY(12px)}
+  html.js .hero.lit .hero-chips,html.js .hero.lit .cta-row{opacity:1;transform:none;
+    transition:opacity .9s .55s cubic-bezier(.16,1,.3,1),transform .9s .55s cubic-bezier(.16,1,.3,1)}
+  /* 箔の一閃（光が走る） */
+  .hero h1 .grad-text{position:relative;display:inline-block}
+  .hero.lit h1 .grad-text::after{content:"";position:absolute;inset:-2px;pointer-events:none;
+    background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,.9) 50%,transparent 60%);
+    background-size:300% 100%;mix-blend-mode:screen;animation:sheen 2.2s ease .55s 1 both}
+  @keyframes sheen{from{background-position:170% 0}to{background-position:-70% 0}}
+  /* 文字スタッガー（プレーンテキスト要素のみ） */
+  .ch{display:inline-block;opacity:0;transform:translateY(.45em) rotate(3deg);
+    animation:chIn .6s cubic-bezier(.2,.9,.25,1) forwards;will-change:transform,opacity}
+  .ch.sp{width:.3em}
+  @keyframes chIn{to{opacity:1;transform:none}}
+  /* ナビ下線リビール（中央→左右） */
+  nav .links a{position:relative}
+  nav .links a::after{content:"";position:absolute;left:50%;right:50%;bottom:1px;height:1.5px;border-radius:2px;
+    background:var(--foil);background-size:200% auto;
+    transition:left .34s cubic-bezier(.16,1,.3,1),right .34s cubic-bezier(.16,1,.3,1)}
+  @media (hover:hover){nav .links a:hover::after{left:8%;right:8%}}
+  /* 磁性ボタン（desktopのみ） */
+  @media (hover:hover) and (pointer:fine){.btn{transition:transform .3s cubic-bezier(.2,.9,.25,1),box-shadow .15s}}
+  /* カード3Dティルト（desktopのみ） */
+  @media (hover:hover) and (pointer:fine){
+    .tilt{transition:transform .2s cubic-bezier(.2,.9,.25,1),box-shadow .25s;transform-style:preserve-3d}
+    .tilt-glare{position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;z-index:4;
+      background:radial-gradient(circle at var(--gx,50%) var(--gy,50%),rgba(255,255,255,.4),transparent 46%);
+      transition:opacity .25s;mix-blend-mode:overlay}
+    .tilt.tilting .tilt-glare{opacity:1}
+  }
+  /* gauge 達成バースト */
+  .gauge-card{position:relative}
+  .gauge-burst{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:6}
+  /* フッタ締めの呼吸 */
+  html.js .breathe{display:inline-block;animation:breathe 5.5s ease-in-out infinite}
+  @keyframes breathe{0%,100%{letter-spacing:.005em;opacity:.9}50%{letter-spacing:.07em;opacity:1}}
 </style>
 </head>
 <body>
@@ -1123,8 +1180,11 @@
 
   /* loader */
   (function(){var loader=$('loader'),msg=$('loadMsg'),fill=$('loadFill'),msgs=DATA.loading,i=0,pct=0;
-    msg.textContent=msgs[0];
-    var t=setInterval(function(){i=(i+1)%msgs.length;msg.textContent=msgs[i];},420);
+    var paint=function(s){msg.innerHTML='';var d=0;s.split('').forEach(function(chr){var sp=document.createElement('span');
+      if(chr===' '){sp.className='ch sp';sp.innerHTML='&nbsp;';}else{sp.className='ch';sp.textContent=chr;}
+      sp.style.animationDelay=d+'ms';msg.appendChild(sp);d+=14;});};
+    paint(msgs[0]);
+    var t=setInterval(function(){i=(i+1)%msgs.length;paint(msgs[i]);},600);
     var p=setInterval(function(){pct=Math.min(100,pct+Math.random()*16+6);fill.style.width=pct+'%';if(pct>=100)clearInterval(p);},180);
     function done(){clearInterval(t);clearInterval(p);fill.style.width='100%';loader.classList.add('done');}
     setTimeout(done,3000);window.addEventListener('load',function(){setTimeout(done,2600);});})();
@@ -1166,6 +1226,131 @@
     }
     runBtn.addEventListener('click',run);
   })();
+})();
+</script>
+<script>
+/* ===== KINETIC LUXE — 受賞級スタジオの所作（追加レイヤー・既存を壊さない） ===== */
+(function(){
+  var root=document.documentElement; root.classList.add('js');
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var fine=window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+  var $$=function(s,c){return Array.prototype.slice.call((c||document).querySelectorAll(s));};
+
+  /* 文字スタッガー（プレーンテキスト要素のみ） */
+  function staggerText(el,base,step){
+    if(!el)return; var t=el.textContent; el.textContent='';
+    var frag=document.createDocumentFragment(),d=base||0;
+    t.split('').forEach(function(chr){
+      var s=document.createElement('span');
+      if(chr===' '){s.className='ch sp';s.innerHTML='&nbsp;';}else{s.className='ch';s.textContent=chr;}
+      s.style.animationDelay=d+'ms';frag.appendChild(s);d+=step;
+    });
+    el.appendChild(frag);
+  }
+
+  /* セクション見出しワイプ */
+  (function(){
+    var titles=$$('.section-title');
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.25});
+    titles.forEach(function(el){io.observe(el);});
+    /* 保険：万一IOが全く発火しない環境では、見出しが恒久的に隠れないよう全表示 */
+    setTimeout(function(){ if(!document.querySelector('.section-title.in')){titles.forEach(function(el){el.classList.add('in');});} },6000);
+  })();
+
+  /* ヒーロー入場（ローダー消滅に同期） */
+  (function(){
+    var hero=document.getElementById('top'),sub=document.getElementById('heroSub'),loader=document.getElementById('loader');
+    if(!hero)return; var done=false;
+    function lite(){ if(done)return; done=true; hero.classList.add('lit'); if(!reduce) staggerText(sub,140,24); }
+    if(loader&&!loader.classList.contains('done')){
+      var mo=new MutationObserver(function(){if(loader.classList.contains('done')){mo.disconnect();setTimeout(lite,200);}});
+      mo.observe(loader,{attributes:true,attributeFilter:['class']});
+      setTimeout(lite,4400); /* 保険：ローダーが固まっても必ず表示 */
+    } else { setTimeout(lite,200); }
+  })();
+
+  /* ヒーロー パララックス（背景kenburnsは触らず、内容・絵文字に奥行き） */
+  (function(){
+    if(reduce)return;
+    var inner=document.querySelector('.hero-inner'),emo=document.getElementById('emojis'),tick=false;
+    function upd(){tick=false;var y=window.scrollY||0,vh=window.innerHeight; if(y>vh*1.15)return;
+      if(inner){inner.style.transform='translateY('+(y*0.16)+'px)';inner.style.opacity=String(Math.max(0,1-y/(vh*0.92)));}
+      if(emo){emo.style.transform='translateY('+(y*-0.1)+'px)';}}
+    window.addEventListener('scroll',function(){if(!tick){tick=true;requestAnimationFrame(upd);}},{passive:true});upd();
+  })();
+
+  /* カード3Dティルト（desktopのみ） */
+  (function(){
+    if(!fine||reduce)return;
+    $$('.fcard,.tcard,.mcard,.bcell.img,.pcard,.comic-card,.frame:not(.interactive)').forEach(function(card){
+      card.classList.add('tilt');
+      var glare=document.createElement('span');glare.className='tilt-glare';card.appendChild(glare);
+      var raf=null,rect=null;
+      card.addEventListener('mouseenter',function(){rect=card.getBoundingClientRect();card.classList.add('tilting');});
+      card.addEventListener('mousemove',function(e){
+        if(!rect)rect=card.getBoundingClientRect();
+        var px=(e.clientX-rect.left)/rect.width, py=(e.clientY-rect.top)/rect.height;
+        if(raf)return;raf=requestAnimationFrame(function(){raf=null;
+          card.style.transform='perspective(900px) rotateX('+((py-.5)*-7)+'deg) rotateY('+((px-.5)*9)+'deg) translateY(-4px)';
+          glare.style.setProperty('--gx',(px*100)+'%');glare.style.setProperty('--gy',(py*100)+'%');});
+      });
+      card.addEventListener('mouseleave',function(){rect=null;card.classList.remove('tilting');card.style.transform='';});
+    });
+  })();
+
+  /* 磁性ボタン（desktopのみ） */
+  (function(){
+    if(!fine||reduce)return;
+    $$('.btn').forEach(function(btn){var raf=null;
+      btn.addEventListener('mousemove',function(e){var r=btn.getBoundingClientRect();
+        var mx=e.clientX-(r.left+r.width/2), my=e.clientY-(r.top+r.height/2);
+        if(raf)return;raf=requestAnimationFrame(function(){raf=null;btn.style.transform='translate('+(mx*0.26)+'px,'+(my*0.4)+'px)';});});
+      btn.addEventListener('mouseleave',function(){btn.style.transform='';});
+    });
+  })();
+
+  /* モテゲージ 達成バースト（一回・軽量） */
+  (function(){
+    var gauge=document.getElementById('gauge'); if(!gauge||reduce)return;
+    var card=gauge.closest('.gauge-card')||gauge.parentNode;
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){io.unobserve(e.target);setTimeout(burst,1700);}});},{threshold:.5});
+    io.observe(gauge);
+    function burst(){
+      var cv=document.createElement('canvas');cv.className='gauge-burst';card.appendChild(cv);
+      var r=card.getBoundingClientRect(),gr=gauge.getBoundingClientRect(),DPR=Math.min(2,window.devicePixelRatio||1);
+      cv.width=r.width*DPR;cv.height=r.height*DPR;var ctx=cv.getContext('2d');ctx.scale(DPR,DPR);
+      var ox=gr.left-r.left+gr.width/2, oy=gr.top-r.top+gr.height/2;
+      var cols=['#f1a306','#ffd700','#ff4f9e','#7b5bff','#fff6c0'],hearts=['💕','✨','💖','♡'],P=[];
+      for(var i=0;i<30;i++){var a=Math.random()*Math.PI*2,sp=2+Math.random()*4.5;
+        P.push({x:ox,y:oy,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp-1.4,life:1,col:cols[i%cols.length],sz:3+Math.random()*4,em:Math.random()<.38,h:hearts[i%hearts.length]});}
+      (function frame(){ctx.clearRect(0,0,r.width,r.height);var alive=false;
+        P.forEach(function(p){if(p.life<=0)return;alive=true;p.vy+=0.12;p.x+=p.vx;p.y+=p.vy;p.life-=0.016;
+          ctx.globalAlpha=Math.max(0,p.life);
+          if(p.em){ctx.font=(p.sz*3.4)+'px serif';ctx.textAlign='center';ctx.fillText(p.h,p.x,p.y);}
+          else{ctx.beginPath();ctx.fillStyle=p.col;ctx.arc(p.x,p.y,p.sz,0,Math.PI*2);ctx.fill();}});
+        ctx.globalAlpha=1; if(alive)requestAnimationFrame(frame); else cv.remove();})();
+    }
+  })();
+
+  /* 隠しネタ：孵化パーティクル */
+  (function(){
+    var toggle=document.getElementById('eggToggle'); if(!toggle)return;
+    toggle.addEventListener('click',function(){ if(reduce)return; var r=toggle.getBoundingClientRect(); crackle(r.left+r.width/2,r.top+r.height/2); });
+    function crackle(x,y){
+      var cv=document.createElement('canvas');cv.style.cssText='position:fixed;left:0;top:0;width:100vw;height:100vh;pointer-events:none;z-index:2500';
+      var DPR=Math.min(2,window.devicePixelRatio||1);cv.width=window.innerWidth*DPR;cv.height=window.innerHeight*DPR;
+      document.body.appendChild(cv);var ctx=cv.getContext('2d');ctx.scale(DPR,DPR);
+      var cols=['#ff4f9e','#7b5bff','#14b8b8','#f1a306'],P=[];
+      for(var i=0;i<22;i++){var a=Math.random()*Math.PI*2,sp=2.5+Math.random()*5;P.push({x:x,y:y,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp,life:1,col:cols[i%cols.length],sz:2.5+Math.random()*3});}
+      (function frame(){ctx.clearRect(0,0,window.innerWidth,window.innerHeight);var alive=false;
+        P.forEach(function(p){if(p.life<=0)return;alive=true;p.vy+=0.14;p.x+=p.vx;p.y+=p.vy;p.life-=0.02;
+          ctx.globalAlpha=Math.max(0,p.life);ctx.fillStyle=p.col;ctx.beginPath();ctx.arc(p.x,p.y,p.sz,0,Math.PI*2);ctx.fill();});
+        ctx.globalAlpha=1;if(alive)requestAnimationFrame(frame);else cv.remove();})();
+    }
+  })();
+
+  /* フッタ締めの呼吸 */
+  (function(){var fc=document.getElementById('footClosing'); if(fc&&!reduce)fc.classList.add('breathe');})();
 })();
 </script>
 <script>

@@ -171,6 +171,24 @@
     .medallion{width:112px;height:112px;font-size:3.6rem}
     .prow{grid-template-columns:96px 1fr}
   }
+
+  /* ===== DE-AI REFINEMENT（index.htmlと統一：虹グラデ廃止・ink+金・静的化） ===== */
+  :root{--grad:var(--ink);--violet:var(--gold);--pink:var(--gold);--cyan:var(--gold)}
+  .grad-text,.stat .num{background:none!important;background-image:none!important;
+    -webkit-text-fill-color:var(--gold)!important;color:var(--gold)!important;animation:none!important}
+  .hero h1 .grad-text{-webkit-text-fill-color:var(--gold-2)!important;color:var(--gold-2)!important}
+  #progress{background:var(--gold)!important}
+  .hero-bg{animation:none!important;transform:scale(1.04)!important;
+    filter:grayscale(.32) saturate(.72) contrast(1.06) brightness(.84)}
+  .cursor{display:none!important}
+  html,body{cursor:auto!important}
+  .btn{background:var(--ink)!important;color:#fff!important;border-radius:3px!important;letter-spacing:.06em}
+  .btn.ghost{background:transparent!important;color:var(--ink)!important;border:1px solid var(--line-2)!important;box-shadow:none!important}
+  .hero .btn:not(.ghost),.closing .btn:not(.ghost){background:var(--gold)!important;color:#1a1208!important}
+  .hero .btn.ghost,.closing .btn.ghost{color:#fff!important;border-color:rgba(255,255,255,.45)!important}
+  nav .navcta{background:var(--gold)!important;color:#1a1208!important;border-radius:3px!important;box-shadow:0 8px 20px rgba(169,124,47,.32)!important}
+  .msgcard,.profile,.tcard,.qcard,.stat,.kog{border-radius:12px!important}
+  .eyebrow,.eyebrow-d{letter-spacing:.3em!important}
 </style>
 </head>
 <body>

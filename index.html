@@ -645,8 +645,10 @@
     padding:34px 30px 30px!important;display:flex;flex-direction:column;gap:0;transition:background .4s ease}
   @media(hover:hover) and (pointer:fine){.fcard:hover{transform:none!important;box-shadow:none!important;background:#fbf9f3!important}}
   .fhead{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin-bottom:4px}
+  .fhead .fleft{display:flex;align-items:center;gap:14px}
   .fnum{font-family:var(--cormorant,"Cormorant Garamond",serif);font-weight:600;font-size:3rem;line-height:.72;
     color:var(--accent);letter-spacing:.01em}
+  .femoji{font-size:2.1rem;line-height:1}  /* でかい絵文字を番号の隣に堂々と */
   .fmou{display:flex;flex-direction:column;align-items:flex-end;gap:5px;font-family:var(--mono);
     font-size:.56rem;letter-spacing:.11em;color:var(--muted);text-transform:uppercase;text-align:right;padding-top:7px}
   .fmou b{font-weight:700;color:var(--ink-soft)}
@@ -663,7 +665,7 @@
   .fcard .fquote::before{content:none!important}
   .fcard .fquote cite{display:block;margin-top:10px;font-family:var(--mono);font-size:.6rem;
     letter-spacing:.12em;color:var(--accent);font-style:normal;text-transform:uppercase}
-  .fcard .fquote cite::before{content:"— "}
+  .fcard .fquote cite::before{content:"🧙 "}
   @media(max-width:768px){
     .feat-grid{grid-template-columns:1fr!important;margin-top:30px!important}
     .fcard{padding:26px 22px 24px!important}
@@ -690,8 +692,9 @@
   /* comic Before→After: 大絵文字セルを版面化 */
   .comic-card{border:1px solid var(--line)!important;box-shadow:var(--shadow)!important;overflow:hidden}
   .comic-cells{grid-template-columns:1fr 44px 1fr!important}
-  .cell{align-items:flex-start!important;text-align:left!important;padding:22px 20px!important;gap:9px!important;justify-content:flex-start!important}
-  .cell .ce{display:none!important}
+  .cell{align-items:flex-start!important;text-align:left!important;padding:22px 20px!important;gap:10px!important;justify-content:flex-start!important}
+  .cell .ce{display:block!important;font-size:2.6rem!important;line-height:1!important;margin:.1em 0 .1em}  /* でかい絵文字は“あり”：堂々と大きく */
+  .cell.before .ce{filter:grayscale(.35) opacity(.92)}
   .cell::before{font-family:var(--mono);font-size:.56rem;letter-spacing:.16em;text-transform:uppercase;font-weight:700}
   .cell.before{background:#f6f4ef!important}
   .cell.before::before{content:"Before";color:var(--muted)}
@@ -762,9 +765,9 @@
     <h1><span class="grad-text" id="heroHeadline">フルパワーで弟子を動かす。</span></h1>
     <p class="hero-sub" id="heroSub">読み込み中…</p>
     <div class="hero-chips">
-      <span class="hchip mote">モテ度 <span id="heroMote">87</span>%</span>
-      <span class="hchip">弟子 16体 並列</span>
-      <span class="hchip">儲かってる感 MAX</span>
+      <span class="hchip mote">♡ モテ度 <span id="heroMote">87</span>%</span>
+      <span class="hchip">🤖 弟子 16体 並列</span>
+      <span class="hchip">💰 儲かってる感 MAX</span>
     </div>
     <div class="cta-row">
       <a class="btn" href="#demo">⚡ ライブデモを体感する</a>
@@ -916,7 +919,7 @@
     </div>
     <div class="comic reveal" id="comic"></div>
     <div class="reveal">
-      <h3 style="font-family:var(--disp);font-size:1.5rem;font-weight:800;text-align:center;margin-top:48px;letter-spacing:.02em">“儲かってる×モテモテ” ギャラリー <span style="font-size:.62em;font-weight:600;color:var(--muted)">（AI生成・架空イメージ）</span></h3>
+      <h3 style="font-family:var(--disp);font-size:1.5rem;font-weight:800;text-align:center;margin-top:48px;letter-spacing:.02em">📸 “儲かってる×モテモテ” ギャラリー <span style="font-size:.62em;font-weight:600;color:var(--muted)">（AI生成・架空イメージ）</span></h3>
       <div class="gallery" id="gallery"></div>
       <p class="gallery-note">紫バッジ=<b>AI生成の架空イメージ</b>（実在の人物・出来事ではありません）。<b>✨ 体験ギミック</b>の枠は、<b>あなたの写真を選ぶ</b>と、その場で「モテシーン」に合成されたり「モテ動画」風に動き出します。<b>🔒 写真はあなたのブラウザ内だけで処理され、どこにも送信・保存されません</b>（すべてネタ・パロディ演出です）。</p>
     </div>
@@ -939,7 +942,7 @@
   <div class="wrap">
     <div class="reveal mote-head">
       <span class="parody-banner">🎭 ぜんぶネタ・AI生成 — 実在しない大変身です</span>
-      <h2 class="section-title">人生<span class="grad-text">大変身</span>ギャラリー</h2>
+      <h2 class="section-title">💥 人生<span class="grad-text">大変身</span>ギャラリー</h2>
       <p class="tagline" style="margin:0 auto">AIをガチで使いこなしたら…貧乏→大富豪、冴えない→イケメンに（※あくまでスーパーネタ。効果には個人差どころか実在しません）。</p>
     </div>
     <div class="glowups reveal">
@@ -1239,7 +1242,7 @@
     var lv={low:{label:'だいたい実在',pct:'妄想度 20%',w:20},mid:{label:'ちょい盛り',pct:'妄想度 60%',w:60},high:{label:'ほぼ妄想',pct:'妄想度 90%',w:90}};
     DATA.features.forEach(function(f,i){var m=lv[f.mousou]||lv.mid;var n=('0'+(i+1)).slice(-2);
       var d=document.createElement('article');d.className='fcard reveal';
-      d.innerHTML='<div class="fhead"><span class="fnum">'+n+'</span>'+
+      d.innerHTML='<div class="fhead"><span class="fleft"><span class="fnum">'+n+'</span><span class="femoji">'+f.emoji+'</span></span>'+
           '<span class="fmou"><b>'+m.label+'</b><span class="fmou-bar"><i style="width:'+m.w+'%"></i></span><em>'+m.pct+'</em></span></div>'+
         '<h3 class="ftitle">'+f.title+'</h3>'+
         '<p class="flead">'+f.tag+'</p>'+

@@ -633,6 +633,42 @@
   /* バッジ/チップの彩度を落ち着かせる */
   .badge.ai{background:rgba(24,19,32,.86)!important;color:#fff!important;border-color:transparent!important}
   .hchip{background:rgba(255,255,255,.12)!important;border-color:rgba(255,255,255,.34)!important}
+
+  /* ============================================================
+     FEATURES — 編集的「キュレーション・インデックス」化（おもしろAI 9連発）
+     絵文字アイコンを廃し、大ナンバリング＋明朝＋ヘアライン＋抑制メーターへ
+     参照: 雑誌の番号付きキュレーション（Merit/sakazukiの版面感）
+     ============================================================ */
+  .feat-grid{grid-template-columns:repeat(auto-fit,minmax(322px,1fr))!important;gap:1px!important;
+    background:var(--line);border:1px solid var(--line);margin-top:42px!important}
+  .fcard{background:#fff!important;border:none!important;border-radius:0!important;box-shadow:none!important;
+    padding:34px 30px 30px!important;display:flex;flex-direction:column;gap:0;transition:background .4s ease}
+  @media(hover:hover) and (pointer:fine){.fcard:hover{transform:none!important;box-shadow:none!important;background:#fbf9f3!important}}
+  .fhead{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin-bottom:4px}
+  .fnum{font-family:var(--cormorant,"Cormorant Garamond",serif);font-weight:600;font-size:3rem;line-height:.72;
+    color:var(--accent);letter-spacing:.01em}
+  .fmou{display:flex;flex-direction:column;align-items:flex-end;gap:5px;font-family:var(--mono);
+    font-size:.56rem;letter-spacing:.11em;color:var(--muted);text-transform:uppercase;text-align:right;padding-top:7px}
+  .fmou b{font-weight:700;color:var(--ink-soft)}
+  .fmou-bar{width:54px;height:2px;background:rgba(24,19,32,.12);overflow:hidden;border-radius:2px}
+  .fmou-bar i{display:block;height:100%;background:var(--accent)}
+  .fmou em{font-style:normal;color:var(--muted)}
+  .fcard .ftitle{font-family:var(--disp);font-weight:700;font-size:1.26rem;line-height:1.5;letter-spacing:.012em;
+    color:var(--ink);margin:.45em 0 .7em}
+  .fcard .flead{font-weight:600;font-size:.98rem;line-height:1.78;color:var(--ink);
+    border-top:1px solid var(--line);padding-top:16px;margin:0 0 .85em}
+  .fcard .fbody{font-size:.88rem;line-height:1.92;color:var(--ink-soft);margin:0 0 1.3em}
+  .fcard .fquote{position:relative;font-family:var(--disp);font-weight:500;font-size:.94rem;line-height:1.72;
+    color:var(--ink-soft);border-left:2px solid var(--accent);padding:.1em 0 .1em 16px;margin:auto 0 0;font-style:normal}
+  .fcard .fquote::before{content:none!important}
+  .fcard .fquote cite{display:block;margin-top:10px;font-family:var(--mono);font-size:.6rem;
+    letter-spacing:.12em;color:var(--accent);font-style:normal;text-transform:uppercase}
+  .fcard .fquote cite::before{content:"— "}
+  @media(max-width:768px){
+    .feat-grid{grid-template-columns:1fr!important;margin-top:30px!important}
+    .fcard{padding:26px 22px 24px!important}
+    .fnum{font-size:2.5rem}
+  }
 </style>
 </head>
 <body>
@@ -1144,11 +1180,15 @@
 
   /* features */
   (function(){var g=$('featGrid');
-    var map={low:['m-low','だいたい実在 · 妄想度20%'],mid:['m-mid','ちょい盛り · 妄想度60%'],high:['m-high','ほぼ妄想 · 妄想度90%']};
-    DATA.features.forEach(function(f){var m=map[f.mousou]||map.mid;
-      var d=document.createElement('div');d.className='fcard reveal';
-      d.innerHTML='<div class="top"><div class="emoji">'+f.emoji+'</div><span class="mousou '+m[0]+'">'+m[1]+'</span></div>'+
-        '<h3>'+f.title+'</h3><div class="ftag">'+f.tag+'</div><div class="fbody">'+f.body+'</div><div class="fquote">'+f.quote+'</div>';
+    var lv={low:{label:'だいたい実在',pct:'妄想度 20%',w:20},mid:{label:'ちょい盛り',pct:'妄想度 60%',w:60},high:{label:'ほぼ妄想',pct:'妄想度 90%',w:90}};
+    DATA.features.forEach(function(f,i){var m=lv[f.mousou]||lv.mid;var n=('0'+(i+1)).slice(-2);
+      var d=document.createElement('article');d.className='fcard reveal';
+      d.innerHTML='<div class="fhead"><span class="fnum">'+n+'</span>'+
+          '<span class="fmou"><b>'+m.label+'</b><span class="fmou-bar"><i style="width:'+m.w+'%"></i></span><em>'+m.pct+'</em></span></div>'+
+        '<h3 class="ftitle">'+f.title+'</h3>'+
+        '<p class="flead">'+f.tag+'</p>'+
+        '<p class="fbody">'+f.body+'</p>'+
+        '<blockquote class="fquote">'+f.quote+'<cite>AIマスター山本</cite></blockquote>';
       g.appendChild(d);});})();
 
   /* mote */

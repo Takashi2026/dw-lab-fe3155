@@ -669,6 +669,59 @@
     .fcard{padding:26px 22px 24px!important}
     .fnum{font-size:2.5rem}
   }
+
+  /* ============================================================
+     EDITORIAL ROLLOUT — 他セクション横展開（powers / comic / course / demo）
+     絵文字アイコンを廃し、明朝＋ヘアライン＋モノラベル＋金アクセントに統一（文章は不変）
+     ============================================================ */
+  /* powers「なんで速いんや」: ヘアライン・スペックカード */
+  .powers-grid{grid-template-columns:repeat(auto-fit,minmax(270px,1fr))!important;gap:1px!important;
+    background:var(--line);border:1px solid var(--line);margin-top:40px!important}
+  .pcard{background:#fff!important;border:none!important;border-radius:0!important;box-shadow:none!important;
+    padding:32px 28px!important;overflow:visible!important}
+  .pcard::before{display:none!important}
+  @media(hover:hover) and (pointer:fine){.pcard:hover{transform:none!important;box-shadow:none!important;background:#fbf9f3!important}}
+  .pcard .ico{display:none!important}
+  .pcard h3{font-family:var(--disp)!important;font-weight:700!important;font-size:1.2rem!important;line-height:1.5!important;letter-spacing:.01em;margin:0 0 .7em!important}
+  .pcard .what{font-size:.92rem!important;line-height:1.85!important;color:var(--ink-soft)!important;border-top:1px solid var(--line);padding-top:14px;margin-bottom:.6em}
+  .pcard .why{font-size:.86rem!important;line-height:1.75!important;color:var(--muted)!important;border-top:none!important;padding-top:0!important}
+  .pcard .why::before{content:"なにがすごい — "!important;color:var(--accent)!important;font-family:var(--mono)!important;font-weight:700!important;font-size:.64em;letter-spacing:.08em;text-transform:uppercase}
+
+  /* comic Before→After: 大絵文字セルを版面化 */
+  .comic-card{border:1px solid var(--line)!important;box-shadow:var(--shadow)!important;overflow:hidden}
+  .comic-cells{grid-template-columns:1fr 44px 1fr!important}
+  .cell{align-items:flex-start!important;text-align:left!important;padding:22px 20px!important;gap:9px!important;justify-content:flex-start!important}
+  .cell .ce{display:none!important}
+  .cell::before{font-family:var(--mono);font-size:.56rem;letter-spacing:.16em;text-transform:uppercase;font-weight:700}
+  .cell.before{background:#f6f4ef!important}
+  .cell.before::before{content:"Before";color:var(--muted)}
+  .cell.after{background:#fff!important}
+  .cell.after::before{content:"After";color:var(--accent)}
+  .cell .ct{font-size:.9rem!important;line-height:1.72!important;font-weight:600}
+  .cell.before .ct{color:var(--muted)!important}
+  .cell.after .ct{color:var(--ink)!important}
+  .arrow{color:var(--accent)!important;font-weight:400!important;font-size:1.1rem!important;background:#fff!important}
+  .comic-tag{font-family:var(--mono)!important;font-size:.58rem!important;letter-spacing:.14em!important;color:var(--muted)!important;text-transform:uppercase;border-top:1px solid var(--line)!important;font-weight:700}
+
+  /* course modules: 級バッジをモノ枠ラベルへ・受講後ラベル脱絵文字 */
+  .lvl-badge{background:transparent!important;color:var(--accent)!important;border:1px solid var(--accent)!important;border-radius:2px!important;font-family:var(--mono)!important;font-weight:700!important;font-size:.6rem!important;letter-spacing:.1em!important;padding:.45em .7em!important}
+  .mcard h4{font-family:var(--disp)!important;font-weight:700!important;font-size:1.12rem!important;line-height:1.5!important}
+  .mcard .mout{border-top:1px solid var(--line)!important}
+  .mcard .mout::before{content:"受講後のあなた — "!important;color:var(--accent)!important;font-family:var(--mono)!important;font-weight:700!important;font-size:.62em;letter-spacing:.06em;text-transform:uppercase}
+
+  /* course testimonials: BEFORE/AFTER をモノ金ラベルへ */
+  .tcard .who{font-family:var(--disp)!important}
+  .tcard .ba b{font-family:var(--mono)!important;font-size:.56rem!important;letter-spacing:.14em!important;color:var(--accent)!important;display:inline-block;margin-bottom:.3em}
+
+  /* demo: チップ/ピル/ステージの上品化 */
+  .demo-stage{border-radius:12px!important}
+  .agent-chip{border-radius:4px!important}
+  .pill{font-family:var(--mono)!important;letter-spacing:.05em!important;border-radius:2px!important}
+  .demo-head .title{letter-spacing:.04em}
+  @media(max-width:768px){
+    .powers-grid{grid-template-columns:1fr!important}
+    .pcard{padding:26px 22px!important}
+  }
 </style>
 </head>
 <body>
@@ -1035,6 +1088,9 @@
       {"type":"photo","file":"mote3.jpg","ai":true,"cap":"AI生成｜ガラの主役、撮られまくり","rot":"-2deg"},
       {"type":"photo","file":"mote4.jpg","ai":true,"cap":"AI生成｜ヨットでモテモテ","rot":"2deg"},
       {"type":"photo","file":"mote5.jpg","ai":true,"cap":"AI生成｜舞踏会の主役（モテ国王）","rot":"-3deg"},
+      {"type":"photo","file":"mote6.jpg","ai":true,"cap":"AI生成｜夜のVIPラウンジでも主役","rot":"2deg"},
+      {"type":"photo","file":"mote7.jpg","ai":true,"cap":"AI生成｜ギャラリーで知的にモテる","rot":"-2deg"},
+      {"type":"photo","file":"mote8.jpg","ai":true,"cap":"AI生成｜レッドカーペットの主役","rot":"3deg"},
       {"type":"photo","file":"gag1.jpg","ai":true,"cap":"AI生成①｜“儲かってる感”は気のせいではない","rot":"-4deg"},
       {"type":"photo","file":"gag5.jpg","ai":true,"cap":"AI生成②｜車が札束で見えない","rot":"3deg"},
       {"type":"photo","file":"gag2.jpg","ai":true,"cap":"AI生成③｜札束は紙吹雪として投げるもの","rot":"-2deg"},

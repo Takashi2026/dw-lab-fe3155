@@ -731,6 +731,10 @@
      ↑↑↓↓←→←→BA / スマホは🧙ロゴ5連打 → ~5秒で自動復帰
      ============================================================ */
   nav .brand{cursor:pointer;-webkit-tap-highlight-color:transparent;user-select:none}
+  #maxScrim{position:fixed;inset:0;z-index:4997;pointer-events:none;opacity:0;
+    background:radial-gradient(ellipse 76% 52% at 50% 43%,rgba(8,5,2,.9),rgba(12,8,4,.92) 38%,rgba(14,9,4,.6) 100%)}
+  #maxScrim.go{animation:maxscrim 5.2s ease-in-out forwards}
+  @keyframes maxscrim{0%{opacity:0}9%{opacity:1}86%{opacity:1}100%{opacity:0}}
   #maxFlash{position:fixed;inset:0;z-index:5000;pointer-events:none;opacity:0;
     background:radial-gradient(circle at 50% 44%,rgba(255,228,150,.95),rgba(201,154,69,.55) 42%,transparent 72%)}
   #maxFlash.go{animation:maxflash 1s ease-out forwards}
@@ -745,7 +749,7 @@
   @keyframes maxbanner{0%{opacity:0;transform:translate(-50%,-50%) scale(.6)}13%{opacity:1;transform:translate(-50%,-50%) scale(1.05)}24%{transform:translate(-50%,-50%) scale(1)}82%{opacity:1}100%{opacity:0;transform:translate(-50%,-50%) scale(1.02)}}
   html.maxmode{animation:maxsurge .6s ease-in-out}
   @keyframes maxsurge{0%,100%{filter:none}30%{filter:saturate(1.35) contrast(1.06) brightness(1.05)}}
-  @media (prefers-reduced-motion: reduce){#maxFlash,#maxRain{display:none!important}#maxBanner.go{animation:none!important;opacity:1!important;transform:translate(-50%,-50%) scale(1)!important}html.maxmode{animation:none!important}}
+  @media (prefers-reduced-motion: reduce){#maxFlash,#maxRain{display:none!important}#maxScrim.go{animation:none!important;opacity:1!important}#maxBanner.go{animation:none!important;opacity:1!important;transform:translate(-50%,-50%) scale(1)!important}html.maxmode{animation:none!important}}
 </style>
 </head>
 <body>
@@ -1663,8 +1667,9 @@
   }
   function activate(){
     if(active)return;active=true;var root=document.documentElement;root.classList.add('maxmode');
+    var scrim=document.createElement('div');scrim.id='maxScrim';document.body.appendChild(scrim);
     var flash=document.createElement('div');flash.id='maxFlash';document.body.appendChild(flash);
-    requestAnimationFrame(function(){flash.classList.add('go');});
+    requestAnimationFrame(function(){scrim.classList.add('go');flash.classList.add('go');});
     var b=document.createElement('div');b.id='maxBanner';
     b.innerHTML='<span class="mb-k">秘奥義 ｜ SECRET ARTS</span><span class="mb-t">MAX モード</span><span class="mb-s">全開や。モテ度 999%、儲かってる感も限界突破。</span>';
     document.body.appendChild(b);requestAnimationFrame(function(){b.classList.add('go');});
@@ -1672,7 +1677,7 @@
     var pHm=hm?hm.textContent:null,pGp=gp?gp.textContent:null;
     bump(hm,999);bump(gp,999);
     if(!reduce)rain();
-    setTimeout(function(){root.classList.remove('maxmode');if(flash)flash.remove();if(b)b.remove();
+    setTimeout(function(){root.classList.remove('maxmode');if(scrim)scrim.remove();if(flash)flash.remove();if(b)b.remove();
       if(hm&&pHm!=null)hm.textContent=pHm;if(gp&&pGp!=null)gp.textContent=pGp;active=false;},5200);
   }
   /* trigger 1: Konami code */

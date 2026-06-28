@@ -725,6 +725,27 @@
     .powers-grid{grid-template-columns:1fr!important}
     .pcard{padding:26px 22px!important}
   }
+
+  /* ============================================================
+     秘奥義 MAXモード — 隠しコマンドの大ネタ演出（発見者だけのご褒美）
+     ↑↑↓↓←→←→BA / スマホは🧙ロゴ5連打 → ~5秒で自動復帰
+     ============================================================ */
+  nav .brand{cursor:pointer;-webkit-tap-highlight-color:transparent;user-select:none}
+  #maxFlash{position:fixed;inset:0;z-index:5000;pointer-events:none;opacity:0;
+    background:radial-gradient(circle at 50% 44%,rgba(255,228,150,.95),rgba(201,154,69,.55) 42%,transparent 72%)}
+  #maxFlash.go{animation:maxflash 1s ease-out forwards}
+  @keyframes maxflash{0%{opacity:0}12%{opacity:1}100%{opacity:0}}
+  #maxRain{position:fixed;inset:0;z-index:4999;pointer-events:none}
+  #maxBanner{position:fixed;left:50%;top:42%;transform:translate(-50%,-50%) scale(.6);z-index:5001;pointer-events:none;text-align:center;opacity:0;width:min(92vw,900px)}
+  #maxBanner.go{animation:maxbanner 4.6s cubic-bezier(.16,1,.3,1) forwards}
+  #maxBanner .mb-k{font-family:var(--mono);letter-spacing:.4em;font-size:.74rem;color:var(--gold-2);text-transform:uppercase;display:block;margin-bottom:.5em;text-shadow:0 2px 14px rgba(0,0,0,.6)}
+  #maxBanner .mb-t{font-family:var(--disp);font-weight:800;font-size:clamp(2.6rem,11vw,6.5rem);line-height:1.02;
+    background:var(--foil);background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:foil 2.2s linear infinite}
+  #maxBanner .mb-s{font-family:var(--disp);font-weight:700;font-size:clamp(1rem,3.6vw,1.7rem);color:#fff;margin-top:.55em;text-shadow:0 2px 18px rgba(0,0,0,.7)}
+  @keyframes maxbanner{0%{opacity:0;transform:translate(-50%,-50%) scale(.6)}13%{opacity:1;transform:translate(-50%,-50%) scale(1.05)}24%{transform:translate(-50%,-50%) scale(1)}82%{opacity:1}100%{opacity:0;transform:translate(-50%,-50%) scale(1.02)}}
+  html.maxmode{animation:maxsurge .6s ease-in-out}
+  @keyframes maxsurge{0%,100%{filter:none}30%{filter:saturate(1.35) contrast(1.06) brightness(1.05)}}
+  @media (prefers-reduced-motion: reduce){#maxFlash,#maxRain{display:none!important}#maxBanner.go{animation:none!important;opacity:1!important;transform:translate(-50%,-50%) scale(1)!important}html.maxmode{animation:none!important}}
 </style>
 </head>
 <body>
@@ -1619,6 +1640,49 @@
   (function loop(){cx+=(x-cx)*.2;cy+=(y-cy)*.2;c.style.transform='translate('+cx+'px,'+cy+'px) translate(-50%,-50%)';requestAnimationFrame(loop);})();
   document.addEventListener('mouseover',function(e){if(e.target.closest('a,button,.btn,.frame,.ga,.quote-dots i,.fanbubble')){c.classList.add('hot');}});
   document.addEventListener('mouseout',function(e){if(e.target.closest('a,button,.btn,.frame,.ga,.quote-dots i,.fanbubble')){c.classList.remove('hot');}});
+})();
+</script>
+<script>
+/* ===== 秘奥義 MAXモード（隠しコマンド） ===== */
+(function(){
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches, active=false;
+  function bump(el,to){if(!el)return;var from=parseInt(el.textContent,10)||0,i=0,steps=22;
+    var iv=setInterval(function(){i++;el.textContent=Math.round(from+(to-from)*i/steps);if(i>=steps){el.textContent=to;clearInterval(iv);}},28);}
+  function rain(){
+    var cv=document.createElement('canvas');cv.id='maxRain';
+    var DPR=Math.min(2,window.devicePixelRatio||1),W=window.innerWidth,H=window.innerHeight;
+    cv.width=W*DPR;cv.height=H*DPR;document.body.appendChild(cv);var ctx=cv.getContext('2d');ctx.scale(DPR,DPR);
+    var glyphs=['💴','✨','🪙','💰','⚡','👑'],P=[],N=Math.min(64,Math.floor(W/9));
+    for(var i=0;i<N;i++)P.push({x:Math.random()*W,y:-Math.random()*H,vy:2+Math.random()*4.5,vx:(Math.random()-.5)*1.3,
+      rot:Math.random()*6,vr:(Math.random()-.5)*.22,sz:16+Math.random()*22,g:glyphs[i%glyphs.length]});
+    var t0=performance.now(),dur=4800;
+    (function frame(ts){var el=ts-t0;ctx.clearRect(0,0,W,H);var fade=el>dur-900?Math.max(0,(dur-el)/900):1;
+      P.forEach(function(p){p.y+=p.vy;p.x+=p.vx;p.rot+=p.vr;if(p.y>H+30){p.y=-30;p.x=Math.random()*W;}
+        ctx.save();ctx.globalAlpha=.9*fade;ctx.translate(p.x,p.y);ctx.rotate(p.rot);ctx.font=p.sz+'px serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(p.g,0,0);ctx.restore();});
+      if(el<dur)requestAnimationFrame(frame);else cv.remove();})(t0);
+  }
+  function activate(){
+    if(active)return;active=true;var root=document.documentElement;root.classList.add('maxmode');
+    var flash=document.createElement('div');flash.id='maxFlash';document.body.appendChild(flash);
+    requestAnimationFrame(function(){flash.classList.add('go');});
+    var b=document.createElement('div');b.id='maxBanner';
+    b.innerHTML='<span class="mb-k">秘奥義 ｜ SECRET ARTS</span><span class="mb-t">MAX モード</span><span class="mb-s">全開や。モテ度 999%、儲かってる感も限界突破。</span>';
+    document.body.appendChild(b);requestAnimationFrame(function(){b.classList.add('go');});
+    var hm=document.getElementById('heroMote'),gp=document.getElementById('gaugePct');
+    var pHm=hm?hm.textContent:null,pGp=gp?gp.textContent:null;
+    bump(hm,999);bump(gp,999);
+    if(!reduce)rain();
+    setTimeout(function(){root.classList.remove('maxmode');if(flash)flash.remove();if(b)b.remove();
+      if(hm&&pHm!=null)hm.textContent=pHm;if(gp&&pGp!=null)gp.textContent=pGp;active=false;},5200);
+  }
+  /* trigger 1: Konami code */
+  var seq=['arrowup','arrowup','arrowdown','arrowdown','arrowleft','arrowright','arrowleft','arrowright','b','a'],pos=0;
+  window.addEventListener('keydown',function(e){var k=(e.key||'').toLowerCase();
+    pos=(k===seq[pos])?pos+1:(k===seq[0]?1:0);if(pos===seq.length){pos=0;activate();}});
+  /* trigger 2: tap 🧙 brand x5 (mobile/desktop) */
+  var brand=document.querySelector('nav .brand');
+  if(brand){var taps=0,tt=null;brand.addEventListener('click',function(){taps++;clearTimeout(tt);
+    tt=setTimeout(function(){taps=0;},2500);if(taps>=5){taps=0;activate();}});}
 })();
 </script>
 </body>

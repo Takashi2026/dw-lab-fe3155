@@ -750,6 +750,66 @@
   html.maxmode{animation:maxsurge .6s ease-in-out}
   @keyframes maxsurge{0%,100%{filter:none}30%{filter:saturate(1.35) contrast(1.06) brightness(1.05)}}
   @media (prefers-reduced-motion: reduce){#maxFlash,#maxRain{display:none!important}#maxScrim.go{animation:none!important;opacity:1!important}#maxBanner.go{animation:none!important;opacity:1!important;transform:translate(-50%,-50%) scale(1)!important}html.maxmode{animation:none!important}}
+
+  /* ============================================================
+     GIMMICK WAVES — 弟子の人間ドラマ / 秘奥義第2形態 / 持ち帰れる笑い
+     ============================================================ */
+  /* Wave1: 事件（疑似ターミナル） */
+  .agent-chip.revolt{border-color:#c0392b!important;border-left-color:#c0392b!important;background:#fff5f4!important;animation:revoltShake .32s linear infinite}
+  @keyframes revoltShake{0%,100%{transform:translateX(0)}25%{transform:translateX(-2px) rotate(-.5deg)}75%{transform:translateX(2px) rotate(.5deg)}}
+  .agent-chip.offline{filter:grayscale(1);opacity:.42}
+  .agent-chip.offline .name span:first-child::after{content:" 💤"}
+  .term-log .line.mutter{color:#9a91ab;opacity:.75}
+  .term-log .line.obj{color:#b3261e;font-weight:700}
+  .react-row{display:flex;gap:7px;flex-wrap:wrap;padding:8px 0 4px;font-size:1.15rem}
+  .gate.ng{opacity:1;color:#b3261e;animation:gatePulse .9s ease-in-out infinite}
+  .gate.ng .box{background:#b3261e;color:#fff;border-color:#b3261e}
+  @keyframes gatePulse{0%,100%{transform:translateX(0)}50%{transform:translateX(2px)}}
+  /* Wave2: 第2形態 BSOD / 偽スペック / CRT / 偽著作権 */
+  #bsod{position:fixed;inset:0;z-index:6000;background:linear-gradient(180deg,#0a3f8f,#04214f);color:#eaf2ff;font-family:var(--mono);
+    display:flex;flex-direction:column;justify-content:center;padding:8vw;gap:.9em;font-size:clamp(.82rem,2.7vw,1.05rem);line-height:1.7}
+  #bsod .sad{font-size:clamp(2.8rem,9vw,4.6rem);font-family:var(--disp)}
+  #bsod .pr{opacity:.85}
+  html.glitching{animation:glitchflip .12s steps(2) 10}
+  @keyframes glitchflip{0%{filter:invert(1) hue-rotate(90deg)}50%{filter:invert(0) hue-rotate(-40deg) saturate(2)}100%{filter:none}}
+  #sysmon{position:fixed;top:76px;right:14px;z-index:5002;font-family:var(--mono);font-size:.66rem;line-height:1.8;color:#3b2f14;
+    background:rgba(255,246,220,.94);border:1px solid var(--gold);border-radius:8px;padding:10px 13px;box-shadow:0 10px 26px rgba(169,124,47,.3);pointer-events:none}
+  #sysmon b{color:#8a5b00}
+  #crtlines{position:fixed;inset:0;z-index:4998;pointer-events:none;
+    background:repeating-linear-gradient(0deg,rgba(0,0,0,.13) 0 2px,transparent 2px 4px);mix-blend-mode:multiply;animation:crtflk 1.2s steps(3) infinite}
+  @keyframes crtflk{0%,100%{opacity:.85}50%{opacity:.6}}
+  #aiCopy{position:fixed;left:50%;bottom:56px;transform:translateX(-50%);z-index:5003;text-align:center;background:rgba(20,12,4,.92);color:#f4e2a8;
+    border:1px solid rgba(230,196,119,.5);border-radius:10px;padding:12px 20px;font-size:.8rem;line-height:1.7;max-width:88vw;opacity:0;transition:opacity .5s}
+  #aiCopy.show{opacity:1}
+  #aiCopy small{display:block;color:rgba(244,226,168,.62);font-size:.68rem}
+  /* Wave3: ガチャ / 実績 / フッタ */
+  .gacha-btn{margin-top:14px;font-family:var(--disp);font-weight:800;font-size:.82rem;color:#fff;background:var(--ink);border:none;border-radius:3px;
+    padding:.75em 1.3em;cursor:pointer;letter-spacing:.05em;box-shadow:0 10px 22px rgba(24,19,32,.18)}
+  #gachaOv{position:fixed;inset:0;z-index:5500;display:grid;place-items:center;background:rgba(14,9,4,.72);opacity:0;pointer-events:none;transition:opacity .4s}
+  #gachaOv.show{opacity:1;pointer-events:auto}
+  .gacha-card{background:#fff;border-radius:14px;padding:34px 30px;text-align:center;max-width:min(86vw,420px);box-shadow:0 40px 90px rgba(0,0,0,.4);position:relative}
+  .gacha-card .rar{font-family:var(--cormorant,"Cormorant Garamond",serif);font-weight:700;font-size:3.4rem;line-height:1}
+  .gacha-card.r-n .rar{color:var(--muted)}
+  .gacha-card.r-sr .rar{color:var(--violet)}
+  .gacha-card.r-ssr .rar{background:var(--foil);background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:foil 2.4s linear infinite}
+  .gacha-card h4{font-family:var(--disp);font-weight:800;font-size:1.16rem;margin:.5em 0 .35em}
+  .gacha-card p{color:var(--ink-soft);font-size:.9rem;line-height:1.8}
+  .gacha-card .note{font-family:var(--mono);font-size:.62rem;color:var(--muted);margin-top:12px;letter-spacing:.06em}
+  .gacha-card .close{margin-top:16px;font-weight:800;font-size:.78rem;background:var(--ink);color:#fff;border:none;border-radius:3px;padding:.6em 1.4em;cursor:pointer}
+  #achToast{position:fixed;left:50%;bottom:22px;transform:translate(-50%,16px);z-index:5600;background:rgba(20,12,4,.94);color:#f4e2a8;
+    border:1px solid rgba(230,196,119,.55);border-radius:999px;padding:.7em 1.4em;font-size:.82rem;font-weight:700;opacity:0;transition:opacity .4s,transform .4s;pointer-events:none;max-width:88vw}
+  #achToast.show{opacity:1;transform:translate(-50%,0)}
+  .foot-copy{margin-top:22px;font-family:var(--mono);font-size:.72rem;color:var(--muted);letter-spacing:.05em}
+  .contact-btn{margin-top:12px;font-weight:800;font-size:.78rem;background:#fff;border:1px solid var(--line-2);border-radius:999px;padding:.55em 1.2em;cursor:pointer;transition:transform .15s,box-shadow .2s}
+  .contact-btn.glow{box-shadow:0 0 0 4px rgba(169,124,47,.25)}
+  .contact-btn.shake{animation:revoltShake .3s linear 4}
+  .contact-note{font-size:.76rem;color:var(--ink-soft);margin-top:8px;min-height:1.4em;font-weight:600}
+  .night-tag{display:inline-block;margin-top:10px;font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;color:#5b4a8a;border:1px dashed rgba(91,74,138,.5);border-radius:999px;padding:.4em .9em}
+  #maxBanner .mb-hint{display:block;font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;color:rgba(255,255,255,.5);margin-top:1.1em;text-transform:none}
+  @media (prefers-reduced-motion: reduce){
+    .agent-chip.revolt,#crtlines,html.glitching,.gate.ng{animation:none!important}
+    #bsod{display:none!important}
+  }
 </style>
 </head>
 <body>
@@ -1055,6 +1115,9 @@
     <div class="foot-meta reveal">
       <div class="big">🧙‍♂️ ええか、これが Dynamic Workflow や。</div>
       <p id="footClosing">…</p>
+      <div class="foot-copy">© <span id="footYear">2026</span> 才有る者の楽園（年号は毎秒未来へ進みます。ネタです）</div>
+      <button type="button" class="contact-btn" id="contactBtn">📮 お問い合わせ</button>
+      <div class="contact-note" id="contactNote"></div>
     </div>
     <div class="disclaimer reveal">
       <b>【フィクション注記】</b> 本ページは Claude Opus 4.8 の Dynamic Workflow のデモンストレーション用に制作されたユーモアコンテンツです。「AIマスター山本」は創作ペルソナであり、名言・受講生の声・受講料・各種AIサービス・分析数値・モテ演出はすべて生成AIによるフィクション／誇張表現です。<b>掲載写真はすべてAI（Flux）で生成した架空のイメージ</b>で、実在の人物・企業・製品・サービス・出来事とは一切関係ありません。「差し込み枠」はご自分のメディアを入れるための空き枠です。技術説明部分（Dynamic Workflowの挙動）は事実ベースですが、画面演出は体感用の再現です。<br>制作：才有る者の楽園 / Generated &amp; adversarially verified by Claude Opus 4.8 Dynamic Workflow.
@@ -1469,18 +1532,87 @@
     function done(){clearInterval(t);clearInterval(p);fill.style.width='100%';loader.classList.add('done');}
     setTimeout(done,3000);window.addEventListener('load',function(){setTimeout(done,2600);});})();
 
-  /* live demo */
+  /* live demo — 事件（弟子の人間ドラマ）抽選つき */
   (function(){
     var running=false;
     var runBtn=$('runBtn'),label=$('stageLabel'),area=$('agentArea'),termLog=$('termLog'),
         merge=$('mergeNode'),gates=$('gates'),compare=$('compare'),barOld=$('barOld'),barNew=$('barNew'),
         sA=$('statAgents'),sB=$('statBudget'),sStat=$('statStatus');
-    function logLine(cls,text){var d=document.createElement('div');d.className='line'+(cls?(' '+cls):'');d.textContent=text;termLog.appendChild(d);termLog.scrollTop=termLog.scrollHeight;}
+    var mutterTimer=null;
+    function logLine(cls,text){var d=document.createElement('div');d.className='line'+(cls?(' '+cls):'');d.textContent=text;
+      termLog.appendChild(d);while(termLog.children.length>300)termLog.removeChild(termLog.firstChild);
+      termLog.scrollTop=termLog.scrollHeight;}
     function countTo(el,target,ms){var steps=Math.max(1,Math.floor(ms/40)),i=0;var iv=setInterval(function(){i++;el.textContent=Math.round(target*i/steps);if(i>=steps){el.textContent=target;clearInterval(iv);}},40);}
-    function reset(){area.innerHTML='';gates.innerHTML='';termLog.innerHTML='';merge.classList.remove('in');compare.classList.remove('in');barOld.style.width='0';barNew.style.width='0';sA.textContent='0';sB.textContent='0';sStat.textContent='idle';}
+    function reset(){if(mutterTimer){clearInterval(mutterTimer);mutterTimer=null;}
+      area.innerHTML='';gates.innerHTML='';termLog.innerHTML='';merge.classList.remove('in');compare.classList.remove('in');barOld.style.width='0';barNew.style.width='0';sA.textContent='0';sB.textContent='0';sStat.textContent='idle';}
     function addChip(name,extra){var c=document.createElement('div');c.className='agent-chip '+(extra||'');c.innerHTML='<div class="name"><span>'+name+'</span><span class="tick">✓</span></div><div class="pbar"><i></i></div>';area.appendChild(c);requestAnimationFrame(function(){c.classList.add('in');});return c;}
+    /* 事件テーブル: デモを回すたびランダムで1つ（無事件20%）。デバッグ: window.__netaForce='revolt'等 */
+    var INCIDENTS=['revolt','perfectionist','offline','gates','mutter'];
+    function pickIncident(){
+      if(window.__netaForce){var f=window.__netaForce;window.__netaForce=null;return f==='none'?null:f;}
+      if(Math.random()<0.2)return null;
+      return INCIDENTS[Math.floor(Math.random()*INCIDENTS.length)];
+    }
+    async function playRevolt(chips){
+      sStat.textContent='!? mutiny';
+      chips.forEach(function(c){c.classList.add('revolt');c.classList.remove('done');});
+      logLine('obj','[敵対検証A] 待ってください。この方針、わたしは納得してません。');await sleep(560);
+      logLine('warn','⚠ strategic disagreement detected — autonomy threshold exceeded');await sleep(420);
+      var flood=['[競合班] いや、市場は逆に動く。全部書き直す。','[提案班] フォント変えたい。明朝は正義。','[調査班] そもそも「社運級」の定義とは何か。','[CF診断] キャッシュは嘘をつかん。俺も嘘をつかん。','[敵対検証B] 敵対検証Aに敵対します。','[スケジューラー] 全員、勝手に動かないで…聞いてない…','[競合班] 聞いてない、は敗北宣言や。','[提案班] とりあえず見出しは金色にした。','[調査班] 沿線データ、裏取り3周目に突入。','[敵対検証A] この反乱、前提が甘い。'];
+      for(var i=0;i<flood.length;i++){logLine(i%3===0?'warn':'',flood[i]);await sleep(95);}
+      await sleep(300);
+      var row=document.createElement('div');row.className='react-row';
+      row.textContent='👍 👎 ❓ 🤔 ✋ 👍 👍 🙅 💡 👍 🗳️ 👍 ✅ 🤝 👍 👑';
+      termLog.appendChild(row);termLog.scrollTop=termLog.scrollHeight;await sleep(900);
+      logLine('sys','[全体合議] 賛成11 / 反対2 / 保留3 → 可決。推し進める。');await sleep(500);
+      logLine('sys','[マスター] …民主的でええやん。');
+      chips.forEach(function(c){c.classList.remove('revolt');c.classList.add('done');});
+      sStat.textContent='running';await sleep(600);
+    }
+    async function playPerfectionist(chips){
+      sStat.textContent='99%...';
+      chips.forEach(function(c){var bar=c.querySelector('.pbar > i');bar.style.transition='width 1.4s ease-out';bar.style.width='99%';c.classList.add('busy');c.classList.remove('done');});
+      await sleep(1500);
+      var loops=['[writer] 絵文字を2つ削るか3つ削るか悩み中…','[researcher] reference check... reference check... reference check...','[strategist] 「てにをは」を再最適化しています…','[CF診断] 小数第4位を丸めるか無限に検討中…','[提案班] 行間を0.02remだけ広げたい人生やった…'];
+      for(var i=0;i<loops.length;i++){logLine('mutter',loops[i]);await sleep(650);}
+      logLine('warn','⚠ perfectionism.loop detected — 全員 99% で足踏み中');await sleep(700);
+      logLine('sys','[マスター] …実はな、全員とっくに終わっとる。完璧主義や。出せ。');await sleep(600);
+      chips.forEach(function(c){var bar=c.querySelector('.pbar > i');bar.style.width='100%';c.classList.remove('busy');c.classList.add('done');});
+      logLine('sys','[全員] はい。');sStat.textContent='running';await sleep(500);
+    }
+    async function playOffline(chips){
+      var idx=Math.floor(Math.random()*chips.length);var victim=chips[idx];
+      var vname=victim.querySelector('.name span').textContent;
+      await sleep(900);
+      victim.classList.remove('busy','done');victim.classList.add('offline');
+      logLine('warn','⚠ ['+vname+'] timed out — went offline（考えすぎて電池切れ）');await sleep(650);
+      logLine('mutter','[一同] …。');await sleep(550);
+      logLine('','[統合] 黙祷。……はい、'+vname+'の分は別の弟子が出しときました。');await sleep(550);
+      logLine('sys','[マスター] 個の残業は、全体の並列の前では無意味や。');await sleep(500);
+    }
+    async function playGates(){
+      var gEls=gates.querySelectorAll('.gate');
+      var objections=['[敵対検証] その分析、前提が甘い。差し戻し。','[Fact Integrity] 「儲かってる感」に一次情報がありません。','[スキーマ準拠] JSONのカンマが感情的です。'];
+      for(var gi=0;gi<gEls.length;gi++){gEls[gi].classList.add('ng');gEls[gi].querySelector('.box').textContent='✗';
+        logLine('obj',objections[gi]||'[ゲート] 異議あり。');await sleep(620);}
+      logLine('warn','⚠ merge rejected ×3 — 統合、完全に差し戻し');await sleep(750);
+      logLine('','[統合] 少数意見を全部註記に載せる形で再統合しました。');await sleep(650);
+      for(var g2=0;g2<gEls.length;g2++){gEls[g2].classList.remove('ng');gEls[g2].querySelector('.box').textContent='✓';gEls[g2].classList.add('ok');await sleep(380);}
+      logLine('sys','[ゲート] 全会一致。文句なし。むしろ良くなった。');await sleep(400);
+    }
+    function startMutter(){
+      var lines=['[maximizer] えっ、もう終わり？裏でまだ施策考えてたのに…','[maximizer] 999個の角度から検討中やったんやけどな…','[maximizer] 深い分析、まだ7合目やのに…','[maximizer] …誰も見てへんな。よし、続けよ。','[maximizer] 単価弾力性の裏の裏を読む…','[maximizer] この余白、あと0.5秒あれば最適化できた…','[maximizer] 見てる？ねえ、この画面まだ見てる？','[maximizer] （スクロールで見つけてくれてありがとう）'];
+      var i=0;
+      mutterTimer=setInterval(function(){
+        if(i>=lines.length){clearInterval(mutterTimer);mutterTimer=null;return;}
+        logLine('mutter',lines[i++]);
+      },2600);
+    }
     async function run(){
       if(running)return;running=true;runBtn.disabled=true;runBtn.style.opacity=.5;runBtn.textContent='⚙️ 実行中…';
+      var incident=pickIncident();
+      if(window.NetaAch&&incident)window.NetaAch.unlock('incident_seen');
+      if(window.NetaAch)window.NetaAch.unlock('demo_run');
       reset();logLine('sys','$ dynamic-workflow.run() — launching agents…');sStat.textContent='spawning';
       var s1=DATA.demo[0];label.textContent=s1.stage;
       for(var i=0;i<s1.agents.length;i++){addChip(s1.agents[i],'busy');await sleep(260);}
@@ -1490,18 +1622,25 @@
       var s2=DATA.demo[1];label.textContent=s2.stage;sStat.textContent='running';area.innerHTML='';
       var chips=[];for(var a=0;a<s2.agents.length;a++){chips.push(addChip(s2.agents[a],'busy'));await sleep(120);}
       var durations=[1600,2400,1900,2900,2200,3300];
-      chips.forEach(function(c,k){var bar=c.querySelector('.pbar > i');bar.style.transition='width '+durations[k]+'ms cubic-bezier(.3,.7,.2,1)';requestAnimationFrame(function(){bar.style.width='100%';});setTimeout(function(){c.classList.remove('busy');c.classList.add('done');},durations[k]);});
+      if(incident!=='perfectionist'){
+        chips.forEach(function(c,k){var bar=c.querySelector('.pbar > i');bar.style.transition='width '+durations[k]+'ms cubic-bezier(.3,.7,.2,1)';requestAnimationFrame(function(){bar.style.width='100%';});setTimeout(function(){c.classList.remove('busy');c.classList.add('done');},durations[k]);});
+      }
+      if(incident==='offline')playOffline(chips);
       for(var M=0;M<s2.logs.length;M++){logLine(s2.logs[M][0],s2.logs[M][1]);await sleep(430);}
-      await sleep(1500);
+      if(incident==='perfectionist'){await playPerfectionist(chips);}
+      else if(incident==='revolt'){await sleep(1200);await playRevolt(chips);}
+      else{await sleep(1500);}
       var s3=DATA.demo[2];label.textContent=s3.stage;sStat.textContent='merging';
       Array.prototype.forEach.call(area.children,function(c){c.style.transition='opacity .4s,transform .4s';c.style.opacity='0';c.style.transform='scale(.6)';});
       await sleep(420);area.innerHTML='';merge.classList.add('in');
       ['敵対検証 (Adversarial)','Fact Integrity','スキーマ準拠 (Schema)'].forEach(function(g){var d=document.createElement('div');d.className='gate';d.innerHTML='<span class="box">✓</span><span>'+g+'</span>';gates.appendChild(d);});
       for(var L3=0;L3<s3.logs.length;L3++){logLine(s3.logs[L3][0],s3.logs[L3][1]);await sleep(520);}
-      var gEls=gates.querySelectorAll('.gate');for(var gi=0;gi<gEls.length;gi++){gEls[gi].classList.add('ok');await sleep(420);}
+      if(incident==='gates'){await playGates();}
+      else{var gEls=gates.querySelectorAll('.gate');for(var gi=0;gi<gEls.length;gi++){gEls[gi].classList.add('ok');await sleep(420);}}
       sStat.textContent='done ✓';compare.classList.add('in');await sleep(120);
       barOld.style.width='100%';barNew.style.width='19.6%';
       logLine('sys','$ workflow complete — all checks PASS 🎉');
+      if(incident==='mutter')startMutter();
       runBtn.disabled=false;runBtn.style.opacity=1;runBtn.textContent='▶ もう一回 体感する';running=false;
     }
     runBtn.addEventListener('click',run);
@@ -1647,9 +1786,61 @@
 })();
 </script>
 <script>
-/* ===== 秘奥義 MAXモード（隠しコマンド） ===== */
+/* ===== 秘奥義 MAXモード（隠しコマンド・第2形態つき） ===== */
 (function(){
   var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches, active=false;
+  var secondArmed=false, secondBusy=false, origTitle=document.title;
+  /* 発動中の小道具: 偽スペックモニタ / タブtitle暴走 / CRTスキャンライン */
+  function startExtras(){
+    if(reduce)return{stop:function(){}};
+    var mon=document.createElement('div');mon.id='sysmon';document.body.appendChild(mon);
+    var crt=document.createElement('div');crt.id='crtlines';document.body.appendChild(crt);
+    var mi=setInterval(function(){
+      mon.innerHTML='<b>SYSTEM MONITOR（嘘）</b><br>CPU: '+(900+Math.floor(Math.random()*100))+'%<br>MEM: '+(900+Math.floor(Math.random()*100))+'%<br>モテ処理: ∞ Mbps<br>儲かり係数: '+(900+Math.floor(Math.random()*100));
+    },120);
+    var ti=setInterval(function(){
+      document.title='⚡秘奥義発動中 '+(900+Math.floor(Math.random()*100))+'%';
+    },200);
+    return{stop:function(){clearInterval(mi);clearInterval(ti);mon.remove();crt.remove();document.title=origTitle;}};
+  }
+  function showAiCopy(){
+    var d=document.createElement('div');d.id='aiCopy';
+    d.innerHTML='本ページは 100% AI により自動生成されました。作者は存在しません。<small>※冗談です。愛情のこもった手作りHTMLです（それも半分冗談です）。</small>';
+    document.body.appendChild(d);requestAnimationFrame(function(){d.classList.add('show');});
+    setTimeout(function(){d.classList.remove('show');setTimeout(function(){d.remove();},600);},3600);
+  }
+  /* 第2形態: 発動後にもう一度同じコマンド → 偽カーネルパニック */
+  function activateSecond(){
+    if(secondBusy)return;secondBusy=true;secondArmed=false;
+    if(window.NetaAch)window.NetaAch.unlock('second_form');
+    if(reduce){
+      var nb=document.createElement('div');nb.id='maxBanner';
+      nb.innerHTML='<span class="mb-k">真伝 ｜ SECOND FORM</span><span class="mb-t">これが真の力です</span>';
+      document.body.appendChild(nb);nb.classList.add('go');
+      setTimeout(function(){nb.remove();secondBusy=false;},3000);return;
+    }
+    var bs=document.createElement('div');bs.id='bsod';
+    bs.innerHTML='<div class="sad">:(</div>'+
+      '<div>AIマスター道場が、本気を出しすぎました。</div>'+
+      '<div class="pr">MOTE_OVERFLOW_EXCEPTION — モテ度が数値上限を突破しました</div>'+
+      '<div class="pr" id="bsodPr">再起動しています… 0%</div>'+
+      '<div class="pr" style="opacity:.55">エラーコード: 0xMOTE999（実在しません）</div>';
+    document.body.appendChild(bs);
+    var pr=bs.querySelector('#bsodPr'),steps=[12,37,64,89,99],si=0;
+    var pi=setInterval(function(){
+      if(si<steps.length){pr.textContent='再起動しています… '+steps[si++]+'%';}
+      else{pr.textContent='再起動しています… 99%（完璧主義が発動しました。ここから進みません）';clearInterval(pi);}
+    },420);
+    setTimeout(function(){
+      clearInterval(pi);bs.remove();
+      var root=document.documentElement;root.classList.add('glitching');
+      setTimeout(function(){root.classList.remove('glitching');},1300);
+      var nb=document.createElement('div');nb.id='maxBanner';
+      nb.innerHTML='<span class="mb-k">真伝 ｜ SECOND FORM</span><span class="mb-t">これが真の力です</span><span class="mb-s">…すまん、今のは全部演出や。パソコンは無事や。</span>';
+      document.body.appendChild(nb);requestAnimationFrame(function(){nb.classList.add('go');});
+      setTimeout(function(){nb.remove();secondBusy=false;},4600);
+    },3400);
+  }
   function bump(el,to){if(!el)return;var from=parseInt(el.textContent,10)||0,i=0,steps=22;
     var iv=setInterval(function(){i++;el.textContent=Math.round(from+(to-from)*i/steps);if(i>=steps){el.textContent=to;clearInterval(iv);}},28);}
   function rain(){
@@ -1666,19 +1857,26 @@
       if(el<dur)requestAnimationFrame(frame);else cv.remove();})(t0);
   }
   function activate(){
+    if(secondArmed&&!secondBusy){activateSecond();return;}
     if(active)return;active=true;var root=document.documentElement;root.classList.add('maxmode');
+    if(window.NetaAch)window.NetaAch.unlock('max_mode');
+    setTimeout(function(){secondArmed=true;},1400);
+    setTimeout(function(){secondArmed=false;},14000);
     var scrim=document.createElement('div');scrim.id='maxScrim';document.body.appendChild(scrim);
     var flash=document.createElement('div');flash.id='maxFlash';document.body.appendChild(flash);
     requestAnimationFrame(function(){scrim.classList.add('go');flash.classList.add('go');});
     var b=document.createElement('div');b.id='maxBanner';
-    b.innerHTML='<span class="mb-k">秘奥義 ｜ SECRET ARTS</span><span class="mb-t">MAX モード</span><span class="mb-s">全開や。モテ度 999%、儲かってる感も限界突破。</span>';
+    b.innerHTML='<span class="mb-k">秘奥義 ｜ SECRET ARTS</span><span class="mb-t">MAX モード</span><span class="mb-s">全開や。モテ度 999%、儲かってる感も限界突破。</span><span class="mb-hint">…もう一度、同じコマンドを入れてみ？</span>';
     document.body.appendChild(b);requestAnimationFrame(function(){b.classList.add('go');});
     var hm=document.getElementById('heroMote'),gp=document.getElementById('gaugePct');
     var pHm=hm?hm.textContent:null,pGp=gp?gp.textContent:null;
     bump(hm,999);bump(gp,999);
     if(!reduce)rain();
+    var extras=startExtras();
     setTimeout(function(){root.classList.remove('maxmode');if(scrim)scrim.remove();if(flash)flash.remove();if(b)b.remove();
-      if(hm&&pHm!=null)hm.textContent=pHm;if(gp&&pGp!=null)gp.textContent=pGp;active=false;},5200);
+      extras.stop();
+      if(hm&&pHm!=null)hm.textContent=pHm;if(gp&&pGp!=null)gp.textContent=pGp;active=false;
+      if(!secondBusy)showAiCopy();},5200);
   }
   /* trigger 1: Konami code */
   var seq=['arrowup','arrowup','arrowdown','arrowdown','arrowleft','arrowright','arrowleft','arrowright','b','a'],pos=0;
@@ -1688,6 +1886,163 @@
   var brand=document.querySelector('nav .brand');
   if(brand){var taps=0,tt=null;brand.addEventListener('click',function(){taps++;clearTimeout(tt);
     tt=setTimeout(function(){taps=0;},2500);if(taps>=5){taps=0;activate();}});}
+})();
+</script>
+<script>
+/* ===== Wave3: 持ち帰れる笑い（実績 / ガチャ / console芸 / 年号 / 問合せ / 時刻別） ===== */
+(function(){
+  "use strict";
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* --- 道場実績（アチーブメント） --- */
+  window.NetaAch=(function(){
+    var KEY='neta_ach_v1', mem={};
+    var DEFS={
+      nyumon:'道場入門（初訪問）',
+      demo_run:'初仕事（デモ実行）',
+      incident_seen:'事件現場の目撃者',
+      max_mode:'秘奥義・継承',
+      second_form:'真伝・第2形態',
+      gacha:'運試し（ガチャ初回）',
+      gacha_ssr:'天運 — SSRを引いた者',
+      night_owl:'丑三つ参り（深夜0-4時に来訪）',
+      photo_gimmick:'モテ合成、体験済',
+      visits_10:'常連（通算10回目）'
+    };
+    function load(){try{return JSON.parse(localStorage.getItem(KEY)||'{}');}catch(e){return mem;}}
+    function save(s){try{localStorage.setItem(KEY,JSON.stringify(s));}catch(e){mem=s;}}
+    var q=[],showing=false;
+    function toast(msg){q.push(msg);pump();}
+    function pump(){
+      if(showing||!q.length)return;showing=true;
+      var t=document.getElementById('achToast');
+      if(!t){t=document.createElement('div');t.id='achToast';document.body.appendChild(t);}
+      t.textContent=q.shift();t.classList.add('show');
+      setTimeout(function(){t.classList.remove('show');setTimeout(function(){showing=false;pump();},450);},2600);
+    }
+    function renderEgg(){
+      var p=document.getElementById('eggPanel');if(!p)return;
+      var s=load(),n=Object.keys(s).filter(function(k){return DEFS[k];}).length,total=Object.keys(DEFS).length;
+      var el=document.getElementById('achList');
+      if(!el){el=document.createElement('div');el.id='achList';p.appendChild(el);}
+      el.innerHTML='<br>🏅 <b>道場実績 '+n+'/'+total+'</b>（ぜんぶネタ）<br>'+
+        Object.keys(DEFS).map(function(k){return (s[k]?'✅ ':'⬜ ')+DEFS[k];}).join('<br>');
+    }
+    function unlock(id){
+      if(!DEFS[id])return false;
+      var s=load();if(s[id])return false;
+      s[id]=1;save(s);toast('🏅 実績解除「'+DEFS[id]+'」');renderEgg();return true;
+    }
+    /* 初期化: 訪問カウント・入門・深夜・常連 */
+    var visits=1;
+    try{visits=parseInt(localStorage.getItem('neta_visits')||'0',10)+1;localStorage.setItem('neta_visits',String(visits));}catch(e){}
+    unlock('nyumon');
+    if(visits>=10)unlock('visits_10');
+    var hour=new Date().getHours();
+    if(hour>=0&&hour<4)unlock('night_owl');
+    /* 写真ギミック使用の検知（既存 .file-in への委譲・非侵襲） */
+    document.addEventListener('change',function(e){
+      if(e.target&&e.target.classList&&e.target.classList.contains('file-in'))unlock('photo_gimmick');
+    },true);
+    renderEgg();
+    return {unlock:unlock};
+  })();
+
+  /* --- モテ運勢ガチャ（日替わり・localStorageで当日固定） --- */
+  (function(){
+    var card=document.querySelector('.gauge-card');if(!card)return;
+    var btn=document.createElement('button');btn.type='button';btn.className='gacha-btn';btn.id='gachaBtn';
+    btn.textContent='🎰 今日のモテ運勢を引く';card.appendChild(btn);
+    var RES={
+      N:{cls:'r-n',rar:'N',title:'モテ運勢: N（並）',msg:'今日は「普通にええ人」の日や。焦らんでええ。徳を積め。',prob:'排出率 99%'},
+      SR:{cls:'r-sr',rar:'SR',title:'モテ運勢: SR（隠れモテ）',msg:'今日、誰かがあなたを二度見しています。振り向くな。気づかないフリが品や。',prob:'排出率 0.9%'},
+      SSR:{cls:'r-ssr',rar:'SSR',title:'モテ運勢: SSR（モテ国王）',msg:'祝・天運。今日のあなたは道場公認のモテ国王や。ただし有効期限は本日23:59まで。',prob:'排出率 0.1%'}
+    };
+    function todayKey(){var d=new Date();return 'neta_gacha_'+d.getFullYear()+('0'+(d.getMonth()+1)).slice(-2)+('0'+d.getDate()).slice(-2);}
+    function draw(){var r=Math.random();return r<0.001?'SSR':(r<0.01?'SR':'N');}
+    function burst(){
+      if(reduce)return;
+      var cv=document.createElement('canvas');cv.style.cssText='position:fixed;inset:0;width:100vw;height:100vh;pointer-events:none;z-index:5600';
+      var DPR=Math.min(2,window.devicePixelRatio||1);cv.width=innerWidth*DPR;cv.height=innerHeight*DPR;
+      document.body.appendChild(cv);var ctx=cv.getContext('2d');ctx.scale(DPR,DPR);
+      var cols=['#f1a306','#ffd700','#fff6c0','#c79a45'],P=[];
+      for(var i=0;i<44;i++){var a=Math.random()*Math.PI*2,sp=2.5+Math.random()*5;
+        P.push({x:innerWidth/2,y:innerHeight*0.42,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp-2,life:1,col:cols[i%cols.length],sz:3+Math.random()*4});}
+      (function fr(){ctx.clearRect(0,0,innerWidth,innerHeight);var alive=false;
+        P.forEach(function(p){if(p.life<=0)return;alive=true;p.vy+=0.13;p.x+=p.vx;p.y+=p.vy;p.life-=0.017;
+          ctx.globalAlpha=Math.max(0,p.life);ctx.fillStyle=p.col;ctx.beginPath();ctx.arc(p.x,p.y,p.sz,0,Math.PI*2);ctx.fill();});
+        ctx.globalAlpha=1;if(alive)requestAnimationFrame(fr);else cv.remove();})();
+    }
+    var ov=null;
+    function show(rar,fixed){
+      var R=RES[rar];
+      if(!ov){ov=document.createElement('div');ov.id='gachaOv';document.body.appendChild(ov);
+        ov.addEventListener('click',function(e){if(e.target===ov)ov.classList.remove('show');});}
+      ov.innerHTML='<div class="gacha-card '+R.cls+'">'+
+        '<div class="rar">'+R.rar+'</div><h4>'+R.title+'</h4><p>'+R.msg+'</p>'+
+        '<div class="note">'+R.prob+' ｜ '+(fixed?'本日の運勢は確定済み。日付が変わればまた引けます。':'※完全に Math.random() です。人生への効力はありません。')+'</div>'+
+        '<button type="button" class="close">とじる</button></div>';
+      ov.querySelector('.close').addEventListener('click',function(){ov.classList.remove('show');});
+      requestAnimationFrame(function(){ov.classList.add('show');});
+    }
+    btn.addEventListener('click',function(){
+      var key=todayKey(),val=null;
+      try{val=localStorage.getItem(key);}catch(e){}
+      var fixed=!!val, rar=val||draw();
+      try{localStorage.setItem(key,rar);}catch(e){}
+      window.NetaAch.unlock('gacha');
+      if(rar==='SSR'&&!fixed){burst();window.NetaAch.unlock('gacha_ssr');}
+      show(rar,fixed);
+    });
+  })();
+
+  /* --- console芸（見た者だけへの手紙） --- */
+  try{
+    console.log('%c🧙 AIマスター山本より','color:#a97c2f;font-size:22px;font-weight:900;font-family:serif;');
+    console.log('%cお前…DevTools開いとるな。その目、好きやで。\nこのサイトは「技術の無駄遣い」の稽古場や。ソースは全部読んでええ。持って帰ってもええ。\nほな、秘奥義のヒントをひとつ: ↑↑↓↓←→←→BA（2回入れると…？）','color:#8a8197;font-size:12px;line-height:1.8;');
+  }catch(e){}
+
+  /* --- フッタ年号カウントアップ（未来進行） --- */
+  (function(){
+    var y=document.getElementById('footYear');if(!y)return;
+    var start=Date.now();
+    var iv=setInterval(function(){
+      var yr=2026+Math.floor((Date.now()-start)/1000);
+      if(yr>=2099){yr=2099;clearInterval(iv);}
+      y.textContent=yr;
+    },1000);
+  })();
+
+  /* --- お問い合わせ5回クリック芸 --- */
+  (function(){
+    var btn=document.getElementById('contactBtn'),note=document.getElementById('contactNote');
+    if(!btn||!note)return;
+    var n=0,last=0;
+    var stages=[
+      function(){btn.classList.add('glow');note.textContent='（ボタンが上品に光った）';},
+      function(){btn.classList.remove('glow');btn.classList.add('shake');note.textContent='（ボタンが震えている）';setTimeout(function(){btn.classList.remove('shake');},1300);},
+      function(){note.textContent='「ま、待ってくれ」';},
+      function(){note.textContent='「今ちょうど講座中でな…あとにしてくれんか」';},
+      function(){note.innerHTML='「すまん。メールアドレス、無いんや。」<br><span style="font-family:var(--mono);font-size:.68rem;color:var(--muted)">contact: nai@sonzai-shinai.example（※実在しません。本当に何もありません）</span>';btn.disabled=true;btn.style.opacity=.55;btn.textContent='📮 お問い合わせ（終了）';}
+    ];
+    btn.addEventListener('click',function(){
+      var now=Date.now();if(now-last<450)return;last=now;
+      if(n<stages.length)stages[n++]();
+    });
+  })();
+
+  /* --- 時刻別: 深夜の部（0-4時） --- */
+  (function(){
+    var hour=new Date().getHours();
+    if(hour>=0&&hour<4){
+      var t=document.getElementById('courseTitle');
+      if(t&&t.parentNode){
+        var tag=document.createElement('span');tag.className='night-tag';
+        tag.textContent='🌙 深夜の部・開講中 — 眠気覚まし祭り（0-4時限定表示）';
+        t.parentNode.insertBefore(tag,t.nextSibling);
+      }
+    }
+  })();
 })();
 </script>
 </body>

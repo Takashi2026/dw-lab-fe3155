@@ -2013,21 +2013,39 @@
     },1000);
   })();
 
-  /* --- お問い合わせ5回クリック芸 --- */
+  /* --- お問い合わせ5回クリック芸（オチ: 本物のアドレスが5秒だけ出る） --- */
   (function(){
     var btn=document.getElementById('contactBtn'),note=document.getElementById('contactNote');
     if(!btn||!note)return;
-    var n=0,last=0;
+    var n=0,last=0,revealBusy=false;
+    function reveal(){
+      if(revealBusy)return;revealBusy=true;
+      btn.disabled=true;btn.style.opacity=.55;
+      setTimeout(function(){
+        note.textContent='「……やっぱ、教えたるわ。」';
+        setTimeout(function(){
+          var left=5;
+          note.innerHTML='<a href="mailto:takashi@saiaru.com" style="font-family:var(--mono);font-weight:800;font-size:.98rem;color:var(--gold);text-decoration:none">takashi@saiaru.com</a><br><span style="font-family:var(--mono);font-size:.64rem;color:var(--muted)">（こっちは本物や。あと<b id="ctCd">5</b>秒で消える）</span>';
+          var cd=setInterval(function(){
+            left--;var el=document.getElementById('ctCd');if(el)el.textContent=left;
+            if(left<=0){clearInterval(cd);
+              note.innerHTML='「はい、5秒。」<br><span style="font-size:.72rem;color:var(--muted)">（ほんまに用がある人は、もう一回押し）</span>';
+              btn.disabled=false;btn.style.opacity=1;btn.textContent='📮 もう一回聞く';revealBusy=false;}
+          },1000);
+        },900);
+      },2000);
+    }
     var stages=[
       function(){btn.classList.add('glow');note.textContent='（ボタンが上品に光った）';},
       function(){btn.classList.remove('glow');btn.classList.add('shake');note.textContent='（ボタンが震えている）';setTimeout(function(){btn.classList.remove('shake');},1300);},
       function(){note.textContent='「ま、待ってくれ」';},
       function(){note.textContent='「今ちょうど講座中でな…あとにしてくれんか」';},
-      function(){note.innerHTML='「すまん。メールアドレス、無いんや。」<br><span style="font-family:var(--mono);font-size:.68rem;color:var(--muted)">contact: nai@sonzai-shinai.example（※実在しません。本当に何もありません）</span>';btn.disabled=true;btn.style.opacity=.55;btn.textContent='📮 お問い合わせ（終了）';}
+      function(){note.innerHTML='「すまん。メールアドレス、無いんや。」<br><span style="font-family:var(--mono);font-size:.68rem;color:var(--muted)">contact: nai@sonzai-shinai.example（※実在しません）</span>';btn.textContent='📮 お問い合わせ（終了）';reveal();}
     ];
     btn.addEventListener('click',function(){
       var now=Date.now();if(now-last<450)return;last=now;
-      if(n<stages.length)stages[n++]();
+      if(n<stages.length){stages[n++]();}
+      else{reveal();}
     });
   })();
 
